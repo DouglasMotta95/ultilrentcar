@@ -10,33 +10,91 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AjustesRouteImport } from './routes/ajustes'
+import { Route as AssinaturaRouteImport } from './routes/assinatura'
+import { Route as CorridaRouteImport } from './routes/corrida'
+import { Route as CriteriosRouteImport } from './routes/criterios'
+import { Route as ResumoRouteImport } from './routes/resumo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AjustesRoute = AjustesRouteImport.update({
+  id: '/ajustes',
+  path: '/ajustes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssinaturaRoute = AssinaturaRouteImport.update({
+  id: '/assinatura',
+  path: '/assinatura',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorridaRoute = CorridaRouteImport.update({
+  id: '/corrida',
+  path: '/corrida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriteriosRoute = CriteriosRouteImport.update({
+  id: '/criterios',
+  path: '/criterios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumoRoute = ResumoRouteImport.update({
+  id: '/resumo',
+  path: '/resumo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ajustes': typeof AjustesRoute
+  '/assinatura': typeof AssinaturaRoute
+  '/corrida': typeof CorridaRoute
+  '/criterios': typeof CriteriosRoute
+  '/resumo': typeof ResumoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ajustes': typeof AjustesRoute
+  '/assinatura': typeof AssinaturaRoute
+  '/corrida': typeof CorridaRoute
+  '/criterios': typeof CriteriosRoute
+  '/resumo': typeof ResumoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ajustes': typeof AjustesRoute
+  '/assinatura': typeof AssinaturaRoute
+  '/corrida': typeof CorridaRoute
+  '/criterios': typeof CriteriosRoute
+  '/resumo': typeof ResumoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/ajustes' | '/assinatura' | '/corrida' | '/criterios' | '/resumo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ajustes' | '/assinatura' | '/corrida' | '/criterios' | '/resumo'
+  id:
+    | '__root__'
+    | '/'
+    | '/ajustes'
+    | '/assinatura'
+    | '/corrida'
+    | '/criterios'
+    | '/resumo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AjustesRoute: typeof AjustesRoute
+  AssinaturaRoute: typeof AssinaturaRoute
+  CorridaRoute: typeof CorridaRoute
+  CriteriosRoute: typeof CriteriosRoute
+  ResumoRoute: typeof ResumoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +106,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ajustes': {
+      id: '/ajustes'
+      path: '/ajustes'
+      fullPath: '/ajustes'
+      preLoaderRoute: typeof AjustesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assinatura': {
+      id: '/assinatura'
+      path: '/assinatura'
+      fullPath: '/assinatura'
+      preLoaderRoute: typeof AssinaturaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corrida': {
+      id: '/corrida'
+      path: '/corrida'
+      fullPath: '/corrida'
+      preLoaderRoute: typeof CorridaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criterios': {
+      id: '/criterios'
+      path: '/criterios'
+      fullPath: '/criterios'
+      preLoaderRoute: typeof CriteriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resumo': {
+      id: '/resumo'
+      path: '/resumo'
+      fullPath: '/resumo'
+      preLoaderRoute: typeof ResumoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AjustesRoute: AjustesRoute,
+  AssinaturaRoute: AssinaturaRoute,
+  CorridaRoute: CorridaRoute,
+  CriteriosRoute: CriteriosRoute,
+  ResumoRoute: ResumoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
