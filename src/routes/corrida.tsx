@@ -119,6 +119,21 @@ function Corrida() {
             : "Alertas em tempo real da pista."
         }
       >
+        {settings.mode === "uber" && settings.dynamicLock && (
+          <div className="mb-4 animate-pulse-subtle flex items-center justify-between gap-2 rounded-2xl bg-primary/10 border border-primary/20 p-3 text-xs font-bold text-primary">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              FIXADO EM: {settings.targetDynamicRegion?.toUpperCase()}
+            </div>
+            <div className="text-[10px] bg-primary/20 px-2 py-0.5 rounded-full">
+              DINÂMICO ATIVO
+            </div>
+          </div>
+        )}
+
         {!online && (
           <div className="mb-4 flex items-center gap-2 rounded-2xl bg-stop-soft p-3 text-xs font-bold text-stop">
             <WifiOff className="size-4" />

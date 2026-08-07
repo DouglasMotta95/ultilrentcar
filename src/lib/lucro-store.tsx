@@ -31,6 +31,9 @@ export type Settings = {
   consumption: number;
   dailyGoal: number;
   mode: "uber" | "kart";
+  dynamicLock: boolean;
+  dynamicLockRadius: number; // km
+  targetDynamicRegion: string;
 };
 
 export type RideHistoryItem = {
@@ -71,6 +74,9 @@ const DEFAULT_SETTINGS: Settings = {
   consumption: 12,
   dailyGoal: 260,
   mode: "uber",
+  dynamicLock: false,
+  dynamicLockRadius: 2.5,
+  targetDynamicRegion: "Centro Comercial",
 };
 
 const Ctx = createContext<Store | null>(null);
