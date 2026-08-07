@@ -19,17 +19,11 @@ export function AIChatDrawer({ open, onClose }: { open: boolean; onClose: () => 
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
-
-  const handleSend = async (e?: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent | null, forcedInput?: string) => {
     e?.preventDefault();
-    if (!input.trim() || loading) return;
+    const userMsg = (forcedInput || input).trim();
+    if (!userMsg || loading) return;
 
-    const userMsg = input.trim();
     setInput("");
     setMessages((prev) => [...prev, { role: "user", content: userMsg }]);
     setLoading(true);
@@ -41,6 +35,7 @@ export function AIChatDrawer({ open, onClose }: { open: boolean; onClose: () => 
           driverData: {
             ...criteria,
             ...settings,
+            currentRide: forcedInput ? true : false
           },
         },
       });
@@ -52,6 +47,22 @@ export function AIChatDrawer({ open, onClose }: { open: boolean; onClose: () => 
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const handleCustomOpen = (e: any) => {
+      if (e.detail?.question) {
+        handleSend(null, e.detail.question);
+      }
+    };
+    window.addEventListener('open-ai-chat', handleCustomOpen);
+    return () => window.removeEventListener('open-ai-chat', handleCustomOpen);
+  }, [criteria, settings, loading]); // Added loading to deps to ensure handleSend has latest state
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   if (!open) return null;
 
