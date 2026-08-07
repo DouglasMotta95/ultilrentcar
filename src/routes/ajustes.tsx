@@ -73,9 +73,25 @@ function Ajustes() {
           <Row title="Notificações Push" desc="Alertas na tela bloqueada">
             <Switch checked={settings.push} onCheckedChange={(v) => set("push", v)} />
           </Row>
-          <Row title="Aceite Automático" desc="Aceita corridas boas na hora">
+          <Row title="Aceite Automático Geral" desc="Habilita o aceite automático inteligente">
             <Switch checked={settings.autoAccept} onCheckedChange={(v) => set("autoAccept", v)} />
           </Row>
+          {settings.autoAccept && (
+            <div className="bg-elevated/30 animate-rise rounded-2xl mx-4 mb-4 pb-2 border border-border/50">
+              <Row title="Aceitar Uber" desc="Corridas Uber dentro dos critérios">
+                <Switch 
+                  checked={settings.autoAcceptUber ?? true} 
+                  onCheckedChange={(v) => set("autoAcceptUber", v)} 
+                />
+              </Row>
+              <Row title="Aceitar 99" desc="Corridas 99 dentro dos critérios">
+                <Switch 
+                  checked={settings.autoAccept99 ?? true} 
+                  onCheckedChange={(v) => set("autoAccept99", v)} 
+                />
+              </Row>
+            </div>
+          )}
         </section>
 
         {settings.mode === "uber" ? (

@@ -20,6 +20,8 @@ export type Settings = {
   voice: boolean;
   push: boolean;
   autoAccept: boolean;
+  autoAcceptUber: boolean;
+  autoAccept99: boolean;
   cardMode: "clean" | "completo";
   overlayPosition: "topo" | "centro" | "base";
   showFuel: boolean;
@@ -58,6 +60,8 @@ const DEFAULT_SETTINGS: Settings = {
   voice: true,
   push: true,
   autoAccept: false,
+  autoAcceptUber: true,
+  autoAccept99: true,
   cardMode: "completo",
   overlayPosition: "centro",
   showFuel: true,

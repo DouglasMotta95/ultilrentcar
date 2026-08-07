@@ -66,31 +66,38 @@ function Corrida() {
     let timeout: ReturnType<typeof setTimeout>;
     if (settings.mode === "uber") {
       timeout = setTimeout(() => {
+        const apps = ["Uber", "99"] as const;
+        const randomApp = apps[Math.floor(Math.random() * apps.length)] || "Uber";
+        
         const newRide: Ride = {
-          app: "Uber",
-          fare: 28.5,
+          app: randomApp,
+          fare: randomApp === "Uber" ? 28.5 : 32.0,
           rating: 4.9,
-          distanceKm: 8.4,
+          distanceKm: randomApp === "Uber" ? 8.4 : 9.5,
           pickupKm: 1.2,
           pickupMin: 4,
           tripMin: 18,
-          passenger: "Ricardo Silva",
-          destino: "Aeroporto Internacional",
+          passenger: randomApp === "Uber" ? "Ricardo Silva" : "Ana Oliveira",
+          destino: randomApp === "Uber" ? "Aeroporto Internacional" : "Shopping Central",
         };
         setCurrentRide(newRide);
 
-        // Lógica de Aceite Automático
+        // Lógica de Aceite Automático (Uber e 99 independentes)
         if (settings.autoAccept) {
-          const verdict = evaluateRide(newRide, criteria, settings);
-          if (verdict.light === "go") {
-            toast.success("Corrida aceita automaticamente!", {
-              description: "Critérios de lucro atingidos.",
-            });
-            // Simula finalização da corrida para o histórico após alguns segundos
-            setTimeout(() => {
-              addToHistory(newRide, verdict, "finished");
-              setCurrentRide(null);
-            }, 5000);
+          const isAppEnabled = newRide.app === "Uber" ? settings.autoAcceptUber : settings.autoAccept99;
+          
+          if (isAppEnabled !== false) {
+            const verdict = evaluateRide(newRide, criteria, settings);
+            if (verdict.light === "go") {
+              toast.success(`Corrida ${newRide.app} aceita automaticamente!`, {
+                description: "Critérios de lucro atingidos.",
+              });
+              // Simula finalização da corrida para o histórico após alguns segundos
+              setTimeout(() => {
+                addToHistory(newRide, verdict, "finished");
+                setCurrentRide(null);
+              }, 5000);
+            }
           }
         }
       }, 2000);
