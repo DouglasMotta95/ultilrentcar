@@ -19,6 +19,7 @@ export const PRESETS: Record<Exclude<ProfileName, "personalizado">, Criteria> = 
 export type Settings = {
   voice: boolean;
   push: boolean;
+  autoAccept: boolean;
   cardMode: "clean" | "completo";
   overlayPosition: "topo" | "centro" | "base";
   showFuel: boolean;
@@ -28,6 +29,14 @@ export type Settings = {
   consumption: number;
   dailyGoal: number;
   mode: "uber" | "kart";
+};
+
+export type RideHistoryItem = {
+  id: string;
+  ride: Ride;
+  verdict: Verdict;
+  status: "finished" | "rejected";
+  timestamp: number;
 };
 
 type Store = {
