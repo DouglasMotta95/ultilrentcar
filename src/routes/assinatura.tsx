@@ -104,7 +104,7 @@ function Assinatura() {
 
       <div className="animate-rise inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-primary">
         <Sparkles className="size-3.5" />
-        14 dias grátis - Acesso Total
+        14 dias grátis — Oferta Exclusiva
       </div>
       
       <h1 className="animate-rise mt-4 text-3xl font-extrabold leading-tight tracking-tight">
