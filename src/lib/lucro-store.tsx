@@ -11,9 +11,9 @@ export type Criteria = {
 export type ProfileName = "conservador" | "equilibrado" | "agressivo" | "personalizado";
 
 export const PRESETS: Record<Exclude<ProfileName, "personalizado">, Criteria> = {
-  conservador: { minPerKm: 2.6, minPerHour: 45, minRating: 4.8, minProfit: 18, maxPickupMin: 5 },
+  agressivo: { minPerKm: 2.6, minPerHour: 45, minRating: 4.8, minProfit: 18, maxPickupMin: 5 },
   equilibrado: { minPerKm: 2.0, minPerHour: 35, minRating: 4.6, minProfit: 12, maxPickupMin: 8 },
-  agressivo: { minPerKm: 1.5, minPerHour: 26, minRating: 4.2, minProfit: 7, maxPickupMin: 12 },
+  conservador: { minPerKm: 1.5, minPerHour: 26, minRating: 4.2, minProfit: 7, maxPickupMin: 12 },
 };
 
 export type Settings = {
