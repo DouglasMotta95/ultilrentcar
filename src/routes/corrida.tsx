@@ -90,13 +90,14 @@ function Corrida() {
             const verdict = evaluateRide(newRide, criteria, settings);
             if (verdict.light === "go") {
               toast.success(`Corrida ${newRide.app} aceita automaticamente!`, {
-              description: "Critérios de lucro atingidos.",
-            });
-            // Simula finalização da corrida para o histórico após alguns segundos
-            setTimeout(() => {
-              addToHistory(newRide, verdict, "finished");
-              setCurrentRide(null);
-            }, 5000);
+                description: "Critérios de lucro atingidos.",
+              });
+              // Simula finalização da corrida para o histórico após alguns segundos
+              setTimeout(() => {
+                addToHistory(newRide, verdict, "finished");
+                setCurrentRide(null);
+              }, 5000);
+            }
           }
         }
       }, 2000);
