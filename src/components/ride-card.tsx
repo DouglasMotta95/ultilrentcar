@@ -8,6 +8,7 @@ import {
   Star,
   GripHorizontal,
   TrendingUp,
+  Sparkles,
 } from "lucide-react";
 import { brl, evaluateRide, type Criteria, type Ride, type Settings } from "@/lib/lucro-store";
 import { cn } from "@/lib/utils";
@@ -128,16 +129,30 @@ export function RideCard({
             </p>
           </div>
         </div>
-        <button
-          onClick={onToggleVoice}
-          aria-label={settings.voice ? "Desligar voz" : "Ligar voz"}
-          className={cn(
-            "grid size-10 shrink-0 place-items-center rounded-2xl transition-colors duration-300",
-            settings.voice ? "bg-primary text-primary-foreground" : "bg-elevated text-muted-foreground",
-          )}
-        >
-          {settings.voice ? <Volume2 className="size-5" /> : <VolumeX className="size-5" />}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              // Custom event to trigger AI drawer with context
+              window.dispatchEvent(new CustomEvent('open-ai-chat', { 
+                detail: { question: `Vale aceitar esta corrida para ${ride.destino}?` } 
+              }));
+            }}
+            aria-label="Perguntar à IA sobre esta corrida"
+            className="grid size-10 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary transition-all duration-300 hover:bg-primary/20 active:scale-90"
+          >
+            <Sparkles className="size-5" />
+          </button>
+          <button
+            onClick={onToggleVoice}
+            aria-label={settings.voice ? "Desligar voz" : "Ligar voz"}
+            className={cn(
+              "grid size-10 shrink-0 place-items-center rounded-2xl transition-colors duration-300",
+              settings.voice ? "bg-primary text-primary-foreground" : "bg-elevated text-muted-foreground",
+            )}
+          >
+            {settings.voice ? <Volume2 className="size-5" /> : <VolumeX className="size-5" />}
+          </button>
+        </div>
       </div>
 
       <div className={cn("mt-4 rounded-3xl px-4 py-4", l.bg)}>
