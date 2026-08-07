@@ -14,6 +14,7 @@ import { Route as AjustesRouteImport } from './routes/ajustes'
 import { Route as AssinaturaRouteImport } from './routes/assinatura'
 import { Route as CorridaRouteImport } from './routes/corrida'
 import { Route as CriteriosRouteImport } from './routes/criterios'
+import { Route as IaRouteImport } from './routes/ia'
 import { Route as ResumoRouteImport } from './routes/resumo'
 import { Route as ApiPublicHooksBillingReminderRouteImport } from './routes/api/public/hooks/billing-reminder'
 import { Route as ApiPublicHooksStripeWebhookRouteImport } from './routes/api/public/hooks/stripe-webhook'
@@ -43,6 +44,11 @@ const CriteriosRoute = CriteriosRouteImport.update({
   path: '/criterios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IaRoute = IaRouteImport.update({
+  id: '/ia',
+  path: '/ia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResumoRoute = ResumoRouteImport.update({
   id: '/resumo',
   path: '/resumo',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/assinatura': typeof AssinaturaRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
+  '/ia': typeof IaRoute
   '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
   '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/assinatura': typeof AssinaturaRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
+  '/ia': typeof IaRoute
   '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
   '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/assinatura': typeof AssinaturaRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
+  '/ia': typeof IaRoute
   '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
   '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/corrida'
     | '/criterios'
+    | '/ia'
     | '/resumo'
     | '/api/public/hooks/billing-reminder'
     | '/api/public/hooks/stripe-webhook'
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/corrida'
     | '/criterios'
+    | '/ia'
     | '/resumo'
     | '/api/public/hooks/billing-reminder'
     | '/api/public/hooks/stripe-webhook'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/assinatura'
     | '/corrida'
     | '/criterios'
+    | '/ia'
     | '/resumo'
     | '/api/public/hooks/billing-reminder'
     | '/api/public/hooks/stripe-webhook'
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   AssinaturaRoute: typeof AssinaturaRoute
   CorridaRoute: typeof CorridaRoute
   CriteriosRoute: typeof CriteriosRoute
+  IaRoute: typeof IaRoute
   ResumoRoute: typeof ResumoRoute
   ApiPublicHooksBillingReminderRoute: typeof ApiPublicHooksBillingReminderRoute
   ApiPublicHooksStripeWebhookRoute: typeof ApiPublicHooksStripeWebhookRoute
@@ -173,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CriteriosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ia': {
+      id: '/ia'
+      path: '/ia'
+      fullPath: '/ia'
+      preLoaderRoute: typeof IaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resumo': {
       id: '/resumo'
       path: '/resumo'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssinaturaRoute: AssinaturaRoute,
   CorridaRoute: CorridaRoute,
   CriteriosRoute: CriteriosRoute,
+  IaRoute: IaRoute,
   ResumoRoute: ResumoRoute,
   ApiPublicHooksBillingReminderRoute: ApiPublicHooksBillingReminderRoute,
   ApiPublicHooksStripeWebhookRoute: ApiPublicHooksStripeWebhookRoute,
@@ -210,3 +231,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
