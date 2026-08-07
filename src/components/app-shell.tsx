@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Gauge, SlidersHorizontal, BarChart3, Settings2 } from "lucide-react";
+import { Gauge, SlidersHorizontal, BarChart3, Settings2, History } from "lucide-react";
 
 const items = [
   { to: "/corrida", label: "Corrida", icon: Gauge },
-  { to: "/criterios", label: "Critérios", icon: SlidersHorizontal },
   { to: "/resumo", label: "Resumo", icon: BarChart3 },
+  { to: "/historico", label: "Histórico", icon: History },
   { to: "/ajustes", label: "Ajustes", icon: Settings2 },
 ] as const;
 
