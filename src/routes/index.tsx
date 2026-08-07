@@ -1,4 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+// LucroReal: Premium Subscription & Profit Control App
+// Now featuring Kart Racing Alert System for real-time race flags.
+
 import { useState } from "react";
 import { Mail, Lock, ShieldCheck, ArrowRight } from "lucide-react";
 import { useLucro } from "@/lib/lucro-store";
