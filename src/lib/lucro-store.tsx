@@ -50,11 +50,14 @@ type Store = {
   setProfile: (p: ProfileName) => void;
   settings: Settings;
   setSettings: (s: Settings) => void;
+  history: RideHistoryItem[];
+  addToHistory: (ride: Ride, verdict: Verdict, status: "finished" | "rejected") => void;
 };
 
 const DEFAULT_SETTINGS: Settings = {
   voice: true,
   push: true,
+  autoAccept: false,
   cardMode: "completo",
   overlayPosition: "centro",
   showFuel: true,
