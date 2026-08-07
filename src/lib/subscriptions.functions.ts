@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
+import { getWebRequest } from "@tanstack/react-start/server";
 
 export const createCheckoutSession = createServerFn({ method: "POST" })
   .inputValidator((data) =>
@@ -11,11 +12,9 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       })
       .parse(data)
   )
-  .handler(async ({ data, request }) => {
-    // In a real implementation, you would:
-    // 1. Get the user from the Supabase session
-    // 2. Use Stripe to create a checkout session
-    // 3. Return the session URL
+  .handler(async ({ data }) => {
+    const request = getWebRequest();
+    if (!request) throw new Error("Request context not found");
 
     const authHeader = request.headers.get("Authorization");
     if (!authHeader) {
@@ -23,8 +22,8 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
     }
 
     const supabase = createClient(
-      process.env.VITE_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      process.env["VITE_SUPABASE_URL"]!,
+      process.env["SUPABASE_SERVICE_ROLE_KEY"]!,
       {
         auth: {
           autoRefreshToken: false,
@@ -45,32 +44,22 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
     // Mock implementation for checkout
     console.log(`Creating checkout session for user ${user.id} on plan ${data.planId}`);
 
-    // Here you would integrate with Stripe:
-    /*
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    const session = await stripe.checkout.sessions.create({
-      customer_email: user.email,
-      line_items: [{ price: data.priceId, quantity: 1 }],
-      mode: 'subscription',
-      success_url: `${process.env.APP_URL}/corrida?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.APP_URL}/assinatura`,
-    });
-    return { url: session.url };
-    */
-
     return { url: "/corrida" };
   });
 
 export const getSubscriptionStatus = createServerFn({ method: "GET" })
-  .handler(async ({ request }) => {
+  .handler(async () => {
+    const request = getWebRequest();
+    if (!request) return { status: "inactive" };
+
     const authHeader = request.headers.get("Authorization");
     if (!authHeader) {
       return { status: "inactive" };
     }
 
     const supabase = createClient(
-      process.env.VITE_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      process.env["VITE_SUPABASE_URL"]!,
+      process.env["SUPABASE_SERVICE_ROLE_KEY"]!,
       {
         auth: {
           autoRefreshToken: false,
