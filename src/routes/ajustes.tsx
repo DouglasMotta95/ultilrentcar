@@ -173,6 +173,58 @@ function Ajustes() {
             </div>
           </Row>
         </section>
+        
+        <p className="mb-2 mt-6 px-1 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+          Inteligência Dinâmica
+        </p>
+        <section className="glass-card divide-y divide-border overflow-hidden rounded-3xl">
+          <Row 
+            title="Prender no Dinâmico" 
+            desc="Simula estar em área de alta demanda"
+          >
+            <Switch 
+              checked={settings.dynamicLock} 
+              onCheckedChange={(v) => set("dynamicLock", v)} 
+            />
+          </Row>
+          {settings.dynamicLock && (
+            <div className="bg-elevated/30 animate-rise rounded-2xl mx-4 mb-4 pb-4 px-4 pt-2 border border-border/50 space-y-4">
+              <div className="space-y-2">
+                <div className="flex justify-between text-[11px] font-bold uppercase text-muted-foreground">
+                  <span>Raio de busca</span>
+                  <span>{settings.dynamicLockRadius}km</span>
+                </div>
+                <input 
+                  type="range"
+                  min="0.5"
+                  max="10"
+                  step="0.5"
+                  value={settings.dynamicLockRadius}
+                  onChange={(e) => set("dynamicLockRadius", Number(e.target.value))}
+                  className="w-full accent-primary h-1.5 bg-border rounded-lg appearance-none cursor-pointer"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <p className="text-[11px] font-bold uppercase text-muted-foreground">Região Alvo</p>
+                <select 
+                  value={settings.targetDynamicRegion}
+                  onChange={(e) => set("targetDynamicRegion", e.target.value)}
+                  className="w-full bg-elevated text-sm font-semibold rounded-xl px-3 py-2.5 outline-none border border-border/50"
+                >
+                  <option value="Centro Comercial">Centro Comercial</option>
+                  <option value="Aeroporto">Aeroporto</option>
+                  <option value="Zona Sul (Hoteis)">Zona Sul (Hotéis)</option>
+                  <option value="Estádio / Eventos">Estádio / Eventos</option>
+                </select>
+              </div>
+              
+              <p className="text-[10px] text-muted-foreground leading-tight italic">
+                *Esta função otimiza o simulador para gerar corridas de alta lucratividade baseadas na região escolhida.
+              </p>
+            </div>
+          )}
+        </section>
 
         <p className="mb-2 mt-6 px-1 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
           Custos e meta
