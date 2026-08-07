@@ -123,7 +123,9 @@ export function RideCard({
         <div className="flex min-w-0 items-center gap-3">
           <span className={cn("animate-signal size-3 shrink-0 rounded-full", l.dot)} />
           <div className="min-w-0">
-            <p className={cn("text-sm font-extrabold tracking-wide", l.text)}>{l.label}</p>
+            <p className={cn("text-sm font-extrabold tracking-wide", l.text)}>
+              {settings.autoAccept && v.light === "go" ? "AUTO-ACEITANDO" : l.label}
+            </p>
             <p className="truncate text-[11px] text-muted-foreground">
               {ride.app} · {ride.destino}
             </p>
