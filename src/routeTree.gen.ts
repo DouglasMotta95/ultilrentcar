@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AjustesRouteImport } from './routes/ajustes'
 import { Route as AssinaturaRouteImport } from './routes/assinatura'
+import { Route as BeneficiosRouteImport } from './routes/beneficios'
 import { Route as CorridaRouteImport } from './routes/corrida'
 import { Route as CriteriosRouteImport } from './routes/criterios'
 import { Route as IaRouteImport } from './routes/ia'
@@ -32,6 +33,11 @@ const AjustesRoute = AjustesRouteImport.update({
 const AssinaturaRoute = AssinaturaRouteImport.update({
   id: '/assinatura',
   path: '/assinatura',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeneficiosRoute = BeneficiosRouteImport.update({
+  id: '/beneficios',
+  path: '/beneficios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CorridaRoute = CorridaRouteImport.update({
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ajustes': typeof AjustesRoute
   '/assinatura': typeof AssinaturaRoute
+  '/beneficios': typeof BeneficiosRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
   '/ia': typeof IaRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ajustes': typeof AjustesRoute
   '/assinatura': typeof AssinaturaRoute
+  '/beneficios': typeof BeneficiosRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
   '/ia': typeof IaRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ajustes': typeof AjustesRoute
   '/assinatura': typeof AssinaturaRoute
+  '/beneficios': typeof BeneficiosRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
   '/ia': typeof IaRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ajustes'
     | '/assinatura'
+    | '/beneficios'
     | '/corrida'
     | '/criterios'
     | '/ia'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ajustes'
     | '/assinatura'
+    | '/beneficios'
     | '/corrida'
     | '/criterios'
     | '/ia'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ajustes'
     | '/assinatura'
+    | '/beneficios'
     | '/corrida'
     | '/criterios'
     | '/ia'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AjustesRoute: typeof AjustesRoute
   AssinaturaRoute: typeof AssinaturaRoute
+  BeneficiosRoute: typeof BeneficiosRoute
   CorridaRoute: typeof CorridaRoute
   CriteriosRoute: typeof CriteriosRoute
   IaRoute: typeof IaRoute
@@ -170,6 +183,13 @@ declare module '@tanstack/react-router' {
       path: '/assinatura'
       fullPath: '/assinatura'
       preLoaderRoute: typeof AssinaturaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beneficios': {
+      id: '/beneficios'
+      path: '/beneficios'
+      fullPath: '/beneficios'
+      preLoaderRoute: typeof BeneficiosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/corrida': {
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AjustesRoute: AjustesRoute,
   AssinaturaRoute: AssinaturaRoute,
+  BeneficiosRoute: BeneficiosRoute,
   CorridaRoute: CorridaRoute,
   CriteriosRoute: CriteriosRoute,
   IaRoute: IaRoute,

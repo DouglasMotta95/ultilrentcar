@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Check, Sparkles, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Check, Sparkles, Loader2, Clock, Zap, Star, Shield, Trophy } from "lucide-react";
 import { useLucro } from "@/lib/lucro-store";
 import { useServerFn } from "@tanstack/react-start";
 import { createCheckoutSession } from "@/lib/subscriptions.functions";
@@ -44,12 +44,25 @@ function Assinatura() {
   const navigate = useNavigate();
   const [plano, setPlano] = useState("trimestral");
   const [loading, setLoading] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutos em segundos
   const checkoutFn = useServerFn(createCheckoutSession);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const começar = async () => {
     setLoading(true);
     try {
-      // In a production app, we would use the actual price IDs from Stripe
       const priceIds: Record<string, string> = {
         mensal: "price_monthly",
         trimestral: "price_quarterly",
@@ -64,7 +77,7 @@ function Assinatura() {
       });
 
       if (result.url) {
-        setSubscribed(true); // Ensure local state is updated for the demo
+        setSubscribed(true);
         if (result.url.startsWith("/")) {
           navigate({ to: result.url as any });
         } else {
@@ -79,32 +92,51 @@ function Assinatura() {
   };
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-md px-5 pb-12 pt-12">
+    <div className="mx-auto min-h-screen w-full max-w-md px-5 pb-12 pt-8">
+      {/* Timer Banner */}
+      <div className="animate-fade-in mb-6 flex items-center justify-between rounded-2xl bg-primary/10 border border-primary/20 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <Clock className="size-4 text-primary animate-pulse" />
+          <span className="text-[13px] font-bold text-primary">Oferta de Teste Expira em:</span>
+        </div>
+        <span className="text-sm font-black tabular-nums text-primary">{formatTime(timeLeft)}</span>
+      </div>
+
       <div className="animate-rise inline-flex items-center gap-2 rounded-full bg-primary/15 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-primary">
         <Sparkles className="size-3.5" />
-        14 dias grátis
+        14 dias grátis — Oferta Exclusiva
       </div>
-      <h1 className="animate-rise mt-4 text-3xl font-extrabold leading-tight">
-        Pare de rodar de graça.
-        <br />
-        Comece hoje sem pagar nada.
+      
+      <h1 className="animate-rise mt-4 text-3xl font-extrabold leading-tight tracking-tight">
+        Multiplique seus ganhos com <span className="text-primary">Inteligência Artificial</span>.
       </h1>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        Teste todos os recursos por 14 dias. Cancele quando quiser, sem multa.
+      
+      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+        Aproveite o período de teste e descubra por que os motoristas top da Uber usam o LucroReal.
       </p>
 
-      <ul className="glass-card mt-6 space-y-3 rounded-3xl p-5">
-        {BENEFICIOS.map((b) => (
-          <li key={b} className="flex items-start gap-3 text-sm">
-            <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-go-soft text-go">
-              <Check className="size-3.5" />
-            </span>
-            <span className="text-foreground/90">{b}</span>
-          </li>
+      {/* Benefits with icons for a more premium look */}
+      <div className="mt-8 grid grid-cols-1 gap-3">
+        {[
+          { icon: Zap, title: "Semáforo IA", desc: "Análise instantânea de rentabilidade" },
+          { icon: Star, title: "Alerta de Voz", desc: "Foque na estrada, nós avisamos se vale" },
+          { icon: Shield, title: "Segurança Total", desc: "Evite regiões perigosas e corridas ruins" },
+          { icon: Trophy, title: "Relatório de Elite", desc: "Controle seu lucro líquido real" },
+        ].map((item, i) => (
+          <div key={i} className="glass-card flex items-center gap-4 rounded-3xl p-4 transition-all hover:bg-elevated/40">
+            <div className="grid size-10 place-items-center rounded-2xl bg-primary/10 text-primary">
+              <item.icon className="size-5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">{item.title}</p>
+              <p className="text-[12px] text-muted-foreground">{item.desc}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
 
-      <div className="mt-6 space-y-2">
+      <div className="mt-8 space-y-2">
+        <p className="px-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground/60">Escolha seu plano após o teste</p>
         {PLANOS.map((p) => (
           <button
             key={p.id}
@@ -134,20 +166,25 @@ function Assinatura() {
       <button
         onClick={começar}
         disabled={loading}
-        className="mt-6 w-full flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground transition-transform duration-200 active:scale-[0.98] disabled:opacity-70"
+        className="mt-8 w-full flex items-center justify-center gap-3 rounded-2xl bg-primary py-4.5 text-[15px] font-black text-primary-foreground shadow-[0_8px_30px_rgb(var(--primary-rgb),0.3)] transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-70"
       >
-        {loading ? <Loader2 className="size-4 animate-spin" /> : null}
-        Começar teste grátis
+        {loading ? <Loader2 className="size-5 animate-spin" /> : <Zap className="size-5 fill-current" />}
+        COMEÇAR MEU TESTE GRÁTIS
       </button>
+
       <button
         onClick={() => {
           setSubscribed(true);
           navigate({ to: "/corrida" });
         }}
-        className="mt-2 w-full rounded-2xl py-3 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground active:opacity-70"
+        className="mt-4 w-full rounded-2xl py-3 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground active:opacity-70"
       >
         Continuar sem assinar por enquanto
       </button>
+
+      <p className="mt-6 text-center text-[10px] text-muted-foreground/50">
+        Você não será cobrado hoje. O teste de 14 dias é totalmente gratuito.
+      </p>
     </div>
   );
 }
