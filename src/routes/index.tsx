@@ -35,7 +35,7 @@ function Login() {
   const entrar = (e?: React.FormEvent) => {
     e?.preventDefault();
     setLoggedIn(true);
-    navigate({ to: "/assinatura" });
+    navigate({ to: "/beneficios" });
   };
 
   return (
