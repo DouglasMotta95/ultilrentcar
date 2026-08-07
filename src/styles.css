@@ -103,13 +103,25 @@
 
   html {
     -webkit-tap-highlight-color: transparent;
+    height: 100%;
+    overflow: hidden;
   }
-
+  
   body {
     background: var(--gradient-app) fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    user-select: none;
+  }
+
+  /* Permite seleção apenas em inputs e áreas específicas */
+  input, textarea, [contenteditable="true"] {
+    user-select: text;
   }
 
   h1,
