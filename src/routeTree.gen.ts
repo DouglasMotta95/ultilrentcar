@@ -15,6 +15,7 @@ import { Route as AssinaturaRouteImport } from './routes/assinatura'
 import { Route as BeneficiosRouteImport } from './routes/beneficios'
 import { Route as CorridaRouteImport } from './routes/corrida'
 import { Route as CriteriosRouteImport } from './routes/criterios'
+import { Route as HistoricoRouteImport } from './routes/historico'
 import { Route as IaRouteImport } from './routes/ia'
 import { Route as ResumoRouteImport } from './routes/resumo'
 import { Route as ApiPublicHooksBillingReminderRouteImport } from './routes/api/public/hooks/billing-reminder'
@@ -50,6 +51,11 @@ const CriteriosRoute = CriteriosRouteImport.update({
   path: '/criterios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IaRoute = IaRouteImport.update({
   id: '/ia',
   path: '/ia',
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/beneficios': typeof BeneficiosRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
+  '/historico': typeof HistoricoRoute
   '/ia': typeof IaRoute
   '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/beneficios': typeof BeneficiosRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
+  '/historico': typeof HistoricoRoute
   '/ia': typeof IaRoute
   '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/beneficios': typeof BeneficiosRoute
   '/corrida': typeof CorridaRoute
   '/criterios': typeof CriteriosRoute
+  '/historico': typeof HistoricoRoute
   '/ia': typeof IaRoute
   '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/beneficios'
     | '/corrida'
     | '/criterios'
+    | '/historico'
     | '/ia'
     | '/resumo'
     | '/api/public/hooks/billing-reminder'
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/beneficios'
     | '/corrida'
     | '/criterios'
+    | '/historico'
     | '/ia'
     | '/resumo'
     | '/api/public/hooks/billing-reminder'
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/beneficios'
     | '/corrida'
     | '/criterios'
+    | '/historico'
     | '/ia'
     | '/resumo'
     | '/api/public/hooks/billing-reminder'
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   BeneficiosRoute: typeof BeneficiosRoute
   CorridaRoute: typeof CorridaRoute
   CriteriosRoute: typeof CriteriosRoute
+  HistoricoRoute: typeof HistoricoRoute
   IaRoute: typeof IaRoute
   ResumoRoute: typeof ResumoRoute
   ApiPublicHooksBillingReminderRoute: typeof ApiPublicHooksBillingReminderRoute
@@ -206,6 +219,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CriteriosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ia': {
       id: '/ia'
       path: '/ia'
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   BeneficiosRoute: BeneficiosRoute,
   CorridaRoute: CorridaRoute,
   CriteriosRoute: CriteriosRoute,
+  HistoricoRoute: HistoricoRoute,
   IaRoute: IaRoute,
   ResumoRoute: ResumoRoute,
   ApiPublicHooksBillingReminderRoute: ApiPublicHooksBillingReminderRoute,
@@ -252,3 +273,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
