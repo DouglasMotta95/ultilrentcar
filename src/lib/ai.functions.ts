@@ -28,13 +28,16 @@ export const askAI = createServerFn({ method: "POST" })
     const q = question.toLowerCase();
 
     if (q.includes("vale aceitar") || q.includes("aceito")) {
-      answer = "Com base nos seus critérios de R$/km e seu perfil equilibrado, esta corrida parece lucrativa. O lucro líquido estimado após combustível e desgaste é positivo.";
+      const isGood = (driverData["score"] || 85) >= 70;
+      answer = isGood 
+        ? `Com base nos seus critérios (R$/km: ${driverData["minPerKm"]}) e no lucro líquido projetado, esta corrida é altamente recomendada. Ela contribui bem para sua meta de ${driverData["dailyGoal"]}.`
+        : "Esta corrida está abaixo dos seus critérios ideais. O tempo de deslocamento ou o valor por km não compensam o desgaste do veículo neste momento.";
     } else if (q.includes("meta")) {
-      answer = `Você está a aproximadamente 65% da sua meta de ${driverData["dailyGoal"]}. Se mantiver o ritmo atual, deve concluir em mais 3 horas.`;
+      answer = `Você está a aproximadamente 65% da sua meta de R$ ${driverData["dailyGoal"]}. Se mantiver o ritmo atual em regiões de alta demanda, deve concluir em mais 3 horas.`;
     } else if (q.includes("lucro")) {
-      answer = "Seu lucro real hoje está otimizado. Você evitou 3 corridas 'vermelhas' que teriam gerado prejuízo.";
+      answer = "Seu lucro real hoje está otimizado. Você evitou 3 corridas 'vermelhas' e priorizou trajetos com asfalto melhor, reduzindo custos de manutenção.";
     } else {
-      answer = "Interessante pergunta! Analisando seus dados de hoje e configurações de custos, recomendo focar em corridas acima de R$ 2,00 por km na próxima hora.";
+      answer = "Analisando seu histórico e preferências de terreno/distância, recomendo focar em corridas curtas no centro para maximizar o giro na próxima hora.";
     }
 
     return {
