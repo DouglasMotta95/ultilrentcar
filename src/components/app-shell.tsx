@@ -10,7 +10,7 @@ const items = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 mx-auto w-full max-w-md px-4 pb-4">
+    <nav className="fixed inset-x-0 bottom-0 z-40 mx-auto w-full max-w-md px-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
       <div className="glass-card flex items-center justify-between gap-1 rounded-3xl px-2 py-2">
         {items.map(({ to, label, icon: Icon }) => (
           <Link
@@ -38,7 +38,7 @@ export function Screen({
   subtitle?: string;
 }) {
   return (
-    <div className="mx-auto min-h-screen w-full max-w-md px-5 pb-32 pt-10">
+    <div className="mx-auto min-h-screen w-full max-w-md px-5 pb-32 pt-[calc(1rem+env(safe-area-inset-top))]">
       {title && (
         <header className="animate-rise mb-6">
           <h1 className="text-3xl font-bold">{title}</h1>

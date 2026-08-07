@@ -1,0 +1,22 @@
+{
+  "name": "LucroReal - Copiloto do Motorista",
+  "short_name": "LucroReal",
+  "description": "App profissional para motoristas de Uber e 99 controlarem seu lucro real.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#101520",
+  "theme_color": "#151c2c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn.lovable.dev/projects/ykvjotrqldaeefiezutp/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn.lovable.dev/projects/ykvjotrqldaeefiezutp/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
