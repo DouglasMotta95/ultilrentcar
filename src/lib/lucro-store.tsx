@@ -33,6 +33,7 @@ export type Settings = {
   mode: "uber" | "kart";
   dynamicLock: boolean;
   dynamicPersistence: boolean;
+  dynamicTunnelMode: boolean;
   dynamicLockRadius: number; // km
   targetDynamicRegion: string;
 };
@@ -77,6 +78,7 @@ const DEFAULT_SETTINGS: Settings = {
   mode: "uber",
   dynamicLock: false,
   dynamicPersistence: true,
+  dynamicTunnelMode: false,
   dynamicLockRadius: 2.5,
   targetDynamicRegion: "Centro Comercial",
 };
