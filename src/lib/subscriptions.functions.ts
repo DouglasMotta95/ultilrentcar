@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
-import { getWebRequest } from "@tanstack/react-start/server";
+import { getRequest } from "@tanstack/react-start/server";
 
 export const createCheckoutSession = createServerFn({ method: "POST" })
   .inputValidator((data) =>
@@ -13,7 +13,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       .parse(data)
   )
   .handler(async ({ data }) => {
-    const request = getWebRequest();
+    const request = getRequest();
     if (!request) throw new Error("Request context not found");
 
     const authHeader = request.headers.get("Authorization");
@@ -21,16 +21,19 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       throw new Error("Unauthorized");
     }
 
-    const supabase = createClient(
-      process.env["VITE_SUPABASE_URL"]!,
-      process.env["SUPABASE_SERVICE_ROLE_KEY"]!,
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-        },
-      }
-    );
+    const supabaseUrl = process.env["VITE_SUPABASE_URL"];
+    const supabaseServiceKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error("Supabase environment variables not set");
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    });
 
     const {
       data: { user },
@@ -49,7 +52,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
 
 export const getSubscriptionStatus = createServerFn({ method: "GET" })
   .handler(async () => {
-    const request = getWebRequest();
+    const request = getRequest();
     if (!request) return { status: "inactive" };
 
     const authHeader = request.headers.get("Authorization");
@@ -57,16 +60,19 @@ export const getSubscriptionStatus = createServerFn({ method: "GET" })
       return { status: "inactive" };
     }
 
-    const supabase = createClient(
-      process.env["VITE_SUPABASE_URL"]!,
-      process.env["SUPABASE_SERVICE_ROLE_KEY"]!,
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-        },
-      }
-    );
+    const supabaseUrl = process.env["VITE_SUPABASE_URL"];
+    const supabaseServiceKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      return { status: "inactive" };
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    });
 
     const {
       data: { user },
