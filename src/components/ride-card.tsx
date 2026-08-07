@@ -11,6 +11,8 @@ import {
   Sparkles,
   Check,
   X,
+  Lock,
+  Unlock,
 } from "lucide-react";
 import { brl, evaluateRide, type Criteria, type Ride, type Settings } from "@/lib/lucro-store";
 import { cn } from "@/lib/utils";
@@ -75,6 +77,7 @@ export function RideCard({
   settings: Settings;
   draggable?: boolean;
   onToggleVoice?: () => void;
+  onToggleDynamicLock?: () => void;
 }) {
   const v = evaluateRide(ride, criteria, settings);
   const l = LIGHT[v.light];
@@ -156,6 +159,18 @@ export function RideCard({
             )}
           >
             {settings.voice ? <Volume2 className="size-5" /> : <VolumeX className="size-5" />}
+          </button>
+          <button
+            onClick={onToggleDynamicLock}
+            aria-label={settings.dynamicLock ? "Desativar Travar Dinâmico" : "Ativar Travar Dinâmico"}
+            className={cn(
+              "grid size-10 shrink-0 place-items-center rounded-2xl transition-all duration-300",
+              settings.dynamicLock 
+                ? "bg-stop text-stop-foreground shadow-[0_0_15px_rgba(239,68,68,0.3)] animate-pulse-subtle" 
+                : "bg-elevated text-muted-foreground hover:bg-elevated/80"
+            )}
+          >
+            {settings.dynamicLock ? <Lock className="size-5" /> : <Unlock className="size-5" />}
           </button>
         </div>
       </div>
