@@ -32,7 +32,7 @@ function Corrida() {
     const interval = setInterval(() => {
       if (settings.mode === "kart") {
         const states: ("verde" | "amarela" | "vermelha")[] = ["verde", "amarela", "vermelha"];
-        const newState = states[Math.floor(Math.random() * states.length)];
+        const newState = states[Math.floor(Math.random() * states.length)] || "verde";
         setKartStatus(newState);
         
         // Simulação de voz
@@ -62,8 +62,9 @@ function Corrida() {
   }, [settings.mode, settings.voice, settings.push]);
 
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
     if (settings.mode === "uber") {
-      const timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setCurrentRide({
           app: "Uber",
           fare: 28.5,
@@ -76,10 +77,12 @@ function Corrida() {
           destino: "Aeroporto Internacional",
         });
       }, 2000);
-      return () => clearTimeout(timeout);
     } else {
       setCurrentRide(null);
     }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
   }, [settings.mode]);
 
   return (
