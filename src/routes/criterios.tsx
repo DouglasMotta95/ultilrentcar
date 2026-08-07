@@ -71,6 +71,13 @@ function Criterios() {
           ))}
         </div>
 
+        <p className="mb-4 text-center text-[11px] text-muted-foreground">
+          {profile === 'agressivo' && "Perfil Agressivo: Alta seletividade para ganhos máximos."}
+          {profile === 'equilibrado' && "Perfil Equilibrado: O melhor balanço entre ganhos e tempo."}
+          {profile === 'conservador' && "Perfil Conservador: Aceita mais corridas para não ficar parado."}
+          {profile === 'personalizado' && "Perfil Personalizado: Suas próprias regras de lucro."}
+        </p>
+
         <div className="space-y-3">
           {FIELDS.map((f) => (
             <div key={f.key} className="glass-card rounded-3xl p-4">
