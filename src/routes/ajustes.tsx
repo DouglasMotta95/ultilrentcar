@@ -198,6 +198,15 @@ function Ajustes() {
                   onCheckedChange={(v) => set("dynamicPersistence", v)} 
                 />
               </Row>
+              <Row 
+                title="Modo Túnel (Data Lock)" 
+                desc="Simula queda de rede para travar o valor"
+              >
+                <Switch 
+                  checked={settings.dynamicTunnelMode} 
+                  onCheckedChange={(v) => set("dynamicTunnelMode", v)} 
+                />
+              </Row>
               
               <div className="space-y-2">
                 <div className="flex justify-between text-[11px] font-bold uppercase text-muted-foreground">

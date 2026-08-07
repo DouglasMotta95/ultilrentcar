@@ -123,7 +123,19 @@ function Corrida() {
             : "Alertas em tempo real da pista."
         }
       >
-        {settings.mode === "uber" && settings.dynamicLock && (
+        {online && settings.mode === "uber" && settings.dynamicTunnelMode && (
+          <div className="mb-4 animate-pulse-subtle flex items-center justify-between gap-2 rounded-2xl bg-stop-soft border border-stop/20 p-3 text-xs font-bold text-stop">
+            <div className="flex items-center gap-2 text-[10px]">
+              <div className="size-2 rounded-full bg-stop animate-ping" />
+              TÚNEL ATIVO: DADOS MÓVEIS MASCARADOS
+            </div>
+            <div className="bg-stop/20 px-2 py-0.5 rounded-full text-[9px]">
+              DINÂMICO TRAVADO
+            </div>
+          </div>
+        )}
+
+        {settings.mode === "uber" && settings.dynamicLock && !settings.dynamicTunnelMode && (
           <div className="mb-4 animate-pulse-subtle flex items-center justify-between gap-2 rounded-2xl bg-primary/10 border border-primary/20 p-3 text-xs font-bold text-primary">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
