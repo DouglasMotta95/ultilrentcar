@@ -16,11 +16,11 @@ export const askAI = createServerFn({ method: "POST" })
     // Simulate AI processing with driver context
     // In a real app, this would call the Lovable AI Gateway / LLM
     const context = `
-      Motorista: ${driverData.name || "Motorista"}
-      Meta Diária: R$ ${driverData.dailyGoal || 0}
-      Consumo: ${driverData.consumption || 0} km/L
-      Combustível: R$ ${driverData.fuelPrice || 0}
-      Perfil: ${driverData.profile || "Equilibrado"}
+      Motorista: ${driverData["name"] || "Motorista"}
+      Meta Diária: R$ ${driverData["dailyGoal"] || 0}
+      Consumo: ${driverData["consumption"] || 0} km/L
+      Combustível: R$ ${driverData["fuelPrice"] || 0}
+      Perfil: ${driverData["profile"] || "Equilibrado"}
     `;
 
     // Simple heuristic responses for demo
@@ -30,7 +30,7 @@ export const askAI = createServerFn({ method: "POST" })
     if (q.includes("vale aceitar") || q.includes("aceito")) {
       answer = "Com base nos seus critérios de R$/km e seu perfil equilibrado, esta corrida parece lucrativa. O lucro líquido estimado após combustível e desgaste é positivo.";
     } else if (q.includes("meta")) {
-      answer = `Você está a aproximadamente 65% da sua meta de ${driverData.dailyGoal}. Se mantiver o ritmo atual, deve concluir em mais 3 horas.`;
+      answer = `Você está a aproximadamente 65% da sua meta de ${driverData["dailyGoal"]}. Se mantiver o ritmo atual, deve concluir em mais 3 horas.`;
     } else if (q.includes("lucro")) {
       answer = "Seu lucro real hoje está otimizado. Você evitou 3 corridas 'vermelhas' que teriam gerado prejuízo.";
     } else {
