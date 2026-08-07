@@ -64,7 +64,12 @@ function Assinatura() {
       });
 
       if (result.url) {
-        window.location.href = result.url;
+        setSubscribed(true); // Ensure local state is updated for the demo
+        if (result.url.startsWith("/")) {
+          navigate({ to: result.url as any });
+        } else {
+          window.location.href = result.url;
+        }
       }
     } catch (error) {
       console.error("Erro ao iniciar assinatura:", error);
@@ -135,8 +140,11 @@ function Assinatura() {
         Começar teste grátis
       </button>
       <button
-        onClick={começar}
-        className="mt-2 w-full rounded-2xl py-3 text-xs font-semibold text-muted-foreground"
+        onClick={() => {
+          setSubscribed(true);
+          navigate({ to: "/corrida" });
+        }}
+        className="mt-2 w-full rounded-2xl py-3 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground active:opacity-70"
       >
         Continuar sem assinar por enquanto
       </button>
