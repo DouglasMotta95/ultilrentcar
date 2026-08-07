@@ -67,7 +67,7 @@ function Corrida() {
     if (settings.mode === "uber") {
       timeout = setTimeout(() => {
         const apps = ["Uber", "99"] as const;
-        const randomApp = apps[Math.floor(Math.random() * apps.length)];
+        const randomApp = apps[Math.floor(Math.random() * apps.length)] || "Uber";
         
         const newRide: Ride = {
           app: randomApp,
