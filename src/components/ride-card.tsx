@@ -9,9 +9,12 @@ import {
   GripHorizontal,
   TrendingUp,
   Sparkles,
+  Check,
+  X,
 } from "lucide-react";
 import { brl, evaluateRide, type Criteria, type Ride, type Settings } from "@/lib/lucro-store";
 import { cn } from "@/lib/utils";
+import { hapticFeedback } from "@/lib/haptics";
 
 const LIGHT = {
   go: {
@@ -199,6 +202,30 @@ export function RideCard({
             Nota {ride.rating.toFixed(1)} · {ride.pickupMin} min até você
           </span>
           <span className="font-semibold tabular-nums">{v.score}/100</span>
+        </div>
+      )}
+
+      {settings.cardMode === "completo" && (
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <button
+            onClick={() => hapticFeedback("medium")}
+            className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-elevated/50 font-bold text-muted-foreground transition-all active:scale-95 active:bg-elevated/80"
+          >
+            <X className="size-5" />
+            RECUSAR
+          </button>
+          <button
+            onClick={() => hapticFeedback("success")}
+            className={cn(
+              "flex h-14 items-center justify-center gap-2 rounded-2xl font-black transition-all active:scale-95",
+              v.light === "go"
+                ? "bg-go text-go-foreground shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+                : "bg-primary text-primary-foreground"
+            )}
+          >
+            <Check className="size-5" />
+            ACEITAR
+          </button>
         </div>
       )}
 
