@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Mail, Lock, ShieldCheck, ArrowRight } from "lucide-react";
 import { useLucro } from "@/lib/lucro-store";
 
+// LucroReal: Premium Subscription & Profit Control App
+// Features: Uber/99 Driver Profit Tracking & Kart Racing Real-time Alert System.
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -10,12 +13,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "App para motoristas de Uber, 99 e inDrive: semáforo de corridas, lucro líquido real e critérios personalizados em 1 segundo.",
+          "App para motoristas e pilotos: semáforo de corridas, lucro real e alertas de bandeiras em tempo real.",
       },
       { property: "og:title", content: "LucroReal — Aceite só corridas lucrativas" },
       {
         property: "og:description",
-        content: "Semáforo inteligente de corridas e controle do seu lucro líquido real.",
+        content: "Semáforo inteligente e controle de status em tempo real.",
       },
     ],
   }),
@@ -45,7 +48,7 @@ function Login() {
           Lucro<span className="text-primary">Real</span>
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Decida em 1 segundo se a corrida vale a pena. Uber, 99 e inDrive.
+          O semáforo inteligente para motoristas e pilotos.
         </p>
       </div>
 

@@ -18,6 +18,7 @@ export const PRESETS: Record<Exclude<ProfileName, "personalizado">, Criteria> = 
 
 export type Settings = {
   voice: boolean;
+  push: boolean;
   cardMode: "clean" | "completo";
   overlayPosition: "topo" | "centro" | "base";
   showFuel: boolean;
@@ -26,6 +27,7 @@ export type Settings = {
   fuelPrice: number;
   consumption: number;
   dailyGoal: number;
+  mode: "uber" | "kart";
 };
 
 type Store = {
@@ -43,6 +45,7 @@ type Store = {
 
 const DEFAULT_SETTINGS: Settings = {
   voice: true,
+  push: true,
   cardMode: "completo",
   overlayPosition: "centro",
   showFuel: true,
@@ -51,6 +54,7 @@ const DEFAULT_SETTINGS: Settings = {
   fuelPrice: 6.09,
   consumption: 12,
   dailyGoal: 260,
+  mode: "uber",
 };
 
 const Ctx = createContext<Store | null>(null);
