@@ -1,7 +1,10 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Loader2 } from "lucide-react";
 import { useLucro } from "@/lib/lucro-store";
+import { useServerFn } from "@tanstack/react-start";
+import { createCheckoutSession } from "@/lib/subscriptions.functions";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/assinatura")({
   head: () => ({
@@ -40,10 +43,34 @@ function Assinatura() {
   const { setSubscribed } = useLucro();
   const navigate = useNavigate();
   const [plano, setPlano] = useState("trimestral");
+  const [loading, setLoading] = useState(false);
+  const checkoutFn = useServerFn(createCheckoutSession);
 
-  const começar = () => {
-    setSubscribed(true);
-    navigate({ to: "/corrida" });
+  const começar = async () => {
+    setLoading(true);
+    try {
+      // In a production app, we would use the actual price IDs from Stripe
+      const priceIds: Record<string, string> = {
+        mensal: "price_monthly",
+        trimestral: "price_quarterly",
+        anual: "price_yearly",
+      };
+
+      const result = await checkoutFn({
+        data: {
+          planId: plano as "mensal" | "trimestral" | "anual",
+          priceId: priceIds[plano],
+        },
+      });
+
+      if (result.url) {
+        window.location.href = result.url;
+      }
+    } catch (error) {
+      console.error("Erro ao iniciar assinatura:", error);
+      toast.error("Erro ao processar assinatura. Tente novamente.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -101,8 +128,10 @@ function Assinatura() {
 
       <button
         onClick={começar}
-        className="mt-6 w-full rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground transition-transform duration-200 active:scale-[0.98]"
+        disabled={loading}
+        className="mt-6 w-full flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground transition-transform duration-200 active:scale-[0.98] disabled:opacity-70"
       >
+        {loading ? <Loader2 className="size-4 animate-spin" /> : null}
         Começar teste grátis
       </button>
       <button
