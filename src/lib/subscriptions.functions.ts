@@ -13,22 +13,12 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       .parse(data)
   )
   .handler(async ({ data }) => {
-    // On Lovable, we might be in a preview environment without full auth headers sometimes
-    // Or we want to allow a smooth "Free Trial" flow for the demo
-    const authHeader = request.headers.get("Authorization");
-    
-    // For the "Free Trial" / Demo purpose in this app, we'll allow navigation
-    // In a real app, you'd strictly verify the Supabase user here.
-    
-    // Mock implementation for checkout redirect
-    console.log(`Creating checkout session for plan ${data.planId}`);
-    
-    // Return a dummy stripe-like URL or just the app route for the demo
-    return { url: "/corrida" };
-  });
+    const request = getRequest();
+    if (!request) throw new Error("Request context not found");
 
-    // Mock implementation for checkout
-    console.log(`Creating checkout session for user ${user.id} on plan ${data.planId}`);
+    // In a real production app with Stripe, we would use the user ID to create a session
+    // For this premium driver copilot demo, we allow a smooth transition to the app
+    console.log(`Simulando checkout para plano ${data.planId}`);
 
     return { url: "/corrida" };
   });
@@ -57,24 +47,28 @@ export const getSubscriptionStatus = createServerFn({ method: "GET" })
       },
     });
 
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser(authHeader.replace("Bearer ", ""));
+    try {
+      const {
+        data: { user },
+        error: authError,
+      } = await supabase.auth.getUser(authHeader.replace("Bearer ", ""));
 
-    if (authError || !user) {
+      if (authError || !user) {
+        return { status: "inactive" };
+      }
+
+      const { data: subscription } = await supabase
+        .from("user_subscriptions")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+
+      return {
+        status: subscription?.status || "inactive",
+        planId: subscription?.plan_id,
+        currentPeriodEnd: subscription?.current_period_end,
+      };
+    } catch (e) {
       return { status: "inactive" };
     }
-
-    const { data: subscription } = await supabase
-      .from("user_subscriptions")
-      .select("*")
-      .eq("user_id", user.id)
-      .single();
-
-    return {
-      status: subscription?.status || "inactive",
-      planId: subscription?.plan_id,
-      currentPeriodEnd: subscription?.current_period_end,
-    };
   });
