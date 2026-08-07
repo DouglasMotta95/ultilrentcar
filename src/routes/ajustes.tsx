@@ -189,6 +189,16 @@ function Ajustes() {
           </Row>
           {settings.dynamicLock && (
             <div className="bg-elevated/30 animate-rise rounded-2xl mx-4 mb-4 pb-4 px-4 pt-2 border border-border/50 space-y-4">
+              <Row 
+                title="Modo Persistente" 
+                desc="Mantém o valor mesmo se sair da área"
+              >
+                <Switch 
+                  checked={settings.dynamicPersistence} 
+                  onCheckedChange={(v) => set("dynamicPersistence", v)} 
+                />
+              </Row>
+              
               <div className="space-y-2">
                 <div className="flex justify-between text-[11px] font-bold uppercase text-muted-foreground">
                   <span>Raio de busca</span>

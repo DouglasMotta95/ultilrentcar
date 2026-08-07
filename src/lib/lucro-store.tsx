@@ -32,6 +32,7 @@ export type Settings = {
   dailyGoal: number;
   mode: "uber" | "kart";
   dynamicLock: boolean;
+  dynamicPersistence: boolean;
   dynamicLockRadius: number; // km
   targetDynamicRegion: string;
 };
@@ -75,6 +76,7 @@ const DEFAULT_SETTINGS: Settings = {
   dailyGoal: 260,
   mode: "uber",
   dynamicLock: false,
+  dynamicPersistence: true,
   dynamicLockRadius: 2.5,
   targetDynamicRegion: "Centro Comercial",
 };
