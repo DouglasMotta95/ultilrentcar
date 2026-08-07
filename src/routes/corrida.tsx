@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BottomNav, Screen } from "@/components/app-shell";
 import { RideCard } from "@/components/ride-card";
-import { useLucro, type Ride } from "@/lib/lucro-store";
+import { useLucro, evaluateRide, type Ride } from "@/lib/lucro-store";
+import { toast } from "sonner";
 import { WifiOff, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/corrida")({
 });
 
 function Corrida() {
-  const { criteria, settings, setSettings } = useLucro();
+  const { criteria, settings, setSettings, addToHistory } = useLucro();
   const [currentRide, setCurrentRide] = useState<Ride | null>(null);
   const [online, setOnline] = useState(true);
   const [kartStatus, setKartStatus] = useState<"verde" | "amarela" | "vermelha">("verde");
@@ -65,7 +66,7 @@ function Corrida() {
     let timeout: ReturnType<typeof setTimeout>;
     if (settings.mode === "uber") {
       timeout = setTimeout(() => {
-        setCurrentRide({
+        const newRide: Ride = {
           app: "Uber",
           fare: 28.5,
           rating: 4.9,
@@ -75,7 +76,23 @@ function Corrida() {
           tripMin: 18,
           passenger: "Ricardo Silva",
           destino: "Aeroporto Internacional",
-        });
+        };
+        setCurrentRide(newRide);
+
+        // Lógica de Aceite Automático
+        if (settings.autoAccept) {
+          const verdict = evaluateRide(newRide, criteria, settings);
+          if (verdict.light === "go") {
+            toast.success("Corrida aceita automaticamente!", {
+              description: "Critérios de lucro atingidos.",
+            });
+            // Simula finalização da corrida para o histórico após alguns segundos
+            setTimeout(() => {
+              addToHistory(newRide, verdict, "finished");
+              setCurrentRide(null);
+            }, 5000);
+          }
+        }
       }, 2000);
     } else {
       setCurrentRide(null);
@@ -83,7 +100,7 @@ function Corrida() {
     return () => {
       if (timeout) clearTimeout(timeout);
     };
-  }, [settings.mode]);
+  }, [settings.mode, settings.autoAccept, criteria, settings]);
 
   return (
     <>
