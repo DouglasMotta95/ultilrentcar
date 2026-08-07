@@ -71,6 +71,7 @@ export function RideCard({
   settings,
   draggable = true,
   onToggleVoice,
+  onToggleDynamicLock,
 }: {
   ride: Ride;
   criteria: Criteria;
