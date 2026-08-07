@@ -16,6 +16,7 @@ import { Toaster } from "../components/ui/sonner";
 import { AIChatDrawer } from "../components/ai-chat-drawer";
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
+import { PWAInstallPrompt } from "../components/pwa-install-prompt";
 
 
 function NotFoundComponent() {
@@ -138,6 +139,7 @@ function RootComponent() {
       <LucroProvider>
         <div className="relative min-h-screen">
           <Outlet />
+          <PWAInstallPrompt />
           
           <button
             onClick={() => setAiOpen(true)}
