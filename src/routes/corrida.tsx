@@ -69,13 +69,17 @@ function Corrida() {
         const apps = ["Uber", "99"] as const;
         const randomApp = apps[Math.floor(Math.random() * apps.length)] || "Uber";
         
+        const multiplier = settings.dynamicLock ? 1.5 + Math.random() * 0.8 : 1.0;
+        const baseFare = randomApp === "Uber" ? 18.5 : 22.0;
+        const fare = Number((baseFare * multiplier).toFixed(2));
+        
         const newRide: Ride = {
           app: randomApp,
-          fare: randomApp === "Uber" ? 28.5 : 32.0,
+          fare: fare,
           rating: 4.9,
           distanceKm: randomApp === "Uber" ? 8.4 : 9.5,
-          pickupKm: 1.2,
-          pickupMin: 4,
+          pickupKm: settings.dynamicLock ? 0.8 : 1.2,
+          pickupMin: settings.dynamicLock ? 2 : 4,
           tripMin: 18,
           passenger: randomApp === "Uber" ? "Ricardo Silva" : "Ana Oliveira",
           destino: randomApp === "Uber" ? "Aeroporto Internacional" : "Shopping Central",
@@ -129,7 +133,7 @@ function Corrida() {
               FIXADO EM: {settings.targetDynamicRegion?.toUpperCase()}
             </div>
             <div className="text-[10px] bg-primary/20 px-2 py-0.5 rounded-full">
-              DINÂMICO ATIVO
+              {settings.dynamicPersistence ? "STICKY ON" : "DINÂMICO ATIVO"}
             </div>
           </div>
         )}
