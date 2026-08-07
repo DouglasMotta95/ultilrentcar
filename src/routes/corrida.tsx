@@ -211,6 +211,7 @@ function Corrida() {
             criteria={criteria}
             settings={settings}
             onToggleVoice={() => setSettings({ ...settings, voice: !settings.voice })}
+            onToggleDynamicLock={() => setSettings({ ...settings, dynamicLock: !settings.dynamicLock })}
           />
         ) : settings.mode === "uber" ? (
           <div className="mt-20 flex flex-col items-center justify-center text-center opacity-40">
