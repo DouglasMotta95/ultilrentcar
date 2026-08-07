@@ -95,6 +95,18 @@ export function LucroProvider({ children }: { children: ReactNode }) {
   const [criteria, setCriteria] = usePersisted<Criteria>("lr.criteria", PRESETS.equilibrado);
   const [profile, setProfile] = usePersisted<ProfileName>("lr.profile", "equilibrado");
   const [settings, setSettings] = usePersisted<Settings>("lr.settings", DEFAULT_SETTINGS);
+  const [history, setHistory] = usePersisted<RideHistoryItem[]>("lr.history", []);
+
+  const addToHistory = (ride: Ride, verdict: Verdict, status: "finished" | "rejected") => {
+    const newItem: RideHistoryItem = {
+      id: Math.random().toString(36).substring(7),
+      ride,
+      verdict,
+      status,
+      timestamp: Date.now(),
+    };
+    setHistory((prev) => [newItem, ...prev]);
+  };
 
   const value = useMemo(
     () => ({
@@ -108,8 +120,22 @@ export function LucroProvider({ children }: { children: ReactNode }) {
       setProfile,
       settings,
       setSettings,
+      history,
+      addToHistory,
     }),
-    [loggedIn, subscribed, criteria, profile, settings, setLoggedIn, setSubscribed, setCriteria, setProfile, setSettings],
+    [
+      loggedIn,
+      subscribed,
+      criteria,
+      profile,
+      settings,
+      history,
+      setLoggedIn,
+      setSubscribed,
+      setCriteria,
+      setProfile,
+      setSettings,
+    ],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
