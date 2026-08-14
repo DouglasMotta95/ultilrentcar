@@ -10,60 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AjustesRouteImport } from './routes/ajustes'
-import { Route as AssinaturaRouteImport } from './routes/assinatura'
-import { Route as BeneficiosRouteImport } from './routes/beneficios'
-import { Route as CorridaRouteImport } from './routes/corrida'
-import { Route as CriteriosRouteImport } from './routes/criterios'
-import { Route as HistoricoRouteImport } from './routes/historico'
-import { Route as IaRouteImport } from './routes/ia'
-import { Route as ResumoRouteImport } from './routes/resumo'
 import { Route as ApiPublicHooksBillingReminderRouteImport } from './routes/api/public/hooks/billing-reminder'
 import { Route as ApiPublicHooksStripeWebhookRouteImport } from './routes/api/public/hooks/stripe-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AjustesRoute = AjustesRouteImport.update({
-  id: '/ajustes',
-  path: '/ajustes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssinaturaRoute = AssinaturaRouteImport.update({
-  id: '/assinatura',
-  path: '/assinatura',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BeneficiosRoute = BeneficiosRouteImport.update({
-  id: '/beneficios',
-  path: '/beneficios',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CorridaRoute = CorridaRouteImport.update({
-  id: '/corrida',
-  path: '/corrida',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CriteriosRoute = CriteriosRouteImport.update({
-  id: '/criterios',
-  path: '/criterios',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HistoricoRoute = HistoricoRouteImport.update({
-  id: '/historico',
-  path: '/historico',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IaRoute = IaRouteImport.update({
-  id: '/ia',
-  path: '/ia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResumoRoute = ResumoRouteImport.update({
-  id: '/resumo',
-  path: '/resumo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicHooksBillingReminderRoute =
@@ -81,41 +33,17 @@ const ApiPublicHooksStripeWebhookRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ajustes': typeof AjustesRoute
-  '/assinatura': typeof AssinaturaRoute
-  '/beneficios': typeof BeneficiosRoute
-  '/corrida': typeof CorridaRoute
-  '/criterios': typeof CriteriosRoute
-  '/historico': typeof HistoricoRoute
-  '/ia': typeof IaRoute
-  '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
   '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ajustes': typeof AjustesRoute
-  '/assinatura': typeof AssinaturaRoute
-  '/beneficios': typeof BeneficiosRoute
-  '/corrida': typeof CorridaRoute
-  '/criterios': typeof CriteriosRoute
-  '/historico': typeof HistoricoRoute
-  '/ia': typeof IaRoute
-  '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
   '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/ajustes': typeof AjustesRoute
-  '/assinatura': typeof AssinaturaRoute
-  '/beneficios': typeof BeneficiosRoute
-  '/corrida': typeof CorridaRoute
-  '/criterios': typeof CriteriosRoute
-  '/historico': typeof HistoricoRoute
-  '/ia': typeof IaRoute
-  '/resumo': typeof ResumoRoute
   '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
   '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
 }
@@ -123,54 +51,22 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/ajustes'
-    | '/assinatura'
-    | '/beneficios'
-    | '/corrida'
-    | '/criterios'
-    | '/historico'
-    | '/ia'
-    | '/resumo'
     | '/api/public/hooks/billing-reminder'
     | '/api/public/hooks/stripe-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/ajustes'
-    | '/assinatura'
-    | '/beneficios'
-    | '/corrida'
-    | '/criterios'
-    | '/historico'
-    | '/ia'
-    | '/resumo'
     | '/api/public/hooks/billing-reminder'
     | '/api/public/hooks/stripe-webhook'
   id:
     | '__root__'
     | '/'
-    | '/ajustes'
-    | '/assinatura'
-    | '/beneficios'
-    | '/corrida'
-    | '/criterios'
-    | '/historico'
-    | '/ia'
-    | '/resumo'
     | '/api/public/hooks/billing-reminder'
     | '/api/public/hooks/stripe-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AjustesRoute: typeof AjustesRoute
-  AssinaturaRoute: typeof AssinaturaRoute
-  BeneficiosRoute: typeof BeneficiosRoute
-  CorridaRoute: typeof CorridaRoute
-  CriteriosRoute: typeof CriteriosRoute
-  HistoricoRoute: typeof HistoricoRoute
-  IaRoute: typeof IaRoute
-  ResumoRoute: typeof ResumoRoute
   ApiPublicHooksBillingReminderRoute: typeof ApiPublicHooksBillingReminderRoute
   ApiPublicHooksStripeWebhookRoute: typeof ApiPublicHooksStripeWebhookRoute
 }
@@ -182,62 +78,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ajustes': {
-      id: '/ajustes'
-      path: '/ajustes'
-      fullPath: '/ajustes'
-      preLoaderRoute: typeof AjustesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assinatura': {
-      id: '/assinatura'
-      path: '/assinatura'
-      fullPath: '/assinatura'
-      preLoaderRoute: typeof AssinaturaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/beneficios': {
-      id: '/beneficios'
-      path: '/beneficios'
-      fullPath: '/beneficios'
-      preLoaderRoute: typeof BeneficiosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/corrida': {
-      id: '/corrida'
-      path: '/corrida'
-      fullPath: '/corrida'
-      preLoaderRoute: typeof CorridaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/criterios': {
-      id: '/criterios'
-      path: '/criterios'
-      fullPath: '/criterios'
-      preLoaderRoute: typeof CriteriosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/historico': {
-      id: '/historico'
-      path: '/historico'
-      fullPath: '/historico'
-      preLoaderRoute: typeof HistoricoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ia': {
-      id: '/ia'
-      path: '/ia'
-      fullPath: '/ia'
-      preLoaderRoute: typeof IaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resumo': {
-      id: '/resumo'
-      path: '/resumo'
-      fullPath: '/resumo'
-      preLoaderRoute: typeof ResumoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/billing-reminder': {
@@ -259,14 +99,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AjustesRoute: AjustesRoute,
-  AssinaturaRoute: AssinaturaRoute,
-  BeneficiosRoute: BeneficiosRoute,
-  CorridaRoute: CorridaRoute,
-  CriteriosRoute: CriteriosRoute,
-  HistoricoRoute: HistoricoRoute,
-  IaRoute: IaRoute,
-  ResumoRoute: ResumoRoute,
   ApiPublicHooksBillingReminderRoute: ApiPublicHooksBillingReminderRoute,
   ApiPublicHooksStripeWebhookRoute: ApiPublicHooksStripeWebhookRoute,
 }
