@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { createServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+type LeadInsert = Database["public"]["Tables"]["leads"]["Insert"];
 
 const leadSchema = z.object({
   full_name: z.string().min(3),
@@ -28,23 +31,39 @@ const leadSchema = z.object({
 export const submitLead = createServerFn({ method: "POST" })
   .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
+    const insertData: LeadInsert = {
+      full_name: data.full_name,
+      cpf: data.cpf,
+      birth_date: data.birth_date,
+      cellphone: data.cellphone,
+      landline: data.landline || null,
+      email: data.email,
+      cep: data.cep,
+      street: data.street,
+      number: data.number,
+      complement: data.complement || null,
+      neighborhood: data.neighborhood,
+      city: data.city,
+      state: data.state,
+      profession: data.profession,
+      platform: data.platform,
+      facebook: data.facebook || null,
+      instagram: data.instagram || null,
+      ref_phone_1: data.ref_phone_1,
+      ref_phone_2: data.ref_phone_2,
+      vehicle_interest: data.vehicle_interest || null,
+      status: "em_analise",
+    };
+
     const { error } = await supabase
       .from("leads")
-      .insert([
-        {
-          ...data,
-          status: "em_analise",
-        },
-      ]);
+      .insert([insertData]);
 
     if (error) {
       console.error("Error submitting lead:", error);
       throw new Error("Falha ao enviar cadastro. Verifique os dados e tente novamente.");
     }
 
-    // In a real implementation, we would trigger an email notification here
-    // using a server-side helper or a webhook.
-    
     return { success: true };
   });
 
