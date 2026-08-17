@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Conditions } from "@/components/sections/conditions";
+import { VehicleCatalog } from "@/components/sections/vehicle-catalog";
+import { Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -20,6 +22,21 @@ function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+      
+      <section className="py-24 bg-white" id="veiculos">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossa Frota</h2>
+            <p className="text-muted-foreground">
+              Veículos revisados e prontos para você começar a faturar hoje mesmo.
+            </p>
+          </div>
+          <Suspense fallback={<div className="text-center py-12">Carregando frota...</div>}>
+            <VehicleCatalog />
+          </Suspense>
+        </div>
+      </section>
+
       <Conditions />
       
       {/* Footer Placeholder */}
