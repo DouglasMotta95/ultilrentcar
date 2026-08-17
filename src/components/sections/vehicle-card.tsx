@@ -11,7 +11,7 @@ interface VehicleCardProps {
 
 export function VehicleCard({ vehicle }: VehicleCardProps) {
   return (
-    <Card className="overflow-hidden border-border hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+    <Card className="overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 flex flex-col h-full hover:-translate-y-2 group">
       <div className="relative aspect-video overflow-hidden bg-muted">
         {vehicle.image_url ? (
           <img
@@ -24,7 +24,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
             <Car className="w-12 h-12 opacity-20" />
           </div>
         )}
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+        <div className="absolute top-4 right-4 bg-primary px-4 py-2 rounded-2xl text-xs font-bold text-white shadow-xl shadow-primary/20">
           A partir de R$ {Number(vehicle.price_per_week).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}/sem
         </div>
       </div>
@@ -47,9 +47,11 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         </div>
         
         <div className="space-y-2">
-          {vehicle.features?.slice(0, 3).map((feature, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm">
-              <Check className="w-4 h-4 text-green-500" />
+          {vehicle.features?.slice(0, 4).map((feature, i) => (
+            <div key={i} className="flex items-center gap-3 text-sm font-medium text-foreground/80">
+              <div className="bg-primary/10 p-1 rounded-md">
+                <Check className="w-3.5 h-3.5 text-primary" />
+              </div>
               <span>{feature}</span>
             </div>
           ))}
@@ -57,7 +59,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
       </CardContent>
       
       <CardFooter className="p-6 pt-0">
-        <Button className="w-full" asChild>
+        <Button className="w-full h-12 text-base font-bold rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300" asChild>
           <a href={`https://wa.me/5500000000000?text=Olá, tenho interesse no veículo ${vehicle.brand} ${vehicle.model}`} target="_blank" rel="noopener noreferrer">
             TENHO INTERESSE
           </a>

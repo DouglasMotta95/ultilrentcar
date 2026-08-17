@@ -4,9 +4,10 @@ import { Link } from "@tanstack/react-router";
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-primary/5 rounded-l-[100px] hidden lg:block" />
+      <div className="absolute top-0 right-0 -z-10 w-2/3 h-full bg-primary/10 rounded-l-[200px] hidden lg:block blur-3xl opacity-50" />
+      <div className="absolute top-1/4 -left-20 -z-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl opacity-30" />
       
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -34,36 +35,37 @@ export function Hero() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <CheckCircle2 className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold text-foreground bg-card/50 px-4 py-3 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm">
+                <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />
                 <span>7.000 km mensais inclusos</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <ShieldCheck className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold text-foreground bg-card/50 px-4 py-3 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm">
+                <ShieldCheck className="w-6 h-6 text-primary shrink-0" />
                 <span>Seguro total e assistência 24h</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <Calendar className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold text-foreground bg-card/50 px-4 py-3 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm">
+                <Calendar className="w-6 h-6 text-primary shrink-0" />
                 <span>Manutenção preventiva inclusa</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground text-primary font-bold">
-                <span>A partir de R$ 750,00 por semana</span>
+              <div className="flex items-center gap-3 text-base font-bold text-primary bg-primary/10 px-4 py-3 rounded-2xl border border-primary/20 shadow-xl backdrop-blur-sm">
+                <Zap className="w-6 h-6 shrink-0" />
+                <span>R$ 750,00 por semana</span>
               </div>
             </div>
           </div>
           
           <div className="flex-1 relative animate-in fade-in slide-in-from-right duration-700 delay-200">
             {/* Image Placeholder - Will be replaced by real vehicle photo */}
-            <div className="relative z-10 w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl bg-gray-100 flex items-center justify-center border border-white/20">
+            <div className="relative z-10 w-full aspect-[4/3] rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] bg-card border border-white/10 group">
               <img 
                 src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&q=80&w=1000" 
                 alt="Carro de luxo para locação" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-8">
-                <div className="text-white">
-                  <p className="text-sm font-medium opacity-80">Sugestão de modelo</p>
-                  <p className="text-2xl font-bold">Sedan Completo</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent flex items-end p-8">
+                <div className="text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-1">Destaque da Semana</p>
+                  <p className="text-3xl font-bold text-foreground">Sedan Premium 2024</p>
                 </div>
               </div>
             </div>

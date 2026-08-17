@@ -17,8 +17,8 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+        isScrolled ? "bg-background/80 backdrop-blur-md shadow-2xl py-3 border-white/5" : "bg-transparent py-5 border-transparent"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -70,32 +70,32 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b animate-in slide-in-from-top duration-300">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-white/5 animate-in slide-in-from-top duration-300">
           <div className="flex flex-col p-4 gap-4">
             <Link 
               to="/" 
-              className="text-lg font-medium py-2 border-b border-gray-100"
+              className="text-lg font-medium py-2 border-b border-white/5 text-foreground"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Início
             </Link>
             <a 
               href="#veiculos" 
-              className="text-lg font-medium py-2 border-b border-gray-100"
+              className="text-lg font-medium py-2 border-b border-white/5 text-foreground"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Veículos
             </a>
             <a 
               href="#como-funciona" 
-              className="text-lg font-medium py-2 border-b border-gray-100"
+              className="text-lg font-medium py-2 border-b border-white/5 text-foreground"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Como Funciona
             </a>
             <Link 
               to="/cadastro" 
-              className="text-lg font-medium py-2 border-b border-gray-100"
+              className="text-lg font-medium py-2 border-b border-white/5 text-foreground"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Cadastro

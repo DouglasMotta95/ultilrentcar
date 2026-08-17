@@ -35,11 +35,12 @@ export function Conditions() {
   ];
 
   return (
-    <section className="py-20 bg-secondary/30" id="condicoes">
+    <section className="py-24 bg-background relative" id="condicoes">
+      <div className="absolute inset-0 bg-primary/5 skew-y-3 origin-left -z-10" />
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Condições de Locação Transparentes</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Condições de Locação Transparentes</h2>
+          <p className="text-muted-foreground text-lg">
             Na UT Locadora, acreditamos na transparência. Veja as principais condições para alugar seu veículo hoje mesmo.
           </p>
         </div>
@@ -48,7 +49,7 @@ export function Conditions() {
           {conditions.map((item, index) => (
             <div 
               key={index} 
-              className="bg-white p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-all duration-300 group"
+              className="bg-card p-8 rounded-3xl shadow-xl border border-border/50 hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 group"
             >
               <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 {item.icon}
