@@ -26,7 +26,7 @@ const leadSchema = z.object({
 });
 
 export const submitLead = createServerFn({ method: "POST" })
-  .input(leadSchema)
+  .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
     const { error } = await supabase
       .from("leads")
