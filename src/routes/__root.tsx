@@ -11,12 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { LucroProvider } from "../lib/lucro-store";
 import { Toaster } from "../components/ui/sonner";
-import { AIChatDrawer } from "../components/ai-chat-drawer";
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
-import { PWAInstallPrompt } from "../components/pwa-install-prompt";
 
 
 function NotFoundComponent() {
@@ -84,12 +80,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#101520" },
+      { name: "theme-color", content: "#ffffff" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
-      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
-      { name: "apple-mobile-web-app-title", content: "LucroReal" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+      { name: "apple-mobile-web-app-title", content: "Útil Rent Car" },
       { name: "mobile-web-app-capable", content: "yes" },
-      { name: "author", content: "LucroReal" },
+      { name: "author", content: "Útil Rent Car" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -132,26 +128,12 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const [aiOpen, setAiOpen] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LucroProvider>
-        <div className="relative min-h-screen">
-          <Outlet />
-          <PWAInstallPrompt />
-          
-          <button
-            onClick={() => setAiOpen(true)}
-            className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-glow transition-all duration-300 active:scale-90"
-            aria-label="Pergunte à IA"
-          >
-            <Sparkles className="size-6" />
-          </button>
-
-          <AIChatDrawer open={aiOpen} onClose={() => setAiOpen(false)} />
-        </div>
-      </LucroProvider>
+      <div className="relative min-h-screen">
+        <Outlet />
+      </div>
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
