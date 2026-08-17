@@ -35,20 +35,21 @@ export function Hero() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <CheckCircle2 className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold text-foreground bg-card/50 px-4 py-3 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm">
+                <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />
                 <span>7.000 km mensais inclusos</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <ShieldCheck className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold text-foreground bg-card/50 px-4 py-3 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm">
+                <ShieldCheck className="w-6 h-6 text-primary shrink-0" />
                 <span>Seguro total e assistência 24h</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <Calendar className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 text-base font-semibold text-foreground bg-card/50 px-4 py-3 rounded-2xl border border-white/5 shadow-xl backdrop-blur-sm">
+                <Calendar className="w-6 h-6 text-primary shrink-0" />
                 <span>Manutenção preventiva inclusa</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground text-primary font-bold">
-                <span>A partir de R$ 750,00 por semana</span>
+              <div className="flex items-center gap-3 text-base font-bold text-primary bg-primary/10 px-4 py-3 rounded-2xl border border-primary/20 shadow-xl backdrop-blur-sm">
+                <Zap className="w-6 h-6 shrink-0" />
+                <span>R$ 750,00 por semana</span>
               </div>
             </div>
           </div>
