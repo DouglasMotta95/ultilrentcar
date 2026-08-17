@@ -4,12 +4,14 @@ import { Car, Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-white pt-20 pb-10 border-t border-white/5">
+    <footer className="bg-card text-white pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10" />
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="bg-primary p-1.5 rounded-lg">
+            <Link to="/" className="flex items-center gap-3">
+              <div className="bg-primary p-2 rounded-xl shadow-lg shadow-primary/20">
                 <Car className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold tracking-tighter">
