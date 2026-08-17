@@ -24,7 +24,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
             <Car className="w-12 h-12 opacity-20" />
           </div>
         )}
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+        <div className="absolute top-4 right-4 bg-primary px-4 py-2 rounded-2xl text-xs font-bold text-white shadow-xl shadow-primary/20">
           A partir de R$ {Number(vehicle.price_per_week).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}/sem
         </div>
       </div>
