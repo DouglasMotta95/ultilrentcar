@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import { LeadForm } from "@/components/sections/lead-form";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/cadastro")({
@@ -23,13 +25,13 @@ function Cadastro() {
             Preencha o formulário abaixo para iniciar sua solicitação de locação.
           </p>
           
-          <div className="p-12 border-2 border-dashed border-muted rounded-2xl text-center">
-            <p className="text-lg font-medium mb-4">O formulário de cadastro será implementado aqui.</p>
-            <Button asChild>
-              <a href="/">Voltar para Início</a>
-            </Button>
+          <div className="mt-8">
+            <LeadForm />
           </div>
         </div>
+      </div>
+      <div className="mt-20">
+        <Footer />
       </div>
     </main>
   );
