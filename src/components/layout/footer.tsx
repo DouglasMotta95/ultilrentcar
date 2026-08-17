@@ -15,7 +15,7 @@ export function Footer() {
                 <Car className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold tracking-tighter">
-                UT <span className="text-primary">LOCADORA</span>
+                UTIL <span className="text-primary">LOCADORA</span>
               </span>
             </Link>
             <p className="text-white/60 leading-relaxed">
