@@ -88,4 +88,13 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+  .glass-card {
+    @apply bg-card/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)];
+  }
+  .glass-morphism {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl;
+  }
+  .premium-gradient {
+    @apply bg-gradient-to-br from-primary/20 via-primary/5 to-transparent;
+  }
 }

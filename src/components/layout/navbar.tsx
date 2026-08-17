@@ -27,7 +27,7 @@ export function Navbar() {
             <Car className="w-6 h-6 text-white" />
           </div>
           <span className="text-xl font-bold tracking-tighter text-foreground">
-            UT <span className="text-primary">LOCADORA</span>
+            UTIL <span className="text-primary">LOCADORA</span>
           </span>
         </Link>
 

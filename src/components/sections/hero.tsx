@@ -22,7 +22,7 @@ export function Hero() {
             </h1>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0">
-              Alugue seu carro com a UT Locadora e tenha toda a estrutura necessária para rodar na Uber, 99 e inDrive com segurança e lucratividade.
+              Alugue seu carro com a Util Locadora e tenha toda a estrutura necessária para rodar na Uber, 99 e inDrive com segurança e lucratividade.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
@@ -56,16 +56,16 @@ export function Hero() {
           
           <div className="flex-1 relative animate-in fade-in slide-in-from-right duration-700 delay-200">
             {/* Image Placeholder - Will be replaced by real vehicle photo */}
-            <div className="relative z-10 w-full aspect-[4/3] rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] bg-card border border-white/10 group">
+            <div className="relative z-10 w-full aspect-[4/3] rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] bg-card border border-white/20 group">
               <img 
-                src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&q=80&w=1000" 
-                alt="Carro de luxo para locação" 
+                src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?auto=format&fit=crop&q=80&w=1000" 
+                alt="Toyota Corolla Cross - Premium Fleet" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent flex items-end p-8">
                 <div className="text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                   <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-1">Destaque da Semana</p>
-                  <p className="text-3xl font-bold text-foreground">Sedan Premium 2024</p>
+                  <p className="text-3xl font-bold text-foreground">SUV Premium 2025</p>
                 </div>
               </div>
             </div>
