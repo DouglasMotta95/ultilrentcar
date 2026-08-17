@@ -11,7 +11,7 @@ interface VehicleCardProps {
 
 export function VehicleCard({ vehicle }: VehicleCardProps) {
   return (
-    <Card className="overflow-hidden border-border hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
+    <Card className="overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 flex flex-col h-full hover:-translate-y-2 group">
       <div className="relative aspect-video overflow-hidden bg-muted">
         {vehicle.image_url ? (
           <img

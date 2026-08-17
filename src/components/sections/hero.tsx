@@ -4,9 +4,10 @@ import { Link } from "@tanstack/react-router";
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-background">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-primary/5 rounded-l-[100px] hidden lg:block" />
+      <div className="absolute top-0 right-0 -z-10 w-2/3 h-full bg-primary/10 rounded-l-[200px] hidden lg:block blur-3xl opacity-50" />
+      <div className="absolute top-1/4 -left-20 -z-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl opacity-30" />
       
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">

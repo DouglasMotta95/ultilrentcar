@@ -35,7 +35,7 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="py-24 bg-foreground text-white" id="como-funciona">
+    <section className="py-24 bg-card text-white border-y border-white/5" id="como-funciona">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Como Funciona a Locação</h2>
@@ -51,7 +51,7 @@ export function HowItWorks() {
           {steps.map((step, index) => (
             <div 
               key={index} 
-              className="relative z-10 bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+              className="relative z-10 bg-white/5 border border-white/10 p-8 rounded-[2rem] backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 group"
             >
               <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                 {step.icon}
