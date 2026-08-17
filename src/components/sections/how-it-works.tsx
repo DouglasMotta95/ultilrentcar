@@ -44,7 +44,7 @@ export function HowItWorks() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {steps.map(({ n, icon: Icon, title, description }) => (
             <div key={n} className="soft-card p-7 transition hover:-translate-y-1 hover:shadow-xl">
-              <span className="font-display text-5xl font-extrabold text-muted/80 text-secondary-foreground/15">
+              <span className="font-display text-5xl font-extrabold text-foreground/10">
                 {n}
               </span>
               <Icon className="mt-5 h-6 w-6 text-primary" />
