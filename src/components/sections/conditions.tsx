@@ -39,7 +39,7 @@ export function Conditions() {
       <div className="absolute inset-0 bg-primary/5 skew-y-3 origin-left -z-10" />
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Condições de Locação Transparentes</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 uppercase tracking-tighter">Condições de Locação</h2>
           <p className="text-muted-foreground text-lg">
             Na Util Locadora, acreditamos na transparência. Veja as principais condições para alugar seu veículo hoje mesmo.
           </p>

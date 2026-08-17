@@ -38,7 +38,7 @@ export function HowItWorks() {
     <section className="py-24 bg-background text-white border-y border-white/5" id="como-funciona">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Como Funciona a Locação</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-6 uppercase tracking-tighter">Como Funciona a Locação</h2>
           <p className="text-white/60 text-lg">
             Um processo simples e rápido para você começar a trabalhar sem burocracia excessiva.
           </p>

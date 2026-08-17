@@ -45,12 +45,16 @@ const formSchema = z.object({
   ref_phone_1: z.string().min(10, "Telefone de referência obrigatório"),
   ref_phone_2: z.string().min(10, "Telefone de referência obrigatório"),
   vehicle_interest: z.string().optional(),
+  cnh_url: z.any().optional(),
+  residence_proof_url: z.any().optional(),
+  criminal_record_url: z.any().optional(),
 });
 
 export function LeadForm() {
   const navigate = useNavigate();
   const submitLeadFn = useServerFn(submitLead);
   const [step, setStep] = useState(1);
+  const totalSteps = 4;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -324,6 +328,39 @@ export function LeadForm() {
                   </FormItem>
                 )}
               />
+            </div>
+            <div className="flex gap-4">
+              <Button type="button" variant="outline" className="flex-1" onClick={prevStep}>Voltar</Button>
+              <Button type="button" className="flex-1" onClick={nextStep}>Próximo Passo</Button>
+            </div>
+          </div>
+        )}
+
+        {step === 4 && (
+          <div className="space-y-4 animate-in fade-in slide-in-from-right duration-500">
+            <h2 className="text-xl font-bold mb-4">Documentação (Fotos/PDF)</h2>
+            <div className="grid grid-cols-1 gap-6">
+              <FormItem>
+                <FormLabel>CNH (Frente e Verso)</FormLabel>
+                <FormControl>
+                  <Input type="file" accept="image/*,application/pdf" className="bg-card/50 border-white/10" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+              <FormItem>
+                <FormLabel>Comprovante de Residência (Atualizado)</FormLabel>
+                <FormControl>
+                  <Input type="file" accept="image/*,application/pdf" className="bg-card/50 border-white/10" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+              <FormItem>
+                <FormLabel>Antecedentes Criminais</FormLabel>
+                <FormControl>
+                  <Input type="file" accept="image/*,application/pdf" className="bg-card/50 border-white/10" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             </div>
             <div className="flex gap-4">
               <Button type="button" variant="outline" className="flex-1" onClick={prevStep}>Voltar</Button>
