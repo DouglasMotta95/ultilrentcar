@@ -77,7 +77,20 @@ export function LeadForm() {
   const prevStep = () => setStep(step - 1);
 
   return (
-    <Form {...form}>
+    <div className="space-y-6">
+      {/* Progress Bar */}
+      <div className="flex gap-2 mb-8">
+        {[1, 2, 3, 4].map((i) => (
+          <div 
+            key={i} 
+            className={`h-2 flex-1 rounded-full transition-all duration-500 ${
+              step >= i ? "bg-primary shadow-[0_0_10px_rgba(59,130,246,0.5)]" : "bg-white/10"
+            }`}
+          />
+        ))}
+      </div>
+
+      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {step === 1 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-right duration-500">
@@ -371,6 +384,7 @@ export function LeadForm() {
           </div>
         )}
       </form>
-    </Form>
+      </Form>
+    </div>
   );
 }
