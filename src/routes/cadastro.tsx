@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import { LeadForm } from "@/components/sections/lead-form";
 import { Button } from "@/components/ui/button";
 
@@ -28,6 +29,9 @@ function Cadastro() {
             <LeadForm />
           </div>
         </div>
+      </div>
+      <div className="mt-20">
+        <Footer />
       </div>
     </main>
   );

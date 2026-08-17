@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
 import { Conditions } from "@/components/sections/conditions";
 import { VehicleCatalog } from "@/components/sections/vehicle-catalog";
@@ -41,12 +42,7 @@ function Home() {
       <Conditions />
       <HowItWorks />
       
-      {/* Footer Placeholder */}
-      <footer className="bg-foreground text-white py-12 border-t border-white/10">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm opacity-60">© 2026 UT Locadora. Todos os direitos reservados.</p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
