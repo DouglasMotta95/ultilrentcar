@@ -13,7 +13,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "../components/ui/sonner";
 import { useState } from "react";
-import { PWAInstallPrompt } from "../components/pwa-install-prompt";
 
 
 function NotFoundComponent() {
@@ -81,12 +80,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#101520" },
+      { name: "theme-color", content: "#ffffff" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
-      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
-      { name: "apple-mobile-web-app-title", content: "LucroReal" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+      { name: "apple-mobile-web-app-title", content: "Útil Rent Car" },
       { name: "mobile-web-app-capable", content: "yes" },
-      { name: "author", content: "LucroReal" },
+      { name: "author", content: "Útil Rent Car" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -134,7 +133,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="relative min-h-screen">
         <Outlet />
-        <PWAInstallPrompt />
       </div>
       <Toaster position="top-center" />
     </QueryClientProvider>
