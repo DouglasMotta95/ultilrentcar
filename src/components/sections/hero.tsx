@@ -58,7 +58,7 @@ export function Hero() {
             {/* Image Placeholder - Will be replaced by real vehicle photo */}
             <div className="relative z-10 w-full aspect-[4/3] rounded-[3rem] overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] bg-card border border-white/20 group">
               <img 
-                src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?auto=format&fit=crop&q=80&w=1000" 
+                src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000" 
                 alt="Toyota Corolla Cross - Premium Fleet" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
