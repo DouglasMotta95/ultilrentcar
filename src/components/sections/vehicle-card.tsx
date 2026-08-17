@@ -47,9 +47,11 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         </div>
         
         <div className="space-y-2">
-          {vehicle.features?.slice(0, 3).map((feature, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm">
-              <Check className="w-4 h-4 text-green-500" />
+          {vehicle.features?.slice(0, 4).map((feature, i) => (
+            <div key={i} className="flex items-center gap-3 text-sm font-medium text-foreground/80">
+              <div className="bg-primary/10 p-1 rounded-md">
+                <Check className="w-3.5 h-3.5 text-primary" />
+              </div>
               <span>{feature}</span>
             </div>
           ))}
@@ -57,7 +59,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
       </CardContent>
       
       <CardFooter className="p-6 pt-0">
-        <Button className="w-full" asChild>
+        <Button className="w-full h-12 text-base font-bold rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300" asChild>
           <a href={`https://wa.me/5500000000000?text=Olá, tenho interesse no veículo ${vehicle.brand} ${vehicle.model}`} target="_blank" rel="noopener noreferrer">
             TENHO INTERESSE
           </a>
