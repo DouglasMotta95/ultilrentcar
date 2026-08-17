@@ -30,7 +30,7 @@ export function Hero() {
                 <Link to="/cadastro">QUERO ALUGAR UM CARRO</Link>
               </Button>
               <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-12 px-8" asChild>
-                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">FALAR COM A LOCADORA</a>
+                <a href="https://wa.me/5511947265882" target="_blank" rel="noopener noreferrer">FALAR COM A LOCADORA</a>
               </Button>
             </div>
             

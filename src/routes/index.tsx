@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
     title: "Util Locadora | Aluguel de Carros para Aplicativos",
     meta: [
       { name: "description", content: "Locação de veículos para motoristas Uber, 99 e inDrive. A partir de R$ 750,00 por semana. 7.000 km inclusos, seguro e manutenção." },
-      { property: "og:title", content: "UT Locadora - Ganhe mais com o carro certo" },
+      { property: "og:title", content: "Util Locadora - Ganhe mais com o carro certo" },
       { property: "og:description", content: "Aluguel simplificado de carros para motoristas profissionais." },
     ]
   })
