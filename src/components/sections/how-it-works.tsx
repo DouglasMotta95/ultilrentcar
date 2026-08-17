@@ -1,66 +1,69 @@
-import { CheckCircle2, Send, Clock, ShieldCheck, CreditCard, Car } from "lucide-react";
+import { MessageCircle, FileText, Search, KeyRound, ArrowRight } from "lucide-react";
+
+const steps = [
+  {
+    n: "01",
+    icon: MessageCircle,
+    title: "Fale com a gente",
+    description:
+      "Chame no WhatsApp e conte qual plataforma você roda. Em minutos apresentamos o plano ideal para o seu perfil.",
+  },
+  {
+    n: "02",
+    icon: FileText,
+    title: "Envie os documentos",
+    description:
+      "CNH com EAR, comprovante de residência e cadastro no aplicativo. Análise rápida e sem burocracia desnecessária.",
+  },
+  {
+    n: "03",
+    icon: Search,
+    title: "Escolha o veículo",
+    description:
+      "Você seleciona o carro disponível que mais combina com a sua rotina e confere tudo antes de assinar.",
+  },
+  {
+    n: "04",
+    icon: KeyRound,
+    title: "Retire e comece a rodar",
+    description:
+      "Assinatura do contrato, caução apenas na retirada do veículo e chave na mão para começar a faturar.",
+  },
+];
 
 export function HowItWorks() {
-  const steps = [
-    {
-      icon: <CheckCircle2 className="w-6 h-6" />,
-      title: "01 — Faça seu cadastro",
-      description: "Preencha seus dados básicos e profissionais diretamente em nosso site.",
-    },
-    {
-      icon: <Send className="w-6 h-6" />,
-      title: "02 — Envie sua documentação",
-      description: "Envie fotos da sua CNH, comprovante de residência e antecedentes.",
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: "03 — Aguarde a análise",
-      description: "Nossa equipe analisará seu perfil em até 24 horas úteis.",
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6" />,
-      title: "04 — Aprovação",
-      description: "Com tudo certo, você recebe a confirmação via WhatsApp ou E-mail.",
-    },
-    {
-      icon: <CreditCard className="w-6 h-6" />,
-      title: "05 — Pagamento do caução",
-      description: "Realize o pagamento do caução para garantir sua reserva.",
-    },
-    {
-      icon: <Car className="w-6 h-6" />,
-      title: "06 — Retirada do veículo",
-      description: "Agende o horário e retire seu carro revisado e pronto para rodar.",
-    },
-  ];
-
   return (
-    <section className="py-24 bg-background text-white border-y border-white/5" id="como-funciona">
+    <section id="como-funciona" className="py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-6 uppercase tracking-tighter">Como Funciona a Locação</h2>
-          <p className="text-white/60 text-lg">
-            Um processo simples e rápido para você começar a trabalhar sem burocracia excessiva.
-          </p>
-        </div>
+        <span className="eyebrow">Como funciona</span>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-          {/* Decorative connecting line for desktop */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary/5 via-primary/40 to-primary/5 -translate-y-1/2 z-0 blur-sm" />
-          
-          {steps.map((step, index) => (
-            <div 
-              key={index} 
-              className="relative z-10 glass-card p-8 rounded-[2rem] backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 group"
-            >
-              <div className="w-16 h-16 bg-primary rounded-[1.25rem] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 transition-transform duration-500">
-                {step.icon}
-              </div>
-              <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-              <p className="text-white/60 leading-relaxed">{step.description}</p>
+        <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+          Do primeiro contato à chave na mão
+        </h2>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {steps.map(({ n, icon: Icon, title, description }) => (
+            <div key={n} className="soft-card p-7 transition hover:-translate-y-1 hover:shadow-xl">
+              <span className="font-display text-5xl font-extrabold text-muted/80 text-secondary-foreground/15">
+                {n}
+              </span>
+              <Icon className="mt-5 h-6 w-6 text-primary" />
+              <h3 className="mt-5 font-display text-xl font-bold">{title}</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">{description}</p>
             </div>
           ))}
         </div>
+
+        <a
+          href="https://wa.me/5511947229449"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-12 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95"
+        >
+          <MessageCircle className="h-5 w-5" />
+          Começar agora pelo WhatsApp
+          <ArrowRight className="h-4 w-4" />
+        </a>
       </div>
     </section>
   );
