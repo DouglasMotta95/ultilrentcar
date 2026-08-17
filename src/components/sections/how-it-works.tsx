@@ -46,14 +46,14 @@ export function HowItWorks() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
           {/* Decorative connecting line for desktop */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary/20 -translate-y-1/2 z-0" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary/5 via-primary/40 to-primary/5 -translate-y-1/2 z-0 blur-sm" />
           
           {steps.map((step, index) => (
             <div 
               key={index} 
               className="relative z-10 bg-white/5 border border-white/10 p-8 rounded-[2rem] backdrop-blur-sm hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 group"
             >
-              <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+              <div className="w-16 h-16 bg-primary rounded-[1.25rem] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-110 transition-transform duration-500">
                 {step.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{step.title}</h3>
