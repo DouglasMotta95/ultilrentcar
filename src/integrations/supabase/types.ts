@@ -14,6 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
+      leads: {
+        Row: {
+          admin_notes: string | null
+          app_profile_url: string | null
+          birth_date: string
+          cellphone: string
+          cep: string
+          city: string
+          cnh_url: string | null
+          complement: string | null
+          cpf: string
+          created_at: string | null
+          criminal_record_url: string | null
+          email: string
+          facebook: string | null
+          full_name: string
+          id: string
+          instagram: string | null
+          landline: string | null
+          neighborhood: string
+          number: string
+          platform: Database["public"]["Enums"]["platform_type"]
+          profession: string
+          ref_phone_1: string
+          ref_phone_2: string
+          residence_proof_url: string | null
+          state: string
+          status: Database["public"]["Enums"]["lead_status"] | null
+          street: string
+          updated_at: string | null
+          vehicle_interest: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          app_profile_url?: string | null
+          birth_date: string
+          cellphone: string
+          cep: string
+          city: string
+          cnh_url?: string | null
+          complement?: string | null
+          cpf: string
+          created_at?: string | null
+          criminal_record_url?: string | null
+          email: string
+          facebook?: string | null
+          full_name: string
+          id?: string
+          instagram?: string | null
+          landline?: string | null
+          neighborhood: string
+          number: string
+          platform: Database["public"]["Enums"]["platform_type"]
+          profession: string
+          ref_phone_1: string
+          ref_phone_2: string
+          residence_proof_url?: string | null
+          state: string
+          status?: Database["public"]["Enums"]["lead_status"] | null
+          street: string
+          updated_at?: string | null
+          vehicle_interest?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          app_profile_url?: string | null
+          birth_date?: string
+          cellphone?: string
+          cep?: string
+          city?: string
+          cnh_url?: string | null
+          complement?: string | null
+          cpf?: string
+          created_at?: string | null
+          criminal_record_url?: string | null
+          email?: string
+          facebook?: string | null
+          full_name?: string
+          id?: string
+          instagram?: string | null
+          landline?: string | null
+          neighborhood?: string
+          number?: string
+          platform?: Database["public"]["Enums"]["platform_type"]
+          profession?: string
+          ref_phone_1?: string
+          ref_phone_2?: string
+          residence_proof_url?: string | null
+          state?: string
+          status?: Database["public"]["Enums"]["lead_status"] | null
+          street?: string
+          updated_at?: string | null
+          vehicle_interest?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -71,6 +167,48 @@ export type Database = {
         }
         Relationships: []
       }
+      vehicles: {
+        Row: {
+          brand: string
+          color: string | null
+          created_at: string | null
+          features: string[] | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          model: string
+          plate: string | null
+          price_per_week: number
+          year: number
+        }
+        Insert: {
+          brand: string
+          color?: string | null
+          created_at?: string | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          model: string
+          plate?: string | null
+          price_per_week: number
+          year: number
+        }
+        Update: {
+          brand?: string
+          color?: string | null
+          created_at?: string | null
+          features?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          model?: string
+          plate?: string | null
+          price_per_week?: number
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -86,6 +224,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      lead_status:
+        | "em_analise"
+        | "documentacao_pendente"
+        | "aprovado"
+        | "reprovado"
+        | "finalizado"
+      platform_type: "Uber" | "99" | "inDrive" | "Outro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -214,6 +359,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      lead_status: [
+        "em_analise",
+        "documentacao_pendente",
+        "aprovado",
+        "reprovado",
+        "finalizado",
+      ],
+      platform_type: ["Uber", "99", "inDrive", "Outro"],
     },
   },
 } as const
