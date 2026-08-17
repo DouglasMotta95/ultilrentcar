@@ -42,7 +42,7 @@
   --popover-foreground: oklch(0.98 0 0);
   
   /* UT Locadora Blue - Professional & Trustworthy */
-  --primary: oklch(0.55 0.2 250);
+  --primary: oklch(0.45 0.18 255);
   --primary-foreground: oklch(0.985 0 0);
   
   --secondary: oklch(0.2 0 0);
@@ -59,7 +59,7 @@
   
   --border: oklch(0.25 0 0);
   --input: oklch(0.25 0 0);
-  --ring: oklch(0.55 0.2 250 / 0.5);
+  --ring: oklch(0.45 0.18 255 / 0.5);
   --radius: 1rem;
 }
 

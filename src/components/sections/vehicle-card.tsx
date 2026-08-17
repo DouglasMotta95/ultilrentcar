@@ -60,7 +60,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
       
       <CardFooter className="p-6 pt-0">
         <Button className="w-full h-12 text-base font-bold rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300" asChild>
-          <a href={`https://wa.me/5500000000000?text=Olá, tenho interesse no veículo ${vehicle.brand} ${vehicle.model}`} target="_blank" rel="noopener noreferrer">
+          <a href={`https://wa.me/5511947265882?text=Olá, tenho interesse no veículo ${vehicle.brand} ${vehicle.model}`} target="_blank" rel="noopener noreferrer">
             TENHO INTERESSE
           </a>
         </Button>
