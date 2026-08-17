@@ -47,7 +47,7 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-white/60">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span>(00) 00000-0000</span>
+                <span>(11) 94726-5882</span>
               </li>
               <li className="flex items-start gap-3 text-white/60">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
@@ -55,7 +55,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3 text-white/60">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
-                <span>Endereço da Locadora, Cidade - UF</span>
+                <span>Rua Almirante Calheiros, 344 - Tatuapé, São Paulo - SP</span>
               </li>
             </ul>
           </div>
