@@ -11,11 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { LucroProvider } from "../lib/lucro-store";
 import { Toaster } from "../components/ui/sonner";
-import { AIChatDrawer } from "../components/ai-chat-drawer";
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
 import { PWAInstallPrompt } from "../components/pwa-install-prompt";
 
 
@@ -132,26 +129,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const [aiOpen, setAiOpen] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LucroProvider>
-        <div className="relative min-h-screen">
-          <Outlet />
-          <PWAInstallPrompt />
-          
-          <button
-            onClick={() => setAiOpen(true)}
-            className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-glow transition-all duration-300 active:scale-90"
-            aria-label="Pergunte à IA"
-          >
-            <Sparkles className="size-6" />
-          </button>
-
-          <AIChatDrawer open={aiOpen} onClose={() => setAiOpen(false)} />
-        </div>
-      </LucroProvider>
+      <div className="relative min-h-screen">
+        <Outlet />
+        <PWAInstallPrompt />
+      </div>
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
