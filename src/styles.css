@@ -11,7 +11,7 @@
   --radius-xl: calc(var(--radius) + 6px);
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -31,36 +31,48 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-whatsapp: var(--whatsapp);
 }
 
 :root {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.16 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.16 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  
-  /* UT Locadora Blue - Professional & Trustworthy */
-  --primary: oklch(0.45 0.18 255);
-  --primary-foreground: oklch(0.985 0 0);
-  
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  
-  --accent: oklch(0.25 0 0);
-  --accent-foreground: oklch(0.98 0 0);
-  
+  /* Light, clean — Util Rent Car */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.01 260);
+  --surface: oklch(0.97 0.008 240);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.01 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.01 260);
+
+  /* Cyan/blue institucional */
+  --primary: oklch(0.68 0.15 231);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.25 0.01 260);
+
+  --muted: oklch(0.96 0.01 240);
+  --muted-foreground: oklch(0.52 0.01 260);
+
+  --accent: oklch(0.94 0.03 231);
+  --accent-foreground: oklch(0.45 0.13 231);
+
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.45 0.18 255 / 0.5);
+
+  --border: oklch(0.92 0.005 250);
+  --input: oklch(0.92 0.005 250);
+  --ring: oklch(0.68 0.15 231 / 0.4);
   --radius: 1rem;
+
+  /* Dark band + footer */
+  --ink: oklch(0.24 0.005 260);
+  --ink-foreground: oklch(0.98 0 0);
+  --whatsapp: oklch(0.62 0.16 152);
 }
 
 @layer base {
@@ -79,22 +91,26 @@
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .glass-card {
-    @apply bg-card/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)];
-  }
-  .glass-morphism {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl;
-  }
-  .premium-gradient {
-    @apply bg-gradient-to-br from-primary/20 via-primary/5 to-transparent;
-  }
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@utility soft-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -18px rgb(15 30 60 / 0.25);
 }

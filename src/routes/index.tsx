@@ -1,22 +1,36 @@
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { Hero } from "@/components/sections/hero";
-import { Conditions } from "@/components/sections/conditions";
-import { VehicleCatalog } from "@/components/sections/vehicle-catalog";
-import { HowItWorks } from "@/components/sections/how-it-works";
 import { Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+import { WhatsappButton } from "@/components/layout/whatsapp-button";
+import { Hero } from "@/components/sections/hero";
+import { About } from "@/components/sections/about";
+import { Services } from "@/components/sections/services";
+import { HowItWorks } from "@/components/sections/how-it-works";
+import { Benefits } from "@/components/sections/benefits";
+import { VehicleCatalog } from "@/components/sections/vehicle-catalog";
+import { Testimonials } from "@/components/sections/testimonials";
+import { Faq } from "@/components/sections/faq";
+import { Contact } from "@/components/sections/contact";
 
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
-    title: "Util Locadora | Aluguel de Carros para Aplicativos",
+    title: "Util Rent Car | Locadora de Veículos para Motoristas de App",
     meta: [
-      { name: "description", content: "Locação de veículos para motoristas Uber, 99 e inDrive. A partir de R$ 750,00 por semana. 7.000 km inclusos, seguro e manutenção." },
-      { property: "og:title", content: "Util Locadora - Ganhe mais com o carro certo" },
-      { property: "og:description", content: "Aluguel simplificado de carros para motoristas profissionais." },
-    ]
-  })
+      {
+        name: "description",
+        content:
+          "Locação de veículos em Itu-SP para motoristas de Uber, 99 e InDriver. Frota revisada, seguro 24h, pagamento semanal e liberação rápida.",
+      },
+      { property: "og:title", content: "Util Rent Car - Locadora de Veículos" },
+      {
+        property: "og:description",
+        content:
+          "Aluguel de carros para motoristas de aplicativo com seguro 24h, frota revisada e suporte de verdade.",
+      },
+    ],
+  }),
 });
 
 function Home() {
@@ -24,26 +38,37 @@ function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      
-      <section className="py-24 bg-background relative" id="veiculos">
-        <div className="absolute inset-0 bg-primary/5 -skew-y-3 origin-right -z-10" />
+      <About />
+      <Services />
+      <HowItWorks />
+      <Benefits />
+
+      <section id="frota" className="py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 uppercase tracking-tighter">Nossa Frota</h2>
-            <p className="text-muted-foreground text-lg">
-              Veículos revisados e prontos para você começar a faturar hoje mesmo.
-            </p>
+          <span className="eyebrow">Nossa frota</span>
+          <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+            Carros populares, econômicos e prontos para rodar
+          </h2>
+          <p className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
+            Trabalhamos com os modelos nacionais mais rentáveis para motoristas de aplicativo.
+            Consulte a disponibilidade do dia.
+          </p>
+
+          <div className="mt-12">
+            <Suspense
+              fallback={<p className="py-12 text-center text-muted-foreground">Carregando frota...</p>}
+            >
+              <VehicleCatalog />
+            </Suspense>
           </div>
-          <Suspense fallback={<div className="text-center py-12 text-muted-foreground">Carregando frota...</div>}>
-            <VehicleCatalog />
-          </Suspense>
         </div>
       </section>
 
-      <Conditions />
-      <HowItWorks />
-      
+      <Testimonials />
+      <Faq />
+      <Contact />
       <Footer />
+      <WhatsappButton />
     </main>
   );
 }
