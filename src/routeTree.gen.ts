@@ -10,65 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiPublicHooksBillingReminderRouteImport } from './routes/api/public/hooks/billing-reminder'
-import { Route as ApiPublicHooksStripeWebhookRouteImport } from './routes/api/public/hooks/stripe-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicHooksBillingReminderRoute =
-  ApiPublicHooksBillingReminderRouteImport.update({
-    id: '/api/public/hooks/billing-reminder',
-    path: '/api/public/hooks/billing-reminder',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicHooksStripeWebhookRoute =
-  ApiPublicHooksStripeWebhookRouteImport.update({
-    id: '/api/public/hooks/stripe-webhook',
-    path: '/api/public/hooks/stripe-webhook',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
-  '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
-  '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/api/public/hooks/billing-reminder': typeof ApiPublicHooksBillingReminderRoute
-  '/api/public/hooks/stripe-webhook': typeof ApiPublicHooksStripeWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/api/public/hooks/billing-reminder'
-    | '/api/public/hooks/stripe-webhook'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/api/public/hooks/billing-reminder'
-    | '/api/public/hooks/stripe-webhook'
-  id:
-    | '__root__'
-    | '/'
-    | '/api/public/hooks/billing-reminder'
-    | '/api/public/hooks/stripe-webhook'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApiPublicHooksBillingReminderRoute: typeof ApiPublicHooksBillingReminderRoute
-  ApiPublicHooksStripeWebhookRoute: typeof ApiPublicHooksStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -80,27 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/hooks/billing-reminder': {
-      id: '/api/public/hooks/billing-reminder'
-      path: '/api/public/hooks/billing-reminder'
-      fullPath: '/api/public/hooks/billing-reminder'
-      preLoaderRoute: typeof ApiPublicHooksBillingReminderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/hooks/stripe-webhook': {
-      id: '/api/public/hooks/stripe-webhook'
-      path: '/api/public/hooks/stripe-webhook'
-      fullPath: '/api/public/hooks/stripe-webhook'
-      preLoaderRoute: typeof ApiPublicHooksStripeWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApiPublicHooksBillingReminderRoute: ApiPublicHooksBillingReminderRoute,
-  ApiPublicHooksStripeWebhookRoute: ApiPublicHooksStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
