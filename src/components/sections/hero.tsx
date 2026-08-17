@@ -22,7 +22,7 @@ export function Hero() {
             </h1>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0">
-              Alugue seu carro com a UT Locadora e tenha toda a estrutura necessária para rodar na Uber, 99 e inDrive com segurança e lucratividade.
+              Alugue seu carro com a Util Locadora e tenha toda a estrutura necessária para rodar na Uber, 99 e inDrive com segurança e lucratividade.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">

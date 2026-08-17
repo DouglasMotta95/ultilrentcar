@@ -70,7 +70,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-white/5 text-center text-white/40 text-sm">
-          <p>© 2026 UT Locadora. Todos os direitos reservados. CNPJ: 00.000.000/0000-00</p>
+          <p>© 2026 Util Locadora. Todos os direitos reservados. CNPJ: 00.000.000/0000-00</p>
         </div>
       </div>
     </footer>
