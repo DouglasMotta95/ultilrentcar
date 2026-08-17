@@ -1,40 +1,41 @@
-# Plan: Implement Útil Rent Car Project
+# UT/Util Locadora - Implementation Plan
 
-Transform the existing project into a professional car rental platform for Útil Rent Car, following the structure and features of the reference site (util-drive-pro.lovable.app).
+Complete reconstruction of the UT Locadora platform for professional drivers (Uber, 99, inDrive).
 
-## User Review Required
+## Phase 1: Branding & Visual Identity (Complete)
+- [x] Configure Tailwind v4 with UT Locadora colors (Professional Blue).
+- [x] Setup premium typography (Sora for headings, Manrope for body).
+- [x] Implement glassmorphism and modern UI utilities.
 
-> [!IMPORTANT]
-> The current project structure (LucroReal) will be completely replaced. This includes resetting routes, styles, and database models.
+## Phase 2: Core Platform Infrastructure
+- [x] Create navigation and global layout.
+- [x] Implement Hero section with value propositions (R$ 750/week, 7k km).
+- [x] Implement Locality/Conditions section.
+- [x] Setup routing for Home and Registration (/cadastro).
 
-- **Logo**: Do you have the official logo file available, or should I use a professional placeholder for now?
-- **Colors**: The reference site uses specific branding. Should I stick strictly to those or can I suggest a modern evolution?
-- **Fleet**: I will set up the structure for vehicles. Do you have specific models to include immediately?
+## Phase 3: Registration & Document Management
+- [ ] Build multi-step registration form (Personal, Address, Professional, References).
+- [ ] Implement secure file upload system for CNH, Residence Proof, Criminal Records, and App Profile.
+- [ ] Configure storage buckets with private access for documents.
+- [ ] Implement validation (MIME, size) and security layers.
 
-## Proposed Changes
+## Phase 4: Backend & Notifications
+- [ ] Create Supabase schema for leads/solicitations.
+- [ ] Implement RLS policies for data privacy.
+- [ ] Setup server function to send email notifications to `utillocadora@gmail.com` on new leads.
 
-### 1. Project Reset
-- Remove all LucroReal specific routes, components, and logic.
-- Reset `src/styles.css` to a clean, professional "Agency" style (Light/Dark support, premium typography).
+## Phase 5: Admin Dashboard
+- [ ] Create protected admin routes (`/admin`, `/admin/solicitacoes`).
+- [ ] Build dashboard for tracking lead status (Yellow: Analysis, Green: Approved, etc.).
+- [ ] Implement vehicle management CRUD (utilizing real customer photos).
 
-### 2. Branding & Design
-- Implement the Útil Rent Car visual identity.
-- Typography: Inter/Manrope for body, Sora/Outfit for headings.
-- Colors: Deep blues/greens (trust) with clean whites/greys.
+## Phase 6: Final Polish
+- [ ] Integrate WhatsApp CTAs across all pages.
+- [ ] Implement "How it Works" visual guide.
+- [ ] Full mobile optimization and PWA configuration.
 
-### 3. Core Pages
-- **Homepage**: Hero section, "Quem Somos", "Serviços", "Como Funciona", "Benefícios", "Frota", "FAQ", "Contato".
-- **Legal**: "Política de Privacidade", "Termos de Uso".
-- **Client/Admin Area**: Secure login and dashboard for managing fleet and leads.
-
-### 4. Features
-- **Fleet Management**: CRUD for vehicles (Model, Year, Category, Status, Photos).
-- **Lead Capture**: WhatsApp integration with pre-filled messages and a budget request form.
-- **Dynamic Content**: CMS-like ability to edit site text and contact info via the dashboard.
-- **SEO & Performance**: Optimized meta tags, lazy loading, and mobile-first responsiveness.
-
-## Technical Details
-- **Frontend**: TanStack Start (React 19), Tailwind CSS v4.
-- **Backend/DB**: Lovable Cloud (Supabase) for Lead storage and Fleet management.
-- **Auth**: Supabase Auth for the Admin/Client area.
-- **Integrations**: WhatsApp API (link-based), Google Maps (placeholder or API if key provided).
+### Technical Details
+- **Frontend**: TanStack Start v1 (React 19), Tailwind CSS v4, Lucide Icons.
+- **Backend**: Supabase (Database, Auth, Storage).
+- **Security**: RLS, private storage, authenticated admin functions.
+- **Communications**: Email notifications via server functions (Resend/SMTP), WhatsApp integration.
