@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Conditions } from "@/components/sections/conditions";
 import { VehicleCatalog } from "@/components/sections/vehicle-catalog";
+import { HowItWorks } from "@/components/sections/how-it-works";
 import { Suspense } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -38,6 +39,7 @@ function Home() {
       </section>
 
       <Conditions />
+      <HowItWorks />
       
       {/* Footer Placeholder */}
       <footer className="bg-foreground text-white py-12 border-t border-white/10">
