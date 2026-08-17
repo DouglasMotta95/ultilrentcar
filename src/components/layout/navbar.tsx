@@ -49,7 +49,7 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <Button variant="outline" size="sm" className="gap-2" asChild>
-            <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/5511947265882" target="_blank" rel="noopener noreferrer">
               <Phone className="w-4 h-4" />
               WhatsApp
             </a>
@@ -102,7 +102,7 @@ export function Navbar() {
             </Link>
             <div className="flex flex-col gap-2 pt-2">
               <Button className="w-full justify-center gap-2" asChild>
-                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5511947265882" target="_blank" rel="noopener noreferrer">
                   <Phone className="w-4 h-4" />
                   Falar com a Locadora
                 </a>
