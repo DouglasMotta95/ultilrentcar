@@ -44,7 +44,7 @@ export function Navbar() {
           </a>
           <Link to="/cadastro" className="text-sm font-medium hover:text-primary transition-colors">
             Cadastro
-          </a>
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
