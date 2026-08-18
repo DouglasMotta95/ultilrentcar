@@ -2,10 +2,10 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 const stats = [
-  { value: "24h", label: "Seguro ativo" },
-  { value: "Semanal", label: "Pagamento" },
-  { value: "100%", label: "Frota revisada" },
-  { value: "Rápido", label: "Atendimento" },
+  { value: "Seguro", label: "Contra roubo e furto" },
+  { value: "7.000 km", label: "Mensais incluídos" },
+  { value: "Manutenção", label: "Por conta da locadora" },
+  { value: "Apps", label: "Veículos para motoristas" },
 ];
 
 export function Hero() {
@@ -23,33 +23,38 @@ export function Hero() {
       <div className="container mx-auto px-4">
         <span className="eyebrow">Itu • São Paulo • Uber · 99 · InDriver</span>
 
-        <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-          Aluguel de veículos para{" "}
-          <span className="text-primary">motoristas de aplicativo</span>
+        <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-7xl">
+          LOCAÇÃO DE CARROS PARA <span className="text-primary">APLICATIVOS</span>
         </h1>
 
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Trabalhe com segurança, economia e praticidade utilizando veículos revisados, prontos para
-          rodar e com excelente custo-benefício. Liberação rápida, sem burocracia e com suporte de
-          verdade ao seu lado.
+        <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          Tenha um veículo para trabalhar e aumentar suas oportunidades como motorista de aplicativo.
+          A partir de <span className="font-bold text-foreground">R$ 750,00 por semana</span>.
+          <span className="block mt-1 text-sm font-medium">*O valor depende do veículo escolhido.</span>
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             to="/cadastro"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95"
           >
-            <MessageCircle className="h-5 w-5" />
-            Solicitar orçamento
+            QUERO ALUGAR UM CARRO
             <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/cadastro"
+            className="inline-flex items-center justify-center rounded-full border border-border bg-background px-7 py-4 font-bold text-foreground transition hover:bg-secondary"
+          >
+            FAZER MEU CADASTRO
           </Link>
           <a
             href="https://wa.me/5511947229449"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-border bg-background px-7 py-3.5 font-semibold text-foreground transition hover:bg-secondary"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-7 py-4 font-bold text-foreground transition hover:bg-secondary"
           >
-            Falar no WhatsApp
+            <MessageCircle className="h-5 w-5" />
+            FALAR COM A LOCADORA
           </a>
         </div>
 

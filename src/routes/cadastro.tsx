@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/cadastro")({
   component: Cadastro,
   head: () => ({
-    title: "Cadastro | UT Locadora",
+    title: "Cadastro | Util Rent Car",
     meta: [
-      { name: "description", content: "Faça seu cadastro online na UT Locadora e comece a rodar." },
+      { name: "description", content: "Faça seu cadastro online na Util Rent Car e comece a rodar como motorista de aplicativo." },
     ]
   })
 });

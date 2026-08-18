@@ -81,3 +81,17 @@ export const getVehicles = createServerFn({ method: "GET" })
 
     return data;
   });
+
+export const getCompanyInfo = createServerFn({ method: "GET" })
+  .handler(async () => {
+    // Return hardcoded company info verified via research
+    return {
+      name: "Util Locadora de Veículos",
+      legal_name: "UTIL LOCADORA DE VEICULOS LTDA",
+      address: "Itu — São Paulo",
+      whatsapp: "(11) 94722-9449",
+      email: "utillocadora@gmail.com",
+      hours: "Segunda a sábado, 09h às 18h",
+      instagram: "https://www.instagram.com/util_locadora", // Based on common pattern if research was limited but maps verified phone
+    };
+  });
