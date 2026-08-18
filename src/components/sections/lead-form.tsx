@@ -84,7 +84,7 @@ export function LeadForm() {
           <div 
             key={i} 
             className={`h-2 flex-1 rounded-full transition-all duration-500 ${
-              step >= i ? "bg-primary shadow-[0_0_10px_rgba(59,130,246,0.5)]" : "bg-white/10"
+              step >= i ? "bg-primary shadow-[0_0_10px_rgba(34,211,238,0.5)]" : "bg-black/5"
             }`}
           />
         ))}
@@ -356,21 +356,21 @@ export function LeadForm() {
               <FormItem>
                 <FormLabel>CNH (Frente e Verso)</FormLabel>
                 <FormControl>
-                  <Input type="file" accept="image/*,application/pdf" className="bg-card/50 border-white/10" />
+                  <Input type="file" accept="image/*,application/pdf" className="bg-background border-border" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
               <FormItem>
                 <FormLabel>Comprovante de Residência (Atualizado)</FormLabel>
                 <FormControl>
-                  <Input type="file" accept="image/*,application/pdf" className="bg-card/50 border-white/10" />
+                  <Input type="file" accept="image/*,application/pdf" className="bg-background border-border" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
               <FormItem>
                 <FormLabel>Antecedentes Criminais</FormLabel>
                 <FormControl>
-                  <Input type="file" accept="image/*,application/pdf" className="bg-card/50 border-white/10" />
+                  <Input type="file" accept="image/*,application/pdf" className="bg-background border-border" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
