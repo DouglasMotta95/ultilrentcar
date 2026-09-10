@@ -1,26 +1,21 @@
 const benefits = [
-  { title: "Pagamento semanal", description: "Caução somente na retirada do veículo." },
-  { title: "Processo rápido", description: "Aprovação e liberação no mesmo dia em muitos casos." },
-  { title: "Veículos revisados", description: "Manutenção preventiva e itens de segurança em dia." },
-  { title: "Suporte de verdade", description: "Equipe disponível para resolver, não para enrolar." },
-  { title: "Excelente economia", description: "Carros 1.0 econômicos, feitos para render mais por litro." },
-  { title: "Frota moderna", description: "Modelos populares atuais, aceitos pelas plataformas." },
-  { title: "Atendimento humanizado", description: "Você fala com gente que entende da rotina do app." },
-  { title: "Prontos para rodar", description: "Documentação regular e cadastro sem dor de cabeça." },
+  { title: "Frota 2025+", description: "Sedãs novos, com boa apresentação e preparados para a rotina do motorista." },
+  { title: "Veículos revisados", description: "Manutenção preventiva e itens de segurança acompanhados pela locadora." },
+  { title: "Conforto para trabalhar", description: "Sedãs que entregam mais espaço e conforto para motorista e passageiros." },
+  { title: "Planos para quem roda", description: "Condições de locação pensadas para a rotina de quem trabalha com aplicativos." },
+  { title: "Atendimento direto", description: "Suporte próximo para tirar dúvidas e resolver o que for necessário." },
+  { title: "Condições claras", description: "Você conhece valores, regras e responsabilidades antes de fechar a locação." },
+  { title: "Documentação em dia", description: "Veículos regularizados e preparados para começar a trabalhar." },
+  { title: "Disponibilidade atualizada", description: "Consulte a equipe para saber quais sedãs estão disponíveis no momento." },
 ];
 
 export function Benefits() {
   return (
     <section id="beneficios" className="bg-ink py-20 text-ink-foreground md:py-28">
       <div className="container mx-auto px-4">
-        <span className="inline-flex items-center rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-primary">
-          Benefícios
-        </span>
-
-        <h2 className="mt-8 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-          Motivos para alugar com a Util
-        </h2>
-
+        <span className="inline-flex items-center rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-primary">Benefícios</span>
+        <h2 className="mt-8 max-w-3xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">Por que escolher a Util Locadora</h2>
+        <p className="mt-5 max-w-2xl text-ink-foreground/65">Uma estrutura pensada para quem precisa do veículo como ferramenta de trabalho.</p>
         <div className="mt-12 grid gap-x-12 sm:grid-cols-2">
           {benefits.map((b) => (
             <div key={b.title} className="border-t border-white/15 py-6">
