@@ -16,18 +16,18 @@ import { Contact } from "@/components/sections/contact";
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
-    title: "Util Rent Car | Locadora de Veículos para Motoristas de App",
+    title: "Util Locadora | Sedãs 2025+ para Motoristas de Aplicativo em Itu",
     meta: [
       {
         name: "description",
         content:
-          "Locação de veículos em Itu-SP para motoristas de Uber, 99 e InDriver. Frota revisada, seguro 24h, pagamento semanal e liberação rápida.",
+          "Locação de sedãs 2025 e mais novos em Itu-SP para motoristas de aplicativo. Frota nova, revisada, manutenção pela locadora e contratação simplificada.",
       },
-      { property: "og:title", content: "Util Rent Car - Locadora de Veículos" },
+      { property: "og:title", content: "Util Locadora | Sedãs 2025+ para Motoristas de App" },
       {
         property: "og:description",
         content:
-          "Aluguel de carros para motoristas de aplicativo com seguro 24h, frota revisada e suporte de verdade.",
+          "Frota de sedãs 2025 e mais novos para quem busca conforto, qualidade e melhores oportunidades nos aplicativos.",
       },
     ],
   }),
@@ -45,19 +45,16 @@ function Home() {
 
       <section id="frota" className="py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <span className="eyebrow">Nossa frota</span>
-          <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-            Carros populares, econômicos e prontos para rodar
+          <span className="eyebrow">Frota 2025+</span>
+          <h2 className="mt-6 max-w-3xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+            Sedãs novos, confortáveis e preparados para o seu trabalho
           </h2>
-          <p className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Trabalhamos com os modelos nacionais mais rentáveis para motoristas de aplicativo.
-            Consulte a disponibilidade do dia.
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            A Util Locadora trabalha com sedãs ano 2025 ou mais novos, ideais para motoristas que valorizam conforto, apresentação e categorias superiores nos aplicativos. Consulte os modelos disponíveis no momento.
           </p>
 
           <div className="mt-12">
-            <Suspense
-              fallback={<p className="py-12 text-center text-muted-foreground">Carregando frota...</p>}
-            >
+            <Suspense fallback={<p className="py-12 text-center text-muted-foreground">Carregando frota...</p>}>
               <VehicleCatalog />
             </Suspense>
           </div>
