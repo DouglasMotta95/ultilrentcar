@@ -390,6 +390,7 @@ function AdminPage() {
             )}
           </div>
         </div>
+        <AdminStyles />
       </main>
     );
   }
@@ -601,14 +602,7 @@ function AdminPage() {
         )}
       </div>
 
-      <style>{`
-        .admin-input { width: 100%; border-radius: 0.875rem; border: 1px solid rgb(203 213 225); background: white; padding: 0.75rem 0.875rem; font-size: 0.875rem; outline: none; }
-        .admin-input:focus { border-color: rgb(6 182 212); box-shadow: 0 0 0 3px rgb(207 250 254); }
-        .admin-primary-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 0.875rem; background: rgb(8 145 178); padding: 0.7rem 1rem; color: white; font-size: 0.875rem; font-weight: 800; }
-        .admin-primary-button:disabled { opacity: 0.5; }
-        .admin-secondary-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 0.875rem; border: 1px solid rgb(203 213 225); background: white; padding: 0.7rem 1rem; color: rgb(15 23 42); font-size: 0.875rem; font-weight: 800; }
-        .admin-dark-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 0.875rem; border: 1px solid rgb(51 65 85); padding: 0.7rem 1rem; color: white; font-size: 0.875rem; font-weight: 700; }
-      `}</style>
+      <AdminStyles />
     </main>
   );
 }
@@ -645,5 +639,19 @@ function AssetBox({ title, url, onFile }: { title: string; url?: string | null; 
         <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={(e) => e.target.files?.[0] && onFile(e.target.files[0])} />
       </label>
     </div>
+  );
+}
+
+
+function AdminStyles() {
+  return (
+    <style>{`
+      .admin-input { width: 100%; border-radius: 0.875rem; border: 1px solid rgb(203 213 225); background: white; padding: 0.75rem 0.875rem; font-size: 0.875rem; outline: none; color: rgb(15 23 42); }
+      .admin-input:focus { border-color: rgb(6 182 212); box-shadow: 0 0 0 3px rgb(207 250 254); }
+      .admin-primary-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 0.875rem; background: rgb(8 145 178); padding: 0.7rem 1rem; color: white; font-size: 0.875rem; font-weight: 800; }
+      .admin-primary-button:disabled { opacity: 0.5; }
+      .admin-secondary-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 0.875rem; border: 1px solid rgb(203 213 225); background: white; padding: 0.7rem 1rem; color: rgb(15 23 42); font-size: 0.875rem; font-weight: 800; }
+      .admin-dark-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 0.875rem; border: 1px solid rgb(51 65 85); padding: 0.7rem 1rem; color: white; font-size: 0.875rem; font-weight: 700; }
+    `}</style>
   );
 }
