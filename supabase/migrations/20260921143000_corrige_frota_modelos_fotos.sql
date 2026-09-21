@@ -26,7 +26,7 @@ VALUES
     'Hyundai',
     'HB20 Hatch',
     'Hatch',
-    'https://http2.mlstatic.com/D_NQ_NP_695899-MLB108021416739_032026-O-hyundai-hb20-sense-plus-10-flex-2025.webp',
+    'https://www.autoo.com.br/fotos/2023/2/1280_960/hyundai_hb20_2023_1_13022023_73048_1280_960.jpg',
     'Hyundai HB20 Hatch. Consulte disponibilidade e condições da locação.'
   ),
   (
