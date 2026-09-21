@@ -66,11 +66,13 @@ export const submitLead = createServerFn({ method: "POST" })
   });
 
 export const getVehicles = createServerFn({ method: "GET" }).handler(async () => {
-  const { data, error } = await supabase
+  const db = supabase as any;
+  const { data, error } = await db
     .from("vehicles")
     .select("*")
     .eq("is_active", true)
     .gte("year", 2025)
+    .order("sort_order", { ascending: true })
     .order("year", { ascending: false });
 
   if (error) {
@@ -78,14 +80,5 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
     return [];
   }
 
-  return data;
+  return data ?? [];
 });
-
-export const getCompanyInfo = createServerFn({ method: "GET" }).handler(async () => ({
-  name: "Util Locadora",
-  legal_name: "UTIL LOCADORA DE VEICULOS LTDA",
-  address: "Itu — São Paulo",
-  whatsapp: "(11) 94722-9449",
-  email: "utillocadora@gmail.com",
-  hours: "Segunda a sábado, 09h às 18h",
-}));
