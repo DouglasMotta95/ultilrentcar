@@ -17,16 +17,14 @@ Site institucional e operacional da UTIL LOCADORA, com foco em locação de veí
 
 ## Frota base do projeto
 
-A carga atual foi corrigida para os modelos informados para o projeto:
+A frota publicada foi alinhada aos modelos informados pela locadora:
 
-- CAOA Chery Arrizo 6 Pro — 2025 — Automático
-- Volkswagen Nivus — 2025 — Automático
-- Chevrolet Tracker — 2025 — Automático
-- Chevrolet Onix Plus — 2025 — Automático
-- Toyota Yaris Sedan — 2025 — Automático
-- Volkswagen Polo — 2025 — Automático
+- Volkswagen Polo Track
+- Hyundai HB20 Hatch
+- Hyundai HB20 Sedan (HB20S)
+- Chevrolet Onix Sedan (Onix Plus)
 
-Fotos, preços, disponibilidade e categoria de aplicativo devem ser mantidos pelo painel administrativo, evitando dados inventados no código.
+A migration de correção reaproveita os registros ativos existentes para preservar os valores semanais já cadastrados. Fotos, preços, disponibilidade e demais informações podem ser mantidos pelo painel administrativo.
 
 ## Desenvolvimento
 
