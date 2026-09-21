@@ -1,10 +1,10 @@
-import { Check, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 const highlights = [
-  "Frota formada por sedãs ano 2025 ou mais novos",
-  "Revisão completa antes da entrega",
-  "Seguro e manutenção conforme as condições da locação",
-  "Atendimento próximo e contrato com condições claras",
+  "Frota com veículos ano 2025 ou mais novos",
+  "Veículos revisados antes da entrega",
+  "Condições de seguro e manutenção informadas no contrato",
+  "Atendimento direto com a locadora",
 ];
 
 export function About() {
@@ -17,12 +17,13 @@ export function About() {
         </h2>
         <div className="mt-6 max-w-4xl space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           <p>
-            A Util Locadora atende motoristas de aplicativo em Itu e região com uma proposta simples: oferecer veículos novos, bem cuidados e atendimento direto para quem depende do carro todos os dias.
+            A UTIL LOCADORA atende motoristas de aplicativo em Itu e região com veículos novos, bem cuidados e atendimento direto para quem depende do carro todos os dias.
           </p>
           <p>
-            Nossa frota é composta por sedãs ano 2025 ou mais novos. O foco é entregar conforto, boa apresentação e veículos preparados para a rotina intensa de trabalho nos aplicativos.
+            A frota publicada no site é administrada pela própria locadora. Assim, modelos, fotos, valores e disponibilidade podem ser mantidos atualizados sem alterar o código.
           </p>
         </div>
+
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {highlights.map((item) => (
             <div key={item} className="flex items-center gap-3">
@@ -31,6 +32,7 @@ export function About() {
             </div>
           ))}
         </div>
+
         <a href="#frota" className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95">
           Conhecer a frota <ArrowRight className="h-4 w-4" />
         </a>

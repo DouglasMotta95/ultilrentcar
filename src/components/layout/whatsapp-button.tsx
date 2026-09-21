@@ -1,15 +1,18 @@
 import { MessageCircle } from "lucide-react";
+import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
 export function WhatsappButton() {
+  const { data: company } = useCompanyInfo();
+
   return (
     <a
-      href="https://wa.me/5511947229449"
+      href={whatsappUrl(company.whatsapp)}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-3.5 font-bold text-white shadow-xl transition hover:brightness-95"
+      aria-label="Falar com a UTIL LOCADORA no WhatsApp"
+      className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl transition hover:scale-105 hover:bg-emerald-600"
     >
-      <MessageCircle className="h-5 w-5" />
-      Fale conosco
+      <MessageCircle className="h-7 w-7" />
     </a>
   );
 }
