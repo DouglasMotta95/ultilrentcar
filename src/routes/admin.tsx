@@ -45,7 +45,7 @@ const emptyVehicle: VehicleDraft = {
   brand: "",
   model: "",
   year: 2025,
-  transmission: "Automático",
+  transmission: "",
   body_type: "",
   app_category: "",
   price_per_week: "",
