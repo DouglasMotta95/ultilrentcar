@@ -1,7 +1,7 @@
 import { ArrowRight, Check } from "lucide-react";
 
 const highlights = [
-  "Frota com veículos ano 2025 ou mais novos",
+  "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan",
   "Veículos revisados antes da entrega",
   "Condições de seguro e manutenção informadas no contrato",
   "Atendimento direto com a locadora",
