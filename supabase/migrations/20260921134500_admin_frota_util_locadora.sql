@@ -254,29 +254,8 @@ USING (
   AND public.has_role(auth.uid(), 'admin')
 );
 
--- 6) O e-mail oficial recebe função de proprietário/admin quando existir no Auth.
-CREATE OR REPLACE FUNCTION public.assign_util_owner_admin()
-RETURNS TRIGGER
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = public
-AS $$
-BEGIN
-  IF lower(COALESCE(NEW.email, '')) = 'utillocadora@gmail.com' THEN
-    INSERT INTO public.user_roles (user_id, role)
-    VALUES (NEW.id, 'admin')
-    ON CONFLICT (user_id, role) DO NOTHING;
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
-DROP TRIGGER IF EXISTS on_util_owner_auth_user ON auth.users;
-CREATE TRIGGER on_util_owner_auth_user
-AFTER INSERT OR UPDATE OF email ON auth.users
-FOR EACH ROW
-EXECUTE FUNCTION public.assign_util_owner_admin();
-
+-- 6) Se o proprietário já existir no Auth, preserva/concede a função admin.
+-- Novos usuários NÃO recebem admin automaticamente por e-mail.
 INSERT INTO public.user_roles (user_id, role)
 SELECT id, 'admin'
 FROM auth.users
