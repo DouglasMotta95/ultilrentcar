@@ -65,6 +65,7 @@ UPDATE public.vehicles v
 SET
   brand = u.brand,
   model = u.model,
+  year = GREATEST(COALESCE(v.year, 2025), 2025),
   body_type = u.body_type,
   image_url = u.image_url,
   description = u.description,
