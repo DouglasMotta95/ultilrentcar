@@ -151,32 +151,6 @@ function AdminPage() {
     }
   }
 
-  async function firstAccess() {
-    if (loginEmail.trim().toLowerCase() !== "utillocadora@gmail.com") {
-      toast.error("O primeiro acesso está restrito ao e-mail oficial da locadora.");
-      return;
-    }
-
-    if (loginPassword.length < 8) {
-      toast.error("Use uma senha com pelo menos 8 caracteres.");
-      return;
-    }
-
-    setBusy(true);
-    try {
-      const { error } = await db.auth.signUp({
-        email: loginEmail.trim(),
-        password: loginPassword,
-      });
-      if (error) throw error;
-      toast.success("Conta criada. Confirme o e-mail, se o Supabase solicitar, e faça login.");
-    } catch (error: any) {
-      toast.error(error?.message || "Não foi possível criar o primeiro acesso.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
   async function logout() {
     await db.auth.signOut();
     setSessionUser(null);
@@ -411,9 +385,6 @@ function AdminPage() {
                 </Field>
                 <button disabled={busy} className="w-full rounded-2xl bg-cyan-400 px-5 py-3.5 font-extrabold text-slate-950 disabled:opacity-50">
                   Entrar
-                </button>
-                <button type="button" disabled={busy} onClick={firstAccess} className="w-full rounded-2xl border border-white/15 px-5 py-3 text-sm font-bold text-slate-100 disabled:opacity-50">
-                  Primeiro acesso do proprietário
                 </button>
               </form>
             )}
