@@ -32,7 +32,7 @@ VALUES
   (
     3,
     'Hyundai',
-    'HB20S',
+    'HB20 Sedan (HB20S)',
     'Sedã',
     'https://garagem360.com.br/wp-content/uploads/2024/05/hyundai-hb20s-comfort-plus-tgdi-at-2025-4-1200x720.jpg',
     'Hyundai HB20 Sedan (HB20S). Consulte disponibilidade e condições da locação.'
@@ -40,7 +40,7 @@ VALUES
   (
     4,
     'Chevrolet',
-    'Onix Plus',
+    'Onix Sedan (Onix Plus)',
     'Sedã',
     'https://next-files-bucket.s3.us-east-1.amazonaws.com/template/34/site/328/modules/sub_modules/720/new/78b3fdc1581b165f10361761681183.png',
     'Chevrolet Onix Sedan (Onix Plus). Consulte disponibilidade e condições da locação.'
@@ -136,11 +136,11 @@ WHERE is_active = true
   AND sort_order = 2;
 
 UPDATE public.vehicles
-SET model = 'HB20S'
+SET model = 'HB20 Sedan (HB20S)'
 WHERE is_active = true
   AND sort_order = 3;
 
 UPDATE public.vehicles
-SET model = 'Onix Plus'
+SET model = 'Onix Sedan (Onix Plus)'
 WHERE is_active = true
   AND sort_order = 4;
