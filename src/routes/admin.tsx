@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import {
   Building2,
   Car,
@@ -133,7 +133,7 @@ function AdminPage() {
     setSettings(settingsResult.data ?? null);
   }
 
-  async function login(event: React.FormEvent) {
+  async function login(event: FormEvent) {
     event.preventDefault();
     setBusy(true);
     try {
@@ -178,7 +178,7 @@ function AdminPage() {
     });
   }
 
-  async function saveVehicle(event: React.FormEvent) {
+  async function saveVehicle(event: FormEvent) {
     event.preventDefault();
     if (!vehicleDraft.brand.trim() || !vehicleDraft.model.trim()) {
       toast.error("Informe marca e modelo.");
@@ -324,7 +324,7 @@ function AdminPage() {
     }
   }
 
-  async function saveSettings(event: React.FormEvent) {
+  async function saveSettings(event: FormEvent) {
     event.preventDefault();
     setBusy(true);
     try {
@@ -617,7 +617,7 @@ function CenteredMessage({ text }: { text: string }) {
   return <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-center font-semibold text-slate-200">{text}</main>;
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return <label className="mt-4 block"><span className="mb-1.5 block text-sm font-bold text-slate-700">{label}</span>{children}</label>;
 }
 
