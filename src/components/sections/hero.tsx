@@ -4,7 +4,7 @@ import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
 const stats = [
   { value: "Seguro", label: "Consulte as condições" },
-  { value: "2025+", label: "Frota atualizada" },
+  { value: "4 modelos", label: "Frota selecionada" },
   { value: "Manutenção", label: "Conforme o contrato" },
   { value: "Apps", label: "Veículos para motoristas" },
 ];
@@ -31,7 +31,7 @@ export function Hero() {
         </h1>
 
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          {company.hero_subtitle || "Veículos 2025 ou mais novos, preparados para a rotina de quem trabalha com aplicativos."}
+          {company.hero_subtitle || "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para a rotina de quem trabalha com aplicativos."}
           {company.weekly_price_from != null && Number(company.weekly_price_from) > 0 && (
             <span className="mt-2 block font-bold text-foreground">
               A partir de R$ {Number(company.weekly_price_from).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} por semana.
