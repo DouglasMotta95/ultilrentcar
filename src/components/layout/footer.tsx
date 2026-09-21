@@ -28,7 +28,7 @@ export function Footer() {
                 </>
               )}
             </div>
-            <p className="mt-6 max-w-xs leading-relaxed text-ink-foreground/60">Locação de veículos 2025 ou mais novos para motoristas de aplicativo em Itu e região.</p>
+            <p className="mt-6 max-w-xs leading-relaxed text-ink-foreground/60">Locação de veículos para motoristas de aplicativo em Itu e região.</p>
           </div>
 
           <div>
