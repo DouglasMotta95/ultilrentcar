@@ -37,6 +37,7 @@ type VehicleDraft = {
   features: string;
   description: string;
   image_url: string;
+  gallery_images: string[];
   is_active: boolean;
   sort_order: number;
 };
@@ -52,6 +53,7 @@ const emptyVehicle: VehicleDraft = {
   features: "",
   description: "",
   image_url: "",
+  gallery_images: [],
   is_active: true,
   sort_order: 0,
 };
@@ -173,6 +175,11 @@ function AdminPage() {
       features: Array.isArray(vehicle.features) ? vehicle.features.join(", ") : "",
       description: vehicle.description ?? "",
       image_url: vehicle.image_url ?? "",
+      gallery_images: Array.isArray(vehicle.gallery_images)
+        ? vehicle.gallery_images.filter(Boolean)
+        : vehicle.image_url
+          ? [vehicle.image_url]
+          : [],
       is_active: vehicle.is_active ?? true,
       sort_order: vehicle.sort_order ?? 0,
     });
@@ -187,7 +194,7 @@ function AdminPage() {
 
     setBusy(true);
     try {
-      const payload = {
+      const payload: Record<string, any> = {
         brand: vehicleDraft.brand.trim(),
         model: vehicleDraft.model.trim(),
         year: Number(vehicleDraft.year),
@@ -202,14 +209,22 @@ function AdminPage() {
           .map((item) => item.trim())
           .filter(Boolean),
         description: vehicleDraft.description.trim() || null,
-        image_url: vehicleDraft.image_url.trim() || null,
+        image_url: vehicleDraft.gallery_images[0] || vehicleDraft.image_url.trim() || null,
+        gallery_images: vehicleDraft.gallery_images,
         is_active: vehicleDraft.is_active,
         sort_order: Number(vehicleDraft.sort_order) || 0,
       };
 
-      const result = vehicleDraft.id
+      let result = vehicleDraft.id
         ? await db.from("vehicles").update(payload).eq("id", vehicleDraft.id).select("*").single()
         : await db.from("vehicles").insert(payload).select("*").single();
+
+      if (result.error && /gallery_images/i.test(result.error.message || "")) {
+        const { gallery_images: _galleryImages, ...legacyPayload } = payload;
+        result = vehicleDraft.id
+          ? await db.from("vehicles").update(legacyPayload).eq("id", vehicleDraft.id).select("*").single()
+          : await db.from("vehicles").insert(legacyPayload).select("*").single();
+      }
 
       if (result.error) throw result.error;
 
@@ -415,7 +430,21 @@ function AdminPage() {
         <div className="mb-6 grid gap-3 sm:grid-cols-3">
           <Metric label="Veículos ativos" value={String(activeVehicles)} />
           <Metric label="Cadastros recebidos" value={String(leads.length)} />
-          <Metric label="Fotos gerenciáveis" value={String(vehicles.filter((v) => v.image_url).length)} />
+          <Metric
+            label="Fotos na frota"
+            value={String(
+              vehicles.reduce(
+                (total, vehicle) =>
+                  total +
+                  (Array.isArray(vehicle.gallery_images)
+                    ? vehicle.gallery_images.length
+                    : vehicle.image_url
+                      ? 1
+                      : 0),
+                0,
+              ),
+            )}
+          />
         </div>
 
         <nav className="mb-6 flex gap-2 overflow-x-auto rounded-2xl bg-white p-2 shadow-sm">
