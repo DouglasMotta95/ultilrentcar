@@ -72,7 +72,7 @@ function AdminPage() {
   const [tab, setTab] = useState<Tab>("frota");
   const [busy, setBusy] = useState(false);
 
-  const [loginEmail, setLoginEmail] = useState("utillocadora@gmail.com");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const [vehicles, setVehicles] = useState<any[]>([]);
@@ -378,10 +378,10 @@ function AdminPage() {
             {!sessionUser && (
               <form onSubmit={login} className="space-y-4">
                 <Field label="E-mail">
-                  <input className="admin-input" type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required />
+                  <input className="admin-input" type="email" autoComplete="username" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required />
                 </Field>
                 <Field label="Senha">
-                  <input className="admin-input" type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
+                  <input className="admin-input" type="password" autoComplete="current-password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required />
                 </Field>
                 <button disabled={busy} className="w-full rounded-2xl bg-cyan-400 px-5 py-3.5 font-extrabold text-slate-950 disabled:opacity-50">
                   Entrar
