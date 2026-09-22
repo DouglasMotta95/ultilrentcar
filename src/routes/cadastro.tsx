@@ -9,7 +9,9 @@ export const Route = createFileRoute("/cadastro")({
     title: "Cadastro | UTIL LOCADORA",
     meta: [
       { name: "description", content: "Faça seu cadastro online na UTIL LOCADORA e envie sua solicitação de locação." },
+      { name: "robots", content: "noindex,follow" },
     ],
+    links: [{ rel: "canonical", href: "https://utilrentcar.com.br/cadastro" }],
   }),
 });
 
