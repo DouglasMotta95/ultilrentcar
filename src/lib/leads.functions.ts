@@ -26,6 +26,7 @@ const leadSchema = z.object({
   ref_phone_1: z.string(),
   ref_phone_2: z.string(),
   vehicle_interest: z.string().optional(),
+  privacy_consent: z.literal(true),
 });
 
 export const submitLead = createServerFn({ method: "POST" })
