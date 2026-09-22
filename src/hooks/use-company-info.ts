@@ -36,7 +36,7 @@ export const fallbackCompanyInfo: CompanyInfo = {
   logo_url: null,
   hero_image_url: null,
   hero_title: "LOCAÇÃO DE CARROS PARA APLICATIVOS",
-  hero_subtitle: "Veículos 2025 ou mais novos, preparados para a rotina de quem trabalha com aplicativos.",
+  hero_subtitle: "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para a rotina de quem trabalha com aplicativos.",
   weekly_price_from: null,
   map_embed_url: null,
 };
