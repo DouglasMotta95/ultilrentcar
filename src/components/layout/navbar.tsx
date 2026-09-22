@@ -4,12 +4,12 @@ import { Link } from "@tanstack/react-router";
 import { useCompanyInfo } from "@/hooks/use-company-info";
 
 const links = [
-  { href: "#quem-somos", label: "Quem somos" },
-  { href: "#servicos", label: "Serviços" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#frota", label: "Nossa frota" },
-  { href: "#duvidas", label: "Dúvidas" },
-  { href: "#contato", label: "Contato" },
+  { href: "/#quem-somos", label: "Quem somos" },
+  { href: "/#servicos", label: "Serviços" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#frota", label: "Nossa frota" },
+  { href: "/#duvidas", label: "Dúvidas" },
+  { href: "/#contato", label: "Contato" },
 ];
 
 export function Navbar() {
@@ -43,11 +43,23 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
-          {links.map((link) => <a key={link.href} href={link.href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">{link.label}</a>)}
-          <Link to="/cadastro" className="rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition hover:brightness-95">Quero alugar</Link>
+          {links.map((link) => (
+            <a key={link.href} href={link.href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
+              {link.label}
+            </a>
+          ))}
+          <Link to="/cadastro" className="rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition hover:brightness-95">
+            Quero alugar
+          </Link>
         </div>
 
-        <button type="button" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground lg:hidden" onClick={() => setOpen((value) => !value)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open}>
+        <button
+          type="button"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground lg:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+        >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
@@ -55,8 +67,14 @@ export function Navbar() {
       {open && (
         <div className="absolute left-0 right-0 top-full border-b border-border bg-background shadow-lg lg:hidden">
           <div className="flex flex-col p-4">
-            {links.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold text-foreground last:border-0">{link.label}</a>)}
-            <Link to="/cadastro" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-primary px-6 py-3 text-center font-bold text-primary-foreground">Quero alugar</Link>
+            {links.map((link) => (
+              <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold text-foreground last:border-0">
+                {link.label}
+              </a>
+            ))}
+            <Link to="/cadastro" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-primary px-6 py-3 text-center font-bold text-primary-foreground">
+              Quero alugar
+            </Link>
           </div>
         </div>
       )}
