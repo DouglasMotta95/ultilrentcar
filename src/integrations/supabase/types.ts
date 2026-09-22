@@ -169,43 +169,127 @@ export type Database = {
       }
       vehicles: {
         Row: {
+          app_category: string | null
+          body_type: string | null
           brand: string
           color: string | null
           created_at: string | null
+          description: string | null
           features: string[] | null
+          gallery_images: string[]
           id: string
           image_url: string | null
           is_active: boolean | null
           model: string
           plate: string | null
-          price_per_week: number
+          price_per_week: number | null
+          sort_order: number
+          transmission: string | null
+          updated_at: string | null
           year: number
         }
         Insert: {
+          app_category?: string | null
+          body_type?: string | null
           brand: string
           color?: string | null
           created_at?: string | null
+          description?: string | null
           features?: string[] | null
+          gallery_images?: string[]
           id?: string
           image_url?: string | null
           is_active?: boolean | null
           model: string
           plate?: string | null
-          price_per_week: number
+          price_per_week?: number | null
+          sort_order?: number
+          transmission?: string | null
+          updated_at?: string | null
           year: number
         }
         Update: {
+          app_category?: string | null
+          body_type?: string | null
           brand?: string
           color?: string | null
           created_at?: string | null
+          description?: string | null
           features?: string[] | null
+          gallery_images?: string[]
           id?: string
           image_url?: string | null
           is_active?: boolean | null
           model?: string
           plate?: string | null
-          price_per_week?: number
+          price_per_week?: number | null
+          sort_order?: number
+          transmission?: string | null
+          updated_at?: string | null
           year?: number
+        }
+        Relationships: []
+      }
+      company_settings: {
+        Row: {
+          address: string | null
+          city: string | null
+          email: string | null
+          facebook_url: string | null
+          hero_image_url: string | null
+          hero_subtitle: string | null
+          hero_title: string | null
+          hours: string | null
+          id: number
+          instagram_url: string | null
+          logo_url: string | null
+          map_embed_url: string | null
+          name: string
+          phone: string | null
+          state: string | null
+          updated_at: string | null
+          weekly_price_from: number | null
+          whatsapp: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          hero_image_url?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
+          hours?: string | null
+          id?: number
+          instagram_url?: string | null
+          logo_url?: string | null
+          map_embed_url?: string | null
+          name?: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string | null
+          weekly_price_from?: number | null
+          whatsapp?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          hero_image_url?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
+          hours?: string | null
+          id?: number
+          instagram_url?: string | null
+          logo_url?: string | null
+          map_embed_url?: string | null
+          name?: string
+          phone?: string | null
+          state?: string | null
+          updated_at?: string | null
+          weekly_price_from?: number | null
+          whatsapp?: string | null
         }
         Relationships: []
       }
