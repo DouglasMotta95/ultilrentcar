@@ -65,20 +65,119 @@ export const submitLead = createServerFn({ method: "POST" })
     return { success: true };
   });
 
+const publishedFleet = [
+  {
+    key: "polo",
+    brand: "Volkswagen",
+    model: "Polo Track",
+    body_type: "Hatch",
+    image_url:
+      "https://production.autoforce.com/uploads/picture/image/251334413/comprar-polo-track-2025_0d8c8073d4.png",
+    match: (value: string) => value.includes("polo"),
+  },
+  {
+    key: "hb20-hatch",
+    brand: "Hyundai",
+    model: "HB20 Hatch",
+    body_type: "Hatch",
+    image_url:
+      "https://www.autoo.com.br/fotos/2023/2/1280_960/hyundai_hb20_2023_1_13022023_73048_1280_960.jpg",
+    match: (value: string) =>
+      value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
+  },
+  {
+    key: "hb20-sedan",
+    brand: "Hyundai",
+    model: "HB20 Sedan (HB20S)",
+    body_type: "Sedã",
+    image_url:
+      "https://garagem360.com.br/wp-content/uploads/2024/05/hyundai-hb20s-comfort-plus-tgdi-at-2025-4-1200x720.jpg",
+    match: (value: string) => value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
+  },
+  {
+    key: "onix",
+    brand: "Chevrolet",
+    model: "Onix Sedan (Onix Plus)",
+    body_type: "Sedã",
+    image_url:
+      "https://next-files-bucket.s3.us-east-1.amazonaws.com/template/34/site/328/modules/sub_modules/720/new/78b3fdc1581b165f10361761681183.png",
+    match: (value: string) => value.includes("onix"),
+  },
+] as const;
+
+function normalizeVehicleName(vehicle: any) {
+  return `${vehicle?.brand ?? ""} ${vehicle?.model ?? ""}`.toLocaleLowerCase("pt-BR");
+}
+
 export const getVehicles = createServerFn({ method: "GET" }).handler(async () => {
   const db = supabase as any;
+
+  // Não filtramos mais por ano aqui. O banco publicado ainda pode conter os
+  // registros antigos (2022/2023), e esse filtro era justamente o motivo de a
+  // home exibir "Nenhum veículo disponível".
   const { data, error } = await db
     .from("vehicles")
     .select("*")
     .eq("is_active", true)
-    .gte("year", 2025)
-    .order("sort_order", { ascending: true })
-    .order("year", { ascending: false });
+    .order("created_at", { ascending: true });
+
+  const rows = !error && Array.isArray(data) ? data : [];
 
   if (error) {
     console.error("Error fetching vehicles:", error);
-    return [];
   }
 
-  return data ?? [];
+  const assigned = new Map<string, any>();
+  const usedIds = new Set<string>();
+
+  // Primeiro preserva os valores de registros cujo modelo já combina.
+  for (const target of publishedFleet) {
+    const source = rows.find(
+      (vehicle: any) =>
+        !usedIds.has(String(vehicle.id)) &&
+        target.match(normalizeVehicleName(vehicle)),
+    );
+
+    if (source) {
+      assigned.set(target.key, source);
+      usedIds.add(String(source.id));
+    }
+  }
+
+  // Depois reaproveita os demais registros apenas para preservar os preços
+  // existentes, sem deixar a frota pública desaparecer.
+  for (const target of publishedFleet) {
+    if (assigned.has(target.key)) continue;
+
+    const source = rows.find((vehicle: any) => !usedIds.has(String(vehicle.id)));
+    if (source) {
+      assigned.set(target.key, source);
+      usedIds.add(String(source.id));
+    }
+  }
+
+  return publishedFleet.map((target, index) => {
+    const source = assigned.get(target.key);
+
+    return {
+      id: source?.id ?? `published-${target.key}`,
+      brand: target.brand,
+      model: target.model,
+      year: source?.year && Number(source.year) >= 2025 ? Number(source.year) : 2025,
+      plate: source?.plate ?? null,
+      color: source?.color ?? null,
+      price_per_week: Number(source?.price_per_week ?? 0),
+      features: Array.isArray(source?.features) ? source.features : [],
+      image_url: target.image_url,
+      is_active: true,
+      created_at: source?.created_at ?? null,
+      transmission: source?.transmission ?? null,
+      body_type: target.body_type,
+      app_category: source?.app_category ?? null,
+      description:
+        source?.description ??
+        `${target.brand} ${target.model}. Consulte disponibilidade e condições da locação.`,
+      sort_order: index + 1,
+    };
+  });
 });
