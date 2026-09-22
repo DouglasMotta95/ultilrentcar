@@ -9,11 +9,12 @@ Site institucional e operacional da UTIL LOCADORA, com foco em locação de veí
 - Frota dinâmica armazenada no Supabase.
 - Painel administrativo em `/admin`.
 - Login protegido por Supabase Auth e função de administrador.
-- Gestão de veículos: adicionar, editar, excluir, ordenar, ativar/ocultar, preço, categoria e descrição.
-- Upload e troca de fotos reais dos veículos.
+- Gestão de veículos: adicionar, editar, excluir, ordenar, ativar/ocultar, preço, categoria, descrição e galeria de até 10 fotos.
+- Upload, remoção e definição da foto principal dos veículos pelo painel administrativo.
 - Gestão de logo, imagem principal, WhatsApp, telefone, e-mail, endereço, mapa e textos do site.
 - Gestão de cadastros recebidos e seus status.
 - RLS no Supabase para impedir leitura pública dos dados dos candidatos.
+- Política de Privacidade pública e consentimento obrigatório no cadastro.
 
 ## Frota base do projeto
 

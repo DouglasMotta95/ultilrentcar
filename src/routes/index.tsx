@@ -28,7 +28,16 @@ export const Route = createFileRoute("/")({
         content:
           "Conheça a frota da UTIL LOCADORA e consulte valores, condições e disponibilidade em Itu e região.",
       },
+      { property: "og:url", content: "https://utilrentcar.com.br/" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "UTIL LOCADORA | Veículos para Motoristas de App" },
+      {
+        name: "twitter:description",
+        content:
+          "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para motoristas de aplicativo em Itu e região.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://utilrentcar.com.br/" }],
   }),
 });
 

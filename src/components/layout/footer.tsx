@@ -1,12 +1,12 @@
 import { useCompanyInfo } from "@/hooks/use-company-info";
 
 const nav = [
-  { href: "#quem-somos", label: "Quem somos" },
-  { href: "#servicos", label: "Serviços" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#frota", label: "Nossa frota" },
-  { href: "#duvidas", label: "Dúvidas" },
-  { href: "#contato", label: "Contato" },
+  { href: "/#quem-somos", label: "Quem somos" },
+  { href: "/#servicos", label: "Serviços" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#frota", label: "Nossa frota" },
+  { href: "/#duvidas", label: "Dúvidas" },
+  { href: "/#contato", label: "Contato" },
 ];
 
 export function Footer() {
@@ -23,17 +23,47 @@ export function Footer() {
                 <img src={company.logo_url} alt={company.name} className="h-12 w-auto max-w-[180px] object-contain" />
               ) : (
                 <>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-white/90 border-b-primary text-primary"><span className="font-display text-[0.7rem] font-extrabold">UTIL</span></span>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-white/90 border-b-primary text-primary">
+                    <span className="font-display text-[0.7rem] font-extrabold">UTIL</span>
+                  </span>
                   <span className="font-display text-lg font-extrabold tracking-tight">{company.name}</span>
                 </>
               )}
             </div>
-            <p className="mt-6 max-w-xs leading-relaxed text-ink-foreground/60">Locação de veículos para motoristas de aplicativo em Itu e região.</p>
+            <p className="mt-6 max-w-xs leading-relaxed text-ink-foreground/60">
+              Locação de veículos para motoristas de aplicativo em Itu e região.
+            </p>
+
+            {(company.instagram_url || company.facebook_url) && (
+              <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
+                {company.instagram_url && (
+                  <a href={company.instagram_url} target="_blank" rel="noopener noreferrer" className="text-ink-foreground/70 transition hover:text-ink-foreground">
+                    Instagram
+                  </a>
+                )}
+                {company.facebook_url && (
+                  <a href={company.facebook_url} target="_blank" rel="noopener noreferrer" className="text-ink-foreground/70 transition hover:text-ink-foreground">
+                    Facebook
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <div>
             <h3 className="text-sm font-bold uppercase tracking-[0.16em]">Navegação</h3>
-            <ul className="mt-6 space-y-4">{nav.map((link) => <li key={link.href}><a href={link.href} className="text-ink-foreground/60 transition hover:text-ink-foreground">{link.label}</a></li>)}</ul>
+            <ul className="mt-6 space-y-4">
+              {nav.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-ink-foreground/60 transition hover:text-ink-foreground">{link.label}</a>
+                </li>
+              ))}
+              <li>
+                <a href="/privacidade" className="text-ink-foreground/60 transition hover:text-ink-foreground">
+                  Política de Privacidade
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div>
@@ -49,7 +79,10 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-8 text-sm text-ink-foreground/40 md:flex-row md:items-center md:justify-between">
           <p>© 2026 {company.name}. Todos os direitos reservados.</p>
-          <p>Consulte os requisitos e condições para locação.</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <a href="/privacidade" className="transition hover:text-ink-foreground">Privacidade</a>
+            <span>Consulte os requisitos e condições para locação.</span>
+          </div>
         </div>
       </div>
     </footer>

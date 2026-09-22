@@ -26,6 +26,7 @@ const leadSchema = z.object({
   ref_phone_1: z.string(),
   ref_phone_2: z.string(),
   vehicle_interest: z.string().optional(),
+  privacy_consent: z.literal(true),
 });
 
 export const submitLead = createServerFn({ method: "POST" })
@@ -180,6 +181,13 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
   return publishedFleet.map((target, index) => {
     const source = assigned.get(target.key);
 
+    const sourceMatchesModel = source ? target.match(normalizeVehicleName(source)) : false;
+    const managedGallery =
+      sourceMatchesModel && Array.isArray(source?.gallery_images)
+        ? source.gallery_images.filter(Boolean)
+        : [];
+    const gallery = managedGallery.length > 0 ? managedGallery : [...target.gallery_images];
+
     return {
       id: source?.id ?? `published-${target.key}`,
       brand: target.brand,
@@ -189,8 +197,8 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
       color: source?.color ?? null,
       price_per_week: Number(source?.price_per_week ?? 0),
       features: [],
-      image_url: target.gallery_images[0],
-      gallery_images: [...target.gallery_images],
+      image_url: gallery[0] ?? null,
+      gallery_images: gallery,
       is_active: true,
       created_at: source?.created_at ?? null,
       transmission: null,

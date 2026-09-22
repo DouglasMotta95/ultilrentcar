@@ -402,8 +402,9 @@ export function LeadForm() {
                     </FormControl>
                     <div className="space-y-1">
                       <FormLabel className="leading-relaxed">
-                        Autorizo a UTIL LOCADORA a utilizar os dados informados para analisar esta solicitação e entrar em contato comigo.
+                        Autorizo a UTIL LOCADORA a utilizar os dados informados para analisar esta solicitação e entrar em contato comigo, conforme a Política de Privacidade.
                       </FormLabel>
+                      <a href="/privacidade" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-primary underline underline-offset-2">Ler Política de Privacidade</a>
                       <FormMessage />
                     </div>
                   </FormItem>
