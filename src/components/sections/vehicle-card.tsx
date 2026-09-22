@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { BadgeCheck, Car, Check, ChevronLeft, ChevronRight, Gauge } from "lucide-react";
+import {
+  BadgeCheck,
+  Car,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Gauge,
+  Pause,
+  Play,
+} from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
@@ -16,39 +25,69 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 
   const { data: company } = useCompanyInfo();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [manualPaused, setManualPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [failedImages, setFailedImages] = useState<string[]>([]);
 
   const images = useMemo(() => {
     const gallery = Array.isArray(extra.gallery_images)
       ? extra.gallery_images.filter(Boolean)
       : [];
-
-    if (gallery.length > 0) return gallery;
-    return vehicle.image_url ? [vehicle.image_url] : [];
-  }, [extra.gallery_images, vehicle.image_url]);
+    const source = gallery.length > 0 ? gallery : vehicle.image_url ? [vehicle.image_url] : [];
+    return source.filter((url) => !failedImages.includes(url));
+  }, [extra.gallery_images, vehicle.image_url, failedImages]);
 
   useEffect(() => {
     setCurrentImageIndex(0);
+    setFailedImages([]);
   }, [vehicle.id]);
 
   useEffect(() => {
-    if (paused || images.length <= 1) return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setPrefersReducedMotion(media.matches);
+    sync();
+    media.addEventListener?.("change", sync);
+    return () => media.removeEventListener?.("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (images.length === 0) {
+      setCurrentImageIndex(0);
+      return;
+    }
+    if (currentImageIndex >= images.length) {
+      setCurrentImageIndex(0);
+    }
+  }, [currentImageIndex, images.length]);
+
+  const autoplayPaused = hoverPaused || manualPaused || prefersReducedMotion;
+
+  useEffect(() => {
+    if (autoplayPaused || images.length <= 1) return;
 
     const interval = window.setInterval(() => {
       setCurrentImageIndex((current) => (current + 1) % images.length);
     }, 4200);
 
     return () => window.clearInterval(interval);
-  }, [images.length, paused]);
+  }, [autoplayPaused, images.length]);
 
   const currentImage = images[currentImageIndex];
 
   function previousImage() {
+    if (images.length <= 1) return;
     setCurrentImageIndex((current) => (current - 1 + images.length) % images.length);
   }
 
   function nextImage() {
+    if (images.length <= 1) return;
     setCurrentImageIndex((current) => (current + 1) % images.length);
+  }
+
+  function handleImageError(url: string) {
+    setFailedImages((current) => (current.includes(url) ? current : [...current, url]));
+    setCurrentImageIndex(0);
   }
 
   const message = `Olá, tenho interesse no ${vehicle.brand} ${vehicle.model} ${vehicle.year}. Gostaria de consultar a disponibilidade.`;
@@ -57,8 +96,9 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
     <article className="soft-card group flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div
         className="relative aspect-video overflow-hidden bg-white"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        onMouseEnter={() => setHoverPaused(true)}
+        onMouseLeave={() => setHoverPaused(false)}
+        aria-label={`Galeria de fotos do ${vehicle.brand} ${vehicle.model}`}
       >
         {currentImage ? (
           <img
@@ -66,6 +106,8 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             src={currentImage}
             alt={`${vehicle.brand} ${vehicle.model} - foto ${currentImageIndex + 1} de ${images.length}`}
             loading="lazy"
+            decoding="async"
+            onError={() => handleImageError(currentImage)}
             className="h-full w-full object-contain transition duration-500"
           />
         ) : (
@@ -97,7 +139,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
               type="button"
               onClick={previousImage}
               aria-label={`Foto anterior do ${vehicle.model}`}
-              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition hover:bg-black/75"
+              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition hover:bg-black/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -106,9 +148,18 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
               type="button"
               onClick={nextImage}
               aria-label={`Próxima foto do ${vehicle.model}`}
-              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition hover:bg-black/75"
+              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition hover:bg-black/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               <ChevronRight className="h-5 w-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setManualPaused((value) => !value)}
+              aria-label={manualPaused ? "Continuar troca automática das fotos" : "Pausar troca automática das fotos"}
+              className="absolute bottom-3 left-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur transition hover:bg-black/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              {manualPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
             </button>
 
             <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-black/45 px-3 py-2 backdrop-blur">
@@ -118,12 +169,13 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
                   type="button"
                   onClick={() => setCurrentImageIndex(index)}
                   aria-label={`Abrir foto ${index + 1} do ${vehicle.model}`}
+                  aria-current={index === currentImageIndex ? "true" : undefined}
                   className={`h-2 rounded-full transition-all ${index === currentImageIndex ? "w-5 bg-white" : "w-2 bg-white/55 hover:bg-white/80"}`}
                 />
               ))}
             </div>
 
-            <span className="absolute bottom-3 right-3 rounded-full bg-black/55 px-2.5 py-1 text-xs font-bold text-white backdrop-blur">
+            <span className="absolute bottom-3 right-3 rounded-full bg-black/55 px-2.5 py-1 text-xs font-bold text-white backdrop-blur" aria-live="off">
               {currentImageIndex + 1}/{images.length}
             </span>
           </>
@@ -145,7 +197,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 
         {images.length > 1 && (
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-            Galeria com {images.length} fotos • troca automática
+            Galeria com {images.length} fotos
           </p>
         )}
 
