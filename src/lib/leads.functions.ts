@@ -71,8 +71,13 @@ const publishedFleet = [
     brand: "Volkswagen",
     model: "Polo Track",
     body_type: "Hatch",
-    image_url:
-      "https://assets.volkswagen.com/is/image/volkswagenag/Polo-Track-IPI-ZERO?Zm10PXBuZy1hbHBoYSZ3aWQ9ODAwJmJmYz1vZmYmMGFmYw=%3D",
+    gallery_images: [
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36482.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36481.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36479.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36478.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36480.webp",
+    ],
     match: (value: string) => value.includes("polo"),
   },
   {
@@ -80,8 +85,13 @@ const publishedFleet = [
     brand: "Hyundai",
     model: "HB20 Hatch",
     body_type: "Hatch",
-    image_url:
+    gallery_images: [
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_lateral.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_traseira.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_grade.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_paineldigital.webp",
+    ],
     match: (value: string) =>
       value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
   },
@@ -90,17 +100,28 @@ const publishedFleet = [
     brand: "Hyundai",
     model: "HB20 Sedan (HB20S)",
     body_type: "Sedã",
-    image_url:
+    gallery_images: [
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
-    match: (value: string) => value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_lateral.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_traseira.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_grade.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/internas/thumb/interna_paineldigital_330x330.webp",
+    ],
+    match: (value: string) =>
+      value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
   },
   {
     key: "onix",
     brand: "Chevrolet",
     model: "Onix Sedan (Onix Plus)",
     body_type: "Sedã",
-    image_url:
+    gallery_images: [
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/mh/mh-desk.jpeg?imwidth=1200",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-1.jpg?imwidth=1200",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus.jpg?imwidth=1200",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-2.jpg?imwidth=1200",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh/design/1/design-interior.jpg?imwidth=1200",
+    ],
     match: (value: string) => value.includes("onix"),
   },
 ] as const;
@@ -168,7 +189,8 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
       color: source?.color ?? null,
       price_per_week: Number(source?.price_per_week ?? 0),
       features: Array.isArray(source?.features) ? source.features : [],
-      image_url: target.image_url,
+      image_url: target.gallery_images[0],
+      gallery_images: [...target.gallery_images],
       is_active: true,
       created_at: source?.created_at ?? null,
       transmission: source?.transmission ?? null,
