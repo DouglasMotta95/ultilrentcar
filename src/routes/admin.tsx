@@ -254,44 +254,70 @@ function AdminPage() {
     }
   }
 
-  async function uploadVehiclePhoto(file: File) {
+  async function uploadVehiclePhotos(fileList: FileList) {
     if (!vehicleDraft.id) {
-      toast.error("Salve o veículo primeiro e depois envie a foto.");
+      toast.error("Salve o veículo primeiro e depois envie as fotos.");
       return;
     }
 
-    if (!file.type.startsWith("image/")) {
-      toast.error("Selecione uma imagem.");
+    const files = Array.from(fileList).filter((file) => file.type.startsWith("image/"));
+    if (files.length === 0) {
+      toast.error("Selecione imagens JPG, PNG ou WebP.");
+      return;
+    }
+
+    const availableSlots = Math.max(0, 10 - vehicleDraft.gallery_images.length);
+    if (availableSlots === 0) {
+      toast.error("A galeria aceita até 10 fotos por veículo.");
       return;
     }
 
     setBusy(true);
     try {
-      const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
-      const path = `vehicles/${vehicleDraft.id}/${Date.now()}.${extension}`;
-      const { error: uploadError } = await db.storage.from("site-media").upload(path, file, {
-        upsert: true,
-        contentType: file.type,
+      const uploadedUrls: string[] = [];
+
+      for (const [index, file] of files.slice(0, availableSlots).entries()) {
+        const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
+        const path = `vehicles/${vehicleDraft.id}/${Date.now()}-${index}.${extension}`;
+        const { error: uploadError } = await db.storage.from("site-media").upload(path, file, {
+          upsert: true,
+          contentType: file.type,
+        });
+        if (uploadError) throw uploadError;
+
+        const { data } = db.storage.from("site-media").getPublicUrl(path);
+        uploadedUrls.push(data.publicUrl);
+      }
+
+      setVehicleDraft((current) => {
+        const gallery = [...current.gallery_images, ...uploadedUrls].slice(0, 10);
+        return {
+          ...current,
+          gallery_images: gallery,
+          image_url: gallery[0] || "",
+        };
       });
-      if (uploadError) throw uploadError;
 
-      const { data } = db.storage.from("site-media").getPublicUrl(path);
-      const imageUrl = data.publicUrl;
-
-      const { error: updateError } = await db
-        .from("vehicles")
-        .update({ image_url: imageUrl })
-        .eq("id", vehicleDraft.id);
-      if (updateError) throw updateError;
-
-      setVehicleDraft((current) => ({ ...current, image_url: imageUrl }));
-      await loadAdminData();
-      toast.success("Foto atualizada.");
+      toast.success("Fotos enviadas. Clique em Salvar veículo para publicar a galeria.");
     } catch (error: any) {
-      toast.error(error?.message || "Não foi possível enviar a foto.");
+      toast.error(error?.message || "Não foi possível enviar as fotos.");
     } finally {
       setBusy(false);
     }
+  }
+
+  function removeGalleryImage(url: string) {
+    setVehicleDraft((current) => {
+      const gallery = current.gallery_images.filter((item) => item !== url);
+      return { ...current, gallery_images: gallery, image_url: gallery[0] || "" };
+    });
+  }
+
+  function makePrimaryGalleryImage(url: string) {
+    setVehicleDraft((current) => {
+      const gallery = [url, ...current.gallery_images.filter((item) => item !== url)];
+      return { ...current, gallery_images: gallery, image_url: url };
+    });
   }
 
   async function saveLead(lead: any) {
@@ -516,18 +542,63 @@ function AdminPage() {
               </Field>
 
               <div className="mt-4 rounded-2xl border border-dashed border-slate-300 p-4">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <div className="h-28 w-full overflow-hidden rounded-xl bg-slate-100 sm:w-44">
-                    {vehicleDraft.image_url ? <img src={vehicleDraft.image_url} alt="" className="h-full w-full object-cover" /> : <div className="flex h-full items-center justify-center text-sm text-slate-400">Sem foto</div>}
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="font-bold">Galeria do veículo</p>
+                    <p className="text-sm text-slate-500">
+                      Até 10 fotos. A primeira imagem é a principal do card.
+                    </p>
                   </div>
-                  <div className="flex-1">
-                    <p className="font-bold">Foto real do veículo</p>
-                    <p className="mb-3 text-sm text-slate-500">JPG, PNG ou WebP. O painel salva no armazenamento do projeto.</p>
-                    <label className="admin-secondary-button cursor-pointer">
-                      <ImagePlus className="h-4 w-4" /> Trocar foto
-                      <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={(e) => e.target.files?.[0] && void uploadVehiclePhoto(e.target.files[0])} />
-                    </label>
+                  <span className="text-xs font-bold text-slate-400">
+                    {vehicleDraft.gallery_images.length}/10
+                  </span>
+                </div>
+
+                {vehicleDraft.gallery_images.length > 0 ? (
+                  <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {vehicleDraft.gallery_images.map((url, index) => (
+                      <div key={url} className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                        <div className="relative aspect-video">
+                          <img src={url} alt={`Foto ${index + 1} de ${vehicleDraft.brand} ${vehicleDraft.model}`} className="h-full w-full object-cover" />
+                          {index === 0 && (
+                            <span className="absolute left-2 top-2 rounded-full bg-cyan-500 px-2 py-1 text-[10px] font-extrabold uppercase text-white">
+                              Principal
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex gap-2 p-2">
+                          {index !== 0 && (
+                            <button type="button" onClick={() => makePrimaryGalleryImage(url)} className="flex-1 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs font-bold">
+                              Tornar principal
+                            </button>
+                          )}
+                          <button type="button" onClick={() => removeGalleryImage(url)} className="rounded-lg px-2 py-1.5 text-xs font-bold text-red-600 hover:bg-red-50">
+                            Remover
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
+                ) : (
+                  <div className="mt-4 flex h-28 items-center justify-center rounded-xl bg-slate-100 text-sm text-slate-400">
+                    Nenhuma foto personalizada. O site usa a galeria oficial de fallback.
+                  </div>
+                )}
+
+                <div className="mt-4">
+                  <label className="admin-secondary-button cursor-pointer">
+                    <ImagePlus className="h-4 w-4" /> Adicionar fotos
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      onChange={(e) => e.target.files && void uploadVehiclePhotos(e.target.files)}
+                    />
+                  </label>
+                  <p className="mt-2 text-xs text-slate-500">
+                    Depois de adicionar, remover ou reordenar, clique em Salvar veículo.
+                  </p>
                 </div>
               </div>
 
