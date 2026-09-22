@@ -32,7 +32,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 
   const images = useMemo(() => {
     const gallery = Array.isArray(extra.gallery_images)
-      ? extra.gallery_images.filter(Boolean)
+      ? Array.from(new Set(extra.gallery_images.filter(Boolean)))
       : [];
     const source = gallery.length > 0 ? gallery : vehicle.image_url ? [vehicle.image_url] : [];
     return source.filter((url) => !failedImages.includes(url));
