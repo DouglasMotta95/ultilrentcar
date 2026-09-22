@@ -188,17 +188,15 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
       plate: source?.plate ?? null,
       color: source?.color ?? null,
       price_per_week: Number(source?.price_per_week ?? 0),
-      features: Array.isArray(source?.features) ? source.features : [],
+      features: [],
       image_url: target.gallery_images[0],
       gallery_images: [...target.gallery_images],
       is_active: true,
       created_at: source?.created_at ?? null,
-      transmission: source?.transmission ?? null,
+      transmission: null,
       body_type: target.body_type,
-      app_category: source?.app_category ?? null,
-      description:
-        source?.description ??
-        `${target.brand} ${target.model}. Consulte disponibilidade e condições da locação.`,
+      app_category: null,
+      description: `${target.brand} ${target.model}. Consulte disponibilidade e condições da locação.`,
       sort_order: index + 1,
     };
   });
