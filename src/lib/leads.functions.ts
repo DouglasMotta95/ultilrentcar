@@ -72,7 +72,7 @@ const publishedFleet = [
     model: "Polo Track",
     body_type: "Hatch",
     image_url:
-      "https://production.autoforce.com/uploads/picture/image/251334413/comprar-polo-track-2025_0d8c8073d4.png",
+      "https://assets.volkswagen.com/is/image/volkswagenag/Polo-Track-IPI-ZERO?Zm10PXBuZy1hbHBoYSZ3aWQ9ODAwJmJmYz1vZmYmMGFmYw=%3D",
     match: (value: string) => value.includes("polo"),
   },
   {
@@ -81,7 +81,7 @@ const publishedFleet = [
     model: "HB20 Hatch",
     body_type: "Hatch",
     image_url:
-      "https://www.autoo.com.br/fotos/2023/2/1280_960/hyundai_hb20_2023_1_13022023_73048_1280_960.jpg",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
     match: (value: string) =>
       value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
   },
@@ -91,7 +91,7 @@ const publishedFleet = [
     model: "HB20 Sedan (HB20S)",
     body_type: "Sedã",
     image_url:
-      "https://garagem360.com.br/wp-content/uploads/2024/05/hyundai-hb20s-comfort-plus-tgdi-at-2025-4-1200x720.jpg",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
     match: (value: string) => value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
   },
   {
@@ -100,7 +100,7 @@ const publishedFleet = [
     model: "Onix Sedan (Onix Plus)",
     body_type: "Sedã",
     image_url:
-      "https://next-files-bucket.s3.us-east-1.amazonaws.com/template/34/site/328/modules/sub_modules/720/new/78b3fdc1581b165f10361761681183.png",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/mh/mh-desk.jpeg?imwidth=1200",
     match: (value: string) => value.includes("onix"),
   },
 ] as const;
