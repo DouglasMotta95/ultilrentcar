@@ -16,7 +16,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { data: company } = useCompanyInfo();
-  const logoSrc = "/logo-util-rent.svg";
+  const logoSrc = company.logo_url || "/logo-util-rent.svg";
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
