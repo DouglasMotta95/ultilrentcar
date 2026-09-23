@@ -16,6 +16,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { data: company } = useCompanyInfo();
+  const logoSrc = "/logo-util-rent.svg";
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -27,19 +28,7 @@ export function Navbar() {
     <nav aria-label="Navegação principal" className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 py-3 shadow-sm backdrop-blur-md" : "bg-background/80 py-4 backdrop-blur-sm"}`}>
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link to="/" aria-label="UTIL LOCADORA - página inicial" className="flex items-center gap-3">
-          {company.logo_url ? (
-            <img src={company.logo_url} alt={company.name} className="h-11 w-auto max-w-[170px] object-contain" />
-          ) : (
-            <>
-              <span className="relative flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-foreground/90 border-b-primary text-primary">
-                <span className="font-display text-[0.7rem] font-extrabold tracking-tight">UTIL</span>
-              </span>
-              <span className="leading-tight">
-                <span className="block font-display text-base font-extrabold tracking-tight text-foreground">{company.name}</span>
-                <span className="block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Locadora de Veículos</span>
-              </span>
-            </>
-          )}
+          <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-12 w-auto max-w-[250px] object-contain object-left sm:h-14 sm:max-w-[310px]" />
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
