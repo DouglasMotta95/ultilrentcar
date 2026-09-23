@@ -32,8 +32,27 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    name: "UTIL LOCADORA",
+    url: "https://utilrentcar.com.br/",
+    telephone: "+55 11 94722-9449",
+    email: "utillocadora@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Itu",
+      addressRegion: "SP",
+      addressCountry: "BR",
+    },
+    areaServed: ["Itu", "Salto", "Indaiatuba", "Sorocaba"],
+    priceRange: "$",
+    description: "Locação de veículos para motoristas de aplicativo em Itu e região.",
+  };
+
   return (
     <main className="min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <Navbar /><Hero /><About /><Services /><HowItWorks /><Benefits />
       <section id="frota" className="scroll-mt-24 py-20 md:py-28">
         <div className="container mx-auto px-4">
