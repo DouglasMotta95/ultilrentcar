@@ -25,13 +25,31 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const onlyDigits = (value: string) => value.replace(/\D/g, "");
+const validCpf = (value: string) => {
+  const cpf = onlyDigits(value);
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
+  let check = (sum * 10) % 11;
+  if (check === 10) check = 0;
+  if (check !== Number(cpf[9])) return false;
+  sum = 0;
+  for (let i = 0; i < 10; i++) sum += Number(cpf[i]) * (11 - i);
+  check = (sum * 10) % 11;
+  if (check === 10) check = 0;
+  return check === Number(cpf[10]);
+};
+const validPhone = (value: string) => [10, 11].includes(onlyDigits(value).length);
+const validCep = (value: string) => onlyDigits(value).length === 8;
+
 const formSchema = z.object({
-  full_name: z.string().min(3, "Informe seu nome completo"),
-  cpf: z.string().min(11, "CPF inválido"),
+  full_name: z.string().trim().min(3, "Informe seu nome completo"),
+  cpf: z.string().refine(validCpf, "CPF inválido"),
   birth_date: z.string().min(10, "Data inválida"),
-  cellphone: z.string().min(10, "Celular inválido"),
-  email: z.string().email("E-mail inválido"),
-  cep: z.string().min(8, "CEP inválido"),
+  cellphone: z.string().refine(validPhone, "Celular inválido"),
+  email: z.string().trim().email("E-mail inválido"),
+  cep: z.string().refine(validCep, "CEP inválido"),
   street: z.string().min(3, "Rua obrigatória"),
   number: z.string().min(1, "Número obrigatório"),
   complement: z.string().optional(),
@@ -40,8 +58,8 @@ const formSchema = z.object({
   state: z.string().min(2, "Estado obrigatório"),
   profession: z.string().min(2, "Profissão obrigatória"),
   platform: z.enum(["Uber", "99", "inDrive", "Outro"]),
-  ref_phone_1: z.string().min(10, "Telefone de referência obrigatório"),
-  ref_phone_2: z.string().min(10, "Telefone de referência obrigatório"),
+  ref_phone_1: z.string().refine(validPhone, "Telefone de referência inválido"),
+  ref_phone_2: z.string().refine(validPhone, "Telefone de referência inválido"),
   vehicle_interest: z.string().optional(),
   privacy_consent: z.boolean().refine((value) => value, {
     message: "É necessário autorizar o uso dos dados para enviar o cadastro",
