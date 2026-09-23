@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">UTIL rent a car — Locadora de veículos</title>
+  <desc id="desc">Logo UTIL rent a car em azul e cinza com a assinatura Locadora de veículos.</desc>
+  <rect width="1200" height="420" fill="#fff"/>
+  <g transform="translate(28 20)">
+    <path d="M35 105 C105 0 300 -10 390 105 C300 42 155 48 90 105 Z" fill="#4b4b4b"/>
+    <path d="M70 300 C145 390 300 392 395 300 L345 300 C270 348 155 346 108 300 Z" fill="#0ea5e9"/>
+    <text x="38" y="280" font-family="Arial, Helvetica, sans-serif" font-size="225" font-weight="800" letter-spacing="-12" fill="#0ea5e9">UTIL</text>
+  </g>
+  <text x="425" y="245" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="700" letter-spacing="-8" fill="#0ea5e9">rent a car</text>
+  <text x="430" y="335" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="700" fill="#0ea5e9">Locadora de veículos</text>
+</svg>
