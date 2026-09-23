@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { BadgeCheck, Car, Check, ChevronLeft, ChevronRight, Gauge, Pause, Play } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
@@ -75,7 +76,23 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         {extra.app_category && <p className="mt-4 rounded-xl bg-accent px-3 py-2 text-sm font-semibold text-foreground">Categoria: {extra.app_category}</p>}
         {extra.description && <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{extra.description}</p>}
         {vehicle.features && vehicle.features.length > 0 && <div className="mt-5 space-y-2 border-t border-border pt-5">{vehicle.features.slice(0, 4).map((feature, index) => <div key={index} className="flex items-center gap-3 text-sm text-foreground/80"><Check className="h-4 w-4 shrink-0 text-primary" /><span>{feature}</span></div>)}</div>}
-        <a href={whatsappUrl(company.whatsapp, message)} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Consultar disponibilidade</a>
+        <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          <Link
+            to="/frota/$vehicleId"
+            params={{ vehicleId: String(vehicle.id) }}
+            className="inline-flex min-h-12 items-center justify-center rounded-full border border-border bg-background px-5 py-3 text-center font-bold text-foreground transition hover:bg-secondary"
+          >
+            Ver detalhes
+          </Link>
+          <a
+            href={whatsappUrl(company.whatsapp, message)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-5 py-3 text-center font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            Consultar
+          </a>
+        </div>
       </div>
     </article>
   );
