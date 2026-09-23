@@ -37,6 +37,8 @@ export type Database = {
           number: string
           platform: Database["public"]["Enums"]["platform_type"]
           profession: string
+          privacy_consent_at?: string | null
+          privacy_policy_version?: string | null
           ref_phone_1: string
           ref_phone_2: string
           residence_proof_url: string | null
@@ -99,6 +101,8 @@ export type Database = {
           number?: string
           platform?: Database["public"]["Enums"]["platform_type"]
           profession?: string
+          privacy_consent_at?: string | null
+          privacy_policy_version?: string | null
           ref_phone_1?: string
           ref_phone_2?: string
           residence_proof_url?: string | null
