@@ -11,8 +11,8 @@ const nav = [
 
 export function Footer() {
   const { data: company } = useCompanyInfo();
-  const logoSrc = "/logo-util-rent.svg";
-  const phoneHref = company.phone ? `tel:${company.phone.replace(/\D/g, "")}` : null;
+  const logoSrc = company.logo_url || "/logo-util-rent.svg";
+  const phoneHref = company.phone ? `tel:${company.phone.replace(/\\D/g, "")}` : null;
 
   return (
     <footer className="bg-ink py-16 text-ink-foreground">
