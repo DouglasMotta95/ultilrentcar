@@ -11,6 +11,7 @@ const nav = [
 
 export function Footer() {
   const { data: company } = useCompanyInfo();
+  const logoSrc = "/logo-util-rent.svg";
   const phoneHref = company.phone ? `tel:${company.phone.replace(/\D/g, "")}` : null;
 
   return (
@@ -19,16 +20,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              {company.logo_url ? (
-                <img src={company.logo_url} alt={company.name} className="h-12 w-auto max-w-[180px] object-contain" />
-              ) : (
-                <>
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-white/90 border-b-primary text-primary">
-                    <span className="font-display text-[0.7rem] font-extrabold">UTIL</span>
-                  </span>
-                  <span className="font-display text-lg font-extrabold tracking-tight">{company.name}</span>
-                </>
-              )}
+              <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-14 w-auto max-w-[300px] object-contain object-left" />
             </div>
             <p className="mt-6 max-w-xs leading-relaxed text-ink-foreground/60">
               Locação de veículos para motoristas de aplicativo em Itu e região.
