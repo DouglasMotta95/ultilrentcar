@@ -28,7 +28,7 @@ export function Navbar() {
     <nav aria-label="Navegação principal" className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 py-3 shadow-sm backdrop-blur-md" : "bg-background/80 py-4 backdrop-blur-sm"}`}>
       <div className="container mx-auto flex items-center justify-between px-4">
         <Link to="/" aria-label="UTIL LOCADORA - página inicial" className="flex items-center gap-3">
-          <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-12 w-auto max-w-[250px] object-contain object-left sm:h-14 sm:max-w-[310px]" />
+          <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-10 w-auto max-w-[190px] object-contain object-left sm:h-14 sm:max-w-[310px]" />
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
