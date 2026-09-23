@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "re
 import {
   Building2,
   Car,
+  History,
   ImagePlus,
   LogOut,
   Plus,
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/admin")({
   }),
 });
 
-type Tab = "frota" | "leads" | "site" | "seguranca";
+type Tab = "frota" | "leads" | "site" | "auditoria" | "seguranca";
 
 type VehicleDraft = {
   id?: string;
@@ -81,6 +82,7 @@ function AdminPage() {
   const [vehicleDraft, setVehicleDraft] = useState<VehicleDraft>(emptyVehicle);
   const [leads, setLeads] = useState<any[]>([]);
   const [settings, setSettings] = useState<any>(null);
+  const [auditLog, setAuditLog] = useState<any[]>([]);
 
   useEffect(() => {
     void bootstrap();
@@ -117,22 +119,25 @@ function AdminPage() {
   }
 
   async function loadAdminData() {
-    const [vehiclesResult, leadsResult, settingsResult] = await Promise.all([
+    const [vehiclesResult, leadsResult, settingsResult, auditResult] = await Promise.all([
       db.from("vehicles").select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: true }),
       db
         .from("leads")
         .select("id,created_at,full_name,cellphone,email,platform,status,vehicle_interest,admin_notes")
         .order("created_at", { ascending: false }),
       db.from("company_settings").select("*").eq("id", 1).maybeSingle(),
+      db.from("admin_audit_log").select("id,created_at,actor_user_id,action,entity,entity_id,summary,details").order("created_at", { ascending: false }).limit(100),
     ]);
 
     if (vehiclesResult.error) toast.error("Erro ao carregar a frota.");
     if (leadsResult.error) toast.error("Erro ao carregar os cadastros.");
     if (settingsResult.error) toast.error("Erro ao carregar os dados da empresa.");
+    if (auditResult.error) toast.error("Erro ao carregar a auditoria administrativa.");
 
     setVehicles(vehiclesResult.data ?? []);
     setLeads(leadsResult.data ?? []);
     setSettings(settingsResult.data ?? null);
+    setAuditLog(auditResult.data ?? []);
   }
 
   async function login(event: FormEvent) {
@@ -477,6 +482,7 @@ function AdminPage() {
           <TabButton active={tab === "frota"} onClick={() => setTab("frota")} icon={Car} label="Frota" />
           <TabButton active={tab === "leads"} onClick={() => setTab("leads")} icon={Users} label="Cadastros" />
           <TabButton active={tab === "site"} onClick={() => setTab("site")} icon={Building2} label="Site e contatos" />
+          <TabButton active={tab === "auditoria"} onClick={() => setTab("auditoria")} icon={History} label="Auditoria" />
           <TabButton active={tab === "seguranca"} onClick={() => setTab("seguranca")} icon={ShieldCheck} label="Segurança" />
         </nav>
 
@@ -683,6 +689,32 @@ function AdminPage() {
 
             <button disabled={busy} className="admin-primary-button mt-6 w-full justify-center py-3.5"><Save className="h-4 w-4" /> Salvar alterações do site</button>
           </form>
+        )}
+
+        {tab === "auditoria" && (
+          <section className="rounded-3xl bg-white p-5 shadow-sm">
+            <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 className="text-xl font-extrabold">Trilha de auditoria</h2>
+                <p className="text-sm text-slate-500">Histórico das alterações administrativas da frota, cadastros e dados do site.</p>
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wide text-slate-400">Últimos 100 eventos</span>
+            </div>
+            <div className="space-y-3">
+              {auditLog.length === 0 && <p className="rounded-2xl bg-slate-50 p-5 text-slate-500">Nenhuma alteração registrada ainda.</p>}
+              {auditLog.map((entry) => (
+                <div key={entry.id} className="rounded-2xl border border-slate-200 p-4">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="font-extrabold">{entry.entity} · {entry.action}</p>
+                      <p className="text-sm text-slate-500">{entry.summary}{entry.entity_id ? ` · ID ${entry.entity_id}` : ""}</p>
+                    </div>
+                    <time className="text-xs font-semibold text-slate-400">{entry.created_at ? new Date(entry.created_at).toLocaleString("pt-BR") : ""}</time>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {tab === "seguranca" && (
