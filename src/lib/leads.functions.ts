@@ -5,26 +5,54 @@ import type { Database } from "@/integrations/supabase/types";
 
 type LeadInsert = Database["public"]["Tables"]["leads"]["Insert"];
 
+function digits(value: string) {
+  return value.replace(/\\D/g, "");
+}
+
+function isValidCpf(value: string) {
+  const cpf = digits(value);
+  if (cpf.length !== 11 || /^([0-9])\\1{10}$/.test(cpf)) return false;
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
+  let check = (sum * 10) % 11;
+  if (check === 10) check = 0;
+  if (check !== Number(cpf[9])) return false;
+  sum = 0;
+  for (let i = 0; i < 10; i++) sum += Number(cpf[i]) * (11 - i);
+  check = (sum * 10) % 11;
+  if (check === 10) check = 0;
+  return check === Number(cpf[10]);
+}
+
+function isValidPhone(value: string) {
+  const phone = digits(value);
+  return phone.length === 10 || phone.length === 11;
+}
+
+function isValidCep(value: string) {
+  return digits(value).length === 8;
+}
+
 const leadSchema = z.object({
-  full_name: z.string().min(3),
-  cpf: z.string().min(11),
-  birth_date: z.string(),
-  cellphone: z.string(),
+  full_name: z.string().trim().min(3),
+  cpf: z.string().refine(isValidCpf, "CPF inválido"),
+  birth_date: z.string().min(10, "Data de nascimento inválida"),
+  cellphone: z.string().refine(isValidPhone, "Celular inválido"),
   landline: z.string().optional(),
-  email: z.string().email(),
-  cep: z.string(),
-  street: z.string(),
-  number: z.string(),
+  email: z.string().trim().email(),
+  cep: z.string().refine(isValidCep, "CEP inválido"),
+  street: z.string().trim().min(3),
+  number: z.string().trim().min(1),
   complement: z.string().optional(),
-  neighborhood: z.string(),
-  city: z.string(),
-  state: z.string(),
-  profession: z.string(),
+  neighborhood: z.string().trim().min(2),
+  city: z.string().trim().min(2),
+  state: z.string().trim().length(2).transform((value) => value.toUpperCase()),
+  profession: z.string().trim().min(2),
   platform: z.enum(["Uber", "99", "inDrive", "Outro"]),
   facebook: z.string().optional(),
   instagram: z.string().optional(),
-  ref_phone_1: z.string(),
-  ref_phone_2: z.string(),
+  ref_phone_1: z.string().refine(isValidPhone, "Telefone de referência inválido"),
+  ref_phone_2: z.string().refine(isValidPhone, "Telefone de referência inválido"),
   vehicle_interest: z.string().optional(),
   privacy_consent: z.literal(true),
 });
@@ -54,6 +82,8 @@ export const submitLead = createServerFn({ method: "POST" })
       ref_phone_2: data.ref_phone_2,
       vehicle_interest: data.vehicle_interest || null,
       status: "em_analise",
+      privacy_consent_at: new Date().toISOString(),
+      privacy_policy_version: "2026-09",
     };
 
     const { error } = await supabase.from("leads").insert([insertData]);
@@ -73,11 +103,7 @@ const publishedFleet = [
     model: "Polo Track",
     body_type: "Hatch",
     gallery_images: [
-      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36482.webp",
-      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36481.webp",
-      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36479.webp",
-      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36478.webp",
-      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36480.webp",
+      "https://assets.volkswagen.com/is/image/volkswagenag/Polo-Track-IPI-ZERO?Zm10PXBuZy1hbHBoYSZ3aWQ9MjQwMCZiZmM9b2ZmJjBhZmM=%3D",
     ],
     match: (value: string) => value.includes("polo"),
   },
@@ -117,11 +143,11 @@ const publishedFleet = [
     model: "Onix Sedan (Onix Plus)",
     body_type: "Sedã",
     gallery_images: [
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/mh/mh-desk.jpeg?imwidth=1200",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-1.jpg?imwidth=1200",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus.jpg?imwidth=1200",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-2.jpg?imwidth=1200",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh/design/1/design-interior.jpg?imwidth=1200",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/mh/mh-desk.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-1.jpg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus.jpg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-2.jpg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh/design/1/design-interior.jpg?imwidth=2400",
     ],
     match: (value: string) => value.includes("onix"),
   },
