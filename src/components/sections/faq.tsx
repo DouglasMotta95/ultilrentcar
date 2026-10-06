@@ -25,10 +25,6 @@ const faqs = [
     a: "As condições de seguro, cobertura, assistência e responsabilidades são apresentadas antes da contratação e constam no contrato de locação.",
   },
   {
-    q: "Os carros são revisados?",
-    a: "A locadora acompanha a manutenção dos veículos e as condições necessárias para a utilização durante a locação.",
-  },
-  {
     q: "Posso alugar com nome negativado?",
     a: "Cada cadastro é analisado individualmente. Fale com a equipe para verificar as condições aplicáveis ao seu perfil.",
   },
