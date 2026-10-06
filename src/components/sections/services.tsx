@@ -4,62 +4,64 @@ const services = [
   {
     icon: CalendarClock,
     title: "Locação semanal",
-    description:
-      "Opção prática para quem trabalha com aplicativos e prefere organizar o pagamento por semana.",
+    description: "Uma forma prática de organizar a locação para quem trabalha com aplicativos.",
   },
   {
     icon: Car,
     title: "Locação mensal",
-    description:
-      "Consulte as condições disponíveis para períodos maiores e escolha o formato que melhor atende sua rotina.",
+    description: "Consulte condições para períodos maiores e escolha o formato que combina com sua rotina.",
   },
   {
     icon: Wallet,
-    title: "Para motoristas de aplicativo",
-    description:
-      "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan. Consulte a compatibilidade do veículo com a plataforma e a categoria em que você pretende rodar.",
+    title: "Foco em aplicativos",
+    description: "Frota apresentada para quem precisa de um veículo para trabalhar com as principais plataformas.",
   },
   {
     icon: ShieldCheck,
-    title: "Seguro e assistência",
-    description:
-      "As condições de cobertura, assistência e responsabilidades são apresentadas de forma clara antes da contratação.",
-  },
-  {
-    icon: Car,
-    title: "Veículos para trabalhar",
-    description:
-      "Modelos selecionados para a rotina de quem trabalha com aplicativos, conforme disponibilidade.",
+    title: "Condições claras",
+    description: "Cobertura, responsabilidades, caução e demais regras são apresentadas antes da contratação.",
   },
   {
     icon: Headphones,
     title: "Atendimento direto",
-    description:
-      "Fale com a equipe pelo WhatsApp para consultar disponibilidade, valores e tirar dúvidas antes de fechar.",
+    description: "Fale com a equipe para consultar disponibilidade, valores e tirar dúvidas.",
   },
 ];
 
 export function Services() {
   return (
-    <section id="servicos" className="bg-surface py-20 md:py-28">
+    <section id="servicos" className="section-section">
       <div className="container mx-auto px-4">
-        <span className="eyebrow">Serviços</span>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <span className="eyebrow">Serviços</span>
+            <h2 className="mt-6 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] sm:text-4xl lg:text-5xl">
+              Tudo organizado para você focar no que realmente importa.
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
+            Uma jornada objetiva: entender as opções, escolher o veículo e conversar com a locadora antes de fechar.
+          </p>
+        </div>
 
-        <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-          Tudo o que você precisa para rodar com tranquilidade
-        </h2>
-        <p className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          Condições pensadas para a rotina do motorista de aplicativo, com informações claras antes da contratação.
-        </p>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {services.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="soft-card p-7 transition hover:-translate-y-1 hover:shadow-xl">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-primary">
-                <Icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-6 font-display text-xl font-bold">{title}</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">{description}</p>
+        <div className="mt-14 grid overflow-hidden rounded-[2rem] border border-border bg-card md:grid-cols-2 lg:grid-cols-3">
+          {services.map(({ icon: Icon, title, description }, index) => (
+            <div
+              key={title}
+              className={`group border-border p-7 transition hover:bg-secondary/60 md:p-8 ${
+                index % 3 !== 2 ? "lg:border-r" : ""
+              } ${index < 3 ? "lg:border-b" : ""}`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent text-primary">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="font-mono text-xs font-bold text-muted-foreground/50">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="mt-8 font-display text-xl font-bold">{title}</h3>
+              <p className="mt-3 max-w-sm leading-7 text-muted-foreground">{description}</p>
             </div>
           ))}
         </div>
