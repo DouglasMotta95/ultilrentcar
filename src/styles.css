@@ -121,8 +121,10 @@
 @utility section-section {
   padding-top: 5.5rem;
   padding-bottom: 5.5rem;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .section-section {
     padding-top: 7.5rem;
     padding-bottom: 7.5rem;
   }
