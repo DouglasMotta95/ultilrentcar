@@ -18,12 +18,12 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -34,21 +34,20 @@
   --color-surface: var(--surface);
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
+
   --color-whatsapp: var(--whatsapp);
 }
 
 :root {
-  /* Light, clean — Util Rent Car */
   --background: oklch(1 0 0);
   --foreground: oklch(0.22 0.01 260);
-  --surface: oklch(0.97 0.008 240);
+  --surface: oklch(0.975 0.006 240);
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.01 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.01 260);
 
-  /* Cyan/blue institucional */
   --primary: oklch(0.68 0.15 231);
   --primary-foreground: oklch(1 0 0);
 
@@ -64,12 +63,11 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
 
-  --border: oklch(0.92 0.005 250);
-  --input: oklch(0.92 0.005 250);
+  --border: oklch(0.91 0.006 250);
+  --input: oklch(0.91 0.006 250);
   --ring: oklch(0.68 0.15 231 / 0.4);
-  --radius: 1rem;
+  --radius: 1.15rem;
 
-  /* Dark band + footer */
   --ink: oklch(0.24 0.005 260);
   --ink-foreground: oklch(0.98 0 0);
   --whatsapp: oklch(0.62 0.16 152);
@@ -79,16 +77,24 @@
   * {
     border-color: var(--color-border);
   }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
   }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -112,13 +118,22 @@
   text-transform: uppercase;
 }
 
+@utility section-section {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+
+  @media (min-width: 768px) {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+}
+
 @utility soft-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px -18px rgb(15 30 60 / 0.25);
+  box-shadow: 0 12px 34px -22px rgb(15 30 60 / 0.24);
 }
-
 
 @media (prefers-reduced-motion: reduce) {
   html {
