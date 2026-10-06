@@ -60,7 +60,7 @@ const leadSchema = z.object({
 export const submitLead = createServerFn({ method: "POST" })
   .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
-    const insertData: LeadInsert = {
+    const insertData: any = {
       full_name: data.full_name,
       cpf: data.cpf,
       birth_date: data.birth_date,
@@ -103,7 +103,11 @@ const publishedFleet = [
     model: "Polo Track",
     body_type: "Hatch",
     gallery_images: [
-      "https://assets.volkswagen.com/is/image/volkswagenag/Polo-Track-IPI-ZERO?Zm10PXBuZy1hbHBoYSZ3aWQ9MjQwMCZiZmM9b2ZmJjBhZmM=%3D",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36482.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36481.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36479.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36478.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36480.webp",
     ],
     match: (value: string) => value.includes("polo"),
   },
@@ -113,11 +117,11 @@ const publishedFleet = [
     model: "HB20 Hatch",
     body_type: "Hatch",
     gallery_images: [
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
-      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_lateral.webp",
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_traseira.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_lateral.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_grade.webp",
-      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_paineldigital.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_arcondicionado.webp",
     ],
     match: (value: string) =>
       value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
@@ -128,11 +132,11 @@ const publishedFleet = [
     model: "HB20 Sedan (HB20S)",
     body_type: "Sedã",
     gallery_images: [
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_lateral.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_traseira.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_lateral.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_grade.webp",
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/internas/thumb/interna_paineldigital_330x330.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/internas/thumb/interna_arcondicionado_330x330.webp",
     ],
     match: (value: string) =>
       value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
@@ -144,17 +148,73 @@ const publishedFleet = [
     body_type: "Sedã",
     gallery_images: [
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/mh/mh-desk.jpeg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-1.jpg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus.jpg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-2.jpg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh/design/1/design-interior.jpg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-01.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-02.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-03.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/design/1/design-interior.jpg?imwidth=2400",
     ],
     match: (value: string) => value.includes("onix"),
   },
 ] as const;
 
-function normalizeVehicleName(vehicle: any) {
+function normalizeVehicleNamefunction normalizeVehicleName(vehicle: any) {
   return `${vehicle?.brand ?? ""} ${vehicle?.model ?? ""}`.toLocaleLowerCase("pt-BR");
+}
+
+export type LeadFormData = z.infer<typeof leadSchema>;
+
+export async function submitLeadDirect(data: LeadFormData) {
+  const baseData: any = {
+    full_name: data.full_name.trim(),
+    cpf: data.cpf,
+    birth_date: data.birth_date,
+    cellphone: data.cellphone,
+    landline: data.landline || null,
+    email: data.email.trim(),
+    cep: data.cep,
+    street: data.street.trim(),
+    number: data.number.trim(),
+    complement: data.complement?.trim() || null,
+    neighborhood: data.neighborhood.trim(),
+    city: data.city.trim(),
+    state: data.state.toUpperCase(),
+    profession: data.profession.trim(),
+    platform: data.platform,
+    facebook: data.facebook?.trim() || null,
+    instagram: data.instagram?.trim() || null,
+    ref_phone_1: data.ref_phone_1,
+    ref_phone_2: data.ref_phone_2,
+    vehicle_interest: data.vehicle_interest || null,
+    status: "em_analise",
+  };
+
+  let result = await supabase.from("leads").insert([
+    {
+      ...baseData,
+      privacy_consent_at: new Date().toISOString(),
+      privacy_policy_version: "2026-09",
+    },
+  ]);
+
+  // Compatibilidade com banco que ainda não recebeu a migration de privacidade.
+  if (
+    result.error &&
+    /privacy_consent_at|privacy_policy_version|schema cache|column.*does not exist/i.test(
+      result.error.message || "",
+    )
+  ) {
+    result = await supabase.from("leads").insert([baseData]);
+  }
+
+  if (result.error) {
+    console.error("Erro ao enviar cadastro:", result.error);
+    const message = /Limite temporário/i.test(result.error.message || "")
+      ? "Limite temporário de cadastros atingido. Tente novamente mais tarde."
+      : "Não foi possível enviar seu cadastro agora. Confira os dados e tente novamente.";
+    throw new Error(message);
+  }
+
+  return { success: true };
 }
 
 export const getVehicles = createServerFn({ method: "GET" }).handler(async () => {

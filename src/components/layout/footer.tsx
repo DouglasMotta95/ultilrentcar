@@ -17,10 +17,10 @@ export function Footer() {
   return (
     <footer className="bg-ink py-16 text-ink-foreground">
       <div className="container mx-auto px-4">
-        <div className="grid gap-12 md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-[1.25fr_0.85fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
-              <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-14 w-auto max-w-[300px] object-contain object-left" />
+              <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-14 w-auto max-w-[250px] object-contain object-left" />
             </div>
             <p className="mt-6 max-w-xs leading-relaxed text-ink-foreground/60">
               Locação de veículos para motoristas de aplicativo em Itu e região.

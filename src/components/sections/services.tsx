@@ -1,4 +1,4 @@
-import { CalendarClock, Car, Headphones, ShieldCheck, Wallet, Wrench } from "lucide-react";
+import { CalendarClock, Car, Headphones, ShieldCheck, Wallet } from "lucide-react";
 
 const services = [
   {
@@ -26,10 +26,10 @@ const services = [
       "As condições de cobertura, assistência e responsabilidades são apresentadas de forma clara antes da contratação.",
   },
   {
-    icon: Wrench,
-    title: "Veículos revisados",
+    icon: Car,
+    title: "Veículos para trabalhar",
     description:
-      "A locadora acompanha a manutenção preventiva e as condições do veículo durante a locação.",
+      "Modelos selecionados para a rotina de quem trabalha com aplicativos, conforme disponibilidade.",
   },
   {
     icon: Headphones,

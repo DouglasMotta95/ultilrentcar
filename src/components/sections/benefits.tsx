@@ -1,11 +1,10 @@
 const benefits = [
   { title: "Modelos para o dia a dia", description: "Hatches e sedãs escolhidos para a rotina de quem trabalha com aplicativos." },
-  { title: "Veículos revisados", description: "Manutenção preventiva e itens de segurança acompanhados pela locadora." },
-  { title: "Opções de frota", description: "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan, conforme disponibilidade." },
+    { title: "Opções de frota", description: "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan, conforme disponibilidade." },
   { title: "Planos para quem roda", description: "Condições de locação pensadas para a rotina de quem trabalha com aplicativos." },
   { title: "Atendimento direto", description: "Suporte próximo para consultar disponibilidade, valores e condições." },
   { title: "Condições claras", description: "Você conhece valores, regras e responsabilidades antes de fechar a locação." },
-  { title: "Documentação em dia", description: "Veículos regularizados para a locação, conforme as condições do contrato." },
+  { title: "Frota selecionada", description: "Consulte os modelos disponíveis e as condições atuais de locação." },
   { title: "Disponibilidade atualizada", description: "Consulte a equipe para saber quais modelos estão disponíveis no momento." },
 ];
 
