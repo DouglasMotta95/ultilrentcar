@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle2, MessageCircle } from "lucide-react";
+import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -21,6 +22,8 @@ export const Route = createFileRoute("/cadastro")({
 });
 
 function Cadastro() {
+  const { data: company } = useCompanyInfo();
+
   return (
     <main className="min-h-screen bg-surface">
       <Navbar />
@@ -51,7 +54,7 @@ function Cadastro() {
               </div>
 
               <a
-                href="https://wa.me/5511947229449"
+                href={whatsappUrl(company.whatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-9 inline-flex items-center gap-2 font-bold text-primary transition hover:gap-3"
