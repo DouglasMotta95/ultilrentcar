@@ -5,7 +5,7 @@ import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 const stats = [
   { value: "Seguro", label: "Consulte as condições" },
   { value: "4 modelos", label: "Frota selecionada" },
-  { value: "Manutenção", label: "Conforme o contrato" },
+  { value: "Atendimento", label: "Direto com a locadora" },
   { value: "Apps", label: "Veículos para motoristas" },
 ];
 
@@ -23,9 +23,9 @@ export function Hero() {
       </div>
       <div className="container mx-auto px-4">
         <span className="eyebrow">Itu • São Paulo • Motoristas de aplicativo</span>
-        <h1 className="mt-6 max-w-3xl font-display text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-7xl">{company.hero_title || "LOCAÇÃO DE CARROS PARA APLICATIVOS"}</h1>
+        <h1 className="mt-6 max-w-3xl font-display text-balance text-4xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-7xl">{company.hero_title || "LOCAÇÃO DE VEÍCULOS PARA MOTORISTAS DE APLICATIVOS"}</h1>
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          {company.hero_subtitle || "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para a rotina de quem trabalha com aplicativos."}
+          {company.hero_subtitle || "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para motoristas de aplicativos."}
           {company.weekly_price_from != null && Number(company.weekly_price_from) > 0 && <span className="mt-2 block font-bold text-foreground">A partir de R$ {Number(company.weekly_price_from).toLocaleString("pt-BR", { minimumFractionDigits: 2 })} por semana.</span>}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
