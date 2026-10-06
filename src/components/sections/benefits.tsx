@@ -1,27 +1,32 @@
 const benefits = [
-  { title: "Modelos para o dia a dia", description: "Hatches e sedãs escolhidos para a rotina de quem trabalha com aplicativos." },
-    { title: "Opções de frota", description: "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan, conforme disponibilidade." },
-  { title: "Planos para quem roda", description: "Condições de locação pensadas para a rotina de quem trabalha com aplicativos." },
-  { title: "Atendimento direto", description: "Suporte próximo para consultar disponibilidade, valores e condições." },
-  { title: "Condições claras", description: "Você conhece valores, regras e responsabilidades antes de fechar a locação." },
-  { title: "Frota selecionada", description: "Consulte os modelos disponíveis e as condições atuais de locação." },
-  { title: "Disponibilidade atualizada", description: "Consulte a equipe para saber quais modelos estão disponíveis no momento." },
+  { title: "Frota objetiva", description: "Quatro modelos apresentados de forma simples, com fotos e informações essenciais." },
+  { title: "Atendimento direto", description: "Você fala com a locadora para confirmar disponibilidade, valores e condições." },
+  { title: "Processo claro", description: "Cadastro, análise e contratação organizados em etapas fáceis de acompanhar." },
+  { title: "Foco em quem roda", description: "A comunicação do site é pensada para o motorista de aplicativo." },
 ];
 
 export function Benefits() {
   return (
-    <section id="beneficios" className="bg-ink py-20 text-ink-foreground md:py-28">
+    <section id="beneficios" className="section-section bg-ink text-ink-foreground">
       <div className="container mx-auto px-4">
-        <span className="inline-flex items-center rounded-full bg-primary/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-primary">Benefícios</span>
-        <h2 className="mt-8 max-w-3xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">Por que escolher a UTIL LOCADORA</h2>
-        <p className="mt-5 max-w-2xl text-ink-foreground/65">Uma estrutura pensada para quem precisa do veículo como ferramenta de trabalho.</p>
-        <div className="mt-12 grid gap-x-12 sm:grid-cols-2">
-          {benefits.map((benefit) => (
-            <div key={benefit.title} className="border-t border-white/15 py-6">
-              <h3 className="font-display text-lg font-bold">{benefit.title}</h3>
-              <p className="mt-2 text-ink-foreground/60">{benefit.description}</p>
-            </div>
-          ))}
+        <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <div>
+            <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white/80">
+              Diferenciais
+            </span>
+            <h2 className="mt-7 max-w-xl font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-5xl">
+              Menos complicação. Mais clareza para começar.
+            </h2>
+          </div>
+
+          <div className="grid border-t border-white/15 sm:grid-cols-2">
+            {benefits.map((benefit) => (
+              <div key={benefit.title} className="border-b border-white/15 py-7 sm:px-7 sm:odd:border-r">
+                <h3 className="font-display text-xl font-bold">{benefit.title}</h3>
+                <p className="mt-3 max-w-sm leading-7 text-white/60">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
