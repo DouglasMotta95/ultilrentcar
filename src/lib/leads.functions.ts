@@ -157,6 +157,62 @@ function normalizeVehicleName(vehicle: any) {
   return `${vehicle?.brand ?? ""} ${vehicle?.model ?? ""}`.toLocaleLowerCase("pt-BR");
 }
 
+export type LeadFormData = z.infer<typeof leadSchema>;
+
+export async function submitLeadDirect(data: LeadFormData) {
+  const baseData: Record<string, unknown> = {
+    full_name: data.full_name.trim(),
+    cpf: data.cpf,
+    birth_date: data.birth_date,
+    cellphone: data.cellphone,
+    landline: data.landline || null,
+    email: data.email.trim(),
+    cep: data.cep,
+    street: data.street.trim(),
+    number: data.number.trim(),
+    complement: data.complement?.trim() || null,
+    neighborhood: data.neighborhood.trim(),
+    city: data.city.trim(),
+    state: data.state.toUpperCase(),
+    profession: data.profession.trim(),
+    platform: data.platform,
+    facebook: data.facebook?.trim() || null,
+    instagram: data.instagram?.trim() || null,
+    ref_phone_1: data.ref_phone_1,
+    ref_phone_2: data.ref_phone_2,
+    vehicle_interest: data.vehicle_interest || null,
+    status: "em_analise",
+  };
+
+  let result = await supabase.from("leads").insert([
+    {
+      ...baseData,
+      privacy_consent_at: new Date().toISOString(),
+      privacy_policy_version: "2026-09",
+    },
+  ]);
+
+  // Compatibilidade com banco que ainda não recebeu a migration de privacidade.
+  if (
+    result.error &&
+    /privacy_consent_at|privacy_policy_version|schema cache|column.*does not exist/i.test(
+      result.error.message || "",
+    )
+  ) {
+    result = await supabase.from("leads").insert([baseData]);
+  }
+
+  if (result.error) {
+    console.error("Erro ao enviar cadastro:", result.error);
+    const message = /Limite temporário/i.test(result.error.message || "")
+      ? "Limite temporário de cadastros atingido. Tente novamente mais tarde."
+      : "Não foi possível enviar seu cadastro agora. Confira os dados e tente novamente.";
+    throw new Error(message);
+  }
+
+  return { success: true };
+}
+
 export const getVehicles = createServerFn({ method: "GET" }).handler(async () => {
   const db = supabase as any;
 
