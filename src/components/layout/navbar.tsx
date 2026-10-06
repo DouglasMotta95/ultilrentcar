@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { useCompanyInfo } from "@/hooks/use-company-info";
 
 const links = [
   { href: "/#quem-somos", label: "Quem somos" },
   { href: "/#servicos", label: "Serviços" },
+  { href: "/#frota", label: "Frota" },
   { href: "/#como-funciona", label: "Como funciona" },
-  { href: "/#frota", label: "Nossa frota" },
-  { href: "/#duvidas", label: "Dúvidas" },
   { href: "/#contato", label: "Contato" },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { data: company } = useCompanyInfo();
-  const logoSrc = "/logo-util-rent.svg";
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -25,26 +21,49 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav aria-label="Navegação principal" className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/95 py-3 shadow-sm backdrop-blur-md" : "bg-background/80 py-4 backdrop-blur-sm"}`}>
-      <div className="container mx-auto flex items-center justify-between px-4">
-        <Link to="/" aria-label="UTIL LOCADORA - página inicial" className="flex items-center gap-3">
-          <img src={logoSrc} alt="UTIL rent a car — Locadora de veículos" className="h-10 w-auto max-w-[235px] object-contain object-left sm:h-14 sm:max-w-[350px]" />
+    <nav
+      aria-label="Navegação principal"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-border/80 bg-background/95 py-2.5 shadow-sm backdrop-blur-xl"
+          : "bg-background/70 py-4 backdrop-blur-md"
+      }`}
+    >
+      <div className="container mx-auto flex items-center justify-between gap-6 px-4">
+        <Link
+          to="/"
+          aria-label="UTIL LOCADORA - página inicial"
+          className="min-w-0 shrink-0"
+        >
+          <img
+            src="/logo-util-rent.svg"
+            alt="UTIL rent a car — Locadora de veículos"
+            className="h-10 w-auto max-w-[235px] object-contain object-left sm:h-12 sm:max-w-[285px]"
+          />
         </Link>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+            >
               {link.label}
             </a>
           ))}
-          <Link to="/cadastro" className="rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition hover:brightness-95">
+          <Link
+            to="/cadastro"
+            className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-sm transition hover:-translate-y-0.5 hover:brightness-95"
+          >
             Quero alugar
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/80 text-foreground lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
@@ -54,15 +73,25 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="absolute left-0 right-0 top-full border-b border-border bg-background shadow-lg lg:hidden">
-          <div className="flex flex-col p-4">
+        <div className="absolute inset-x-0 top-full border-b border-border bg-background/98 shadow-xl backdrop-blur-xl lg:hidden">
+          <div className="container mx-auto flex flex-col px-4 pb-5 pt-2">
             {links.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="border-b border-border py-3 text-base font-semibold text-foreground last:border-0">
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-border py-3.5 text-base font-semibold text-foreground last:border-0"
+              >
                 {link.label}
               </a>
             ))}
-            <Link to="/cadastro" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-primary px-6 py-3 text-center font-bold text-primary-foreground">
+            <Link
+              to="/cadastro"
+              onClick={() => setOpen(false)}
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-bold text-primary-foreground"
+            >
               Quero alugar
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

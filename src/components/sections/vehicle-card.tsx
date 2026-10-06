@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Car } from "lucide-react";
+import { ArrowRight, Car } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
@@ -49,8 +49,8 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const message = `Olá, tenho interesse no ${vehicle.brand} ${vehicle.model}. Gostaria de consultar a disponibilidade.`;
 
   return (
-    <article className="soft-card group flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative aspect-[4/3] overflow-hidden bg-white sm:aspect-video">
+    <article className="group overflow-hidden rounded-[2rem] border border-border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+      <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
         {currentImage ? (
           <img
             key={currentImage}
@@ -58,42 +58,46 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             alt={`${vehicle.brand} ${vehicle.model}`}
             loading="lazy"
             decoding="async"
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
             onError={() => {
               setFailedImages((current) =>
                 current.includes(currentImage) ? current : [...current, currentImage],
               );
               setCurrentImageIndex(0);
             }}
-            className="h-full w-full object-contain object-center transition-opacity duration-500"
           />
         ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-secondary text-muted-foreground">
-            <Car className="h-12 w-12 opacity-30" />
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
+            <Car className="h-12 w-12 opacity-25" />
             <span className="text-xs">Foto em atualização</span>
           </div>
         )}
 
-        <span className="absolute left-4 top-4 rounded-full bg-background/95 px-3 py-2 text-xs font-extrabold uppercase text-foreground shadow">
-          {extra.body_type || "Veículo"}
-        </span>
-
-        <span className="absolute right-4 bottom-4 rounded-full bg-black/55 px-3 py-1.5 text-xs font-bold text-white backdrop-blur">
-          {images.length} fotos
-        </span>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent p-5 pt-20">
+          <div className="flex items-center justify-between gap-3">
+            <span className="rounded-full bg-white/95 px-3 py-1.5 text-xs font-extrabold uppercase text-foreground shadow-sm">
+              {extra.body_type || "Veículo"}
+            </span>
+            <span className="text-xs font-bold text-white/85">{images.length} fotos</span>
+          </div>
+        </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
-        <p className="text-sm font-semibold uppercase tracking-wide text-primary">{vehicle.brand}</p>
-        <h3 className="mt-1 font-display text-2xl font-bold">{vehicle.model}</h3>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Confira a galeria do veículo e consulte disponibilidade e condições de locação.
+      <div className="p-7">
+        <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-primary">{vehicle.brand}</p>
+        <div className="mt-2 flex items-end justify-between gap-4">
+          <h3 className="font-display text-2xl font-bold tracking-tight">{vehicle.model}</h3>
+          <ArrowRight className="h-5 w-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+        </div>
+        <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">
+          Consulte disponibilidade e condições atuais para locação.
         </p>
 
         <a
           href={whatsappUrl(company.whatsapp, message)}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-auto inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95"
+          className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 font-bold text-primary-foreground shadow-lg shadow-primary/20 transition hover:brightness-95"
         >
           Consultar disponibilidade
         </a>
