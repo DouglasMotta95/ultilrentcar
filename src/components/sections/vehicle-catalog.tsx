@@ -1,11 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { getVehicles } from "@/lib/leads.functions";
 import { VehicleCard } from "./vehicle-card";
-import { useServerFn } from "@tanstack/react-start";
 
 export function VehicleCatalog() {
   const getVehiclesFn = useServerFn(getVehicles);
-  
+
   const { data: vehicles } = useSuspenseQuery({
     queryKey: ["vehicles"],
     queryFn: () => getVehiclesFn(),
@@ -13,14 +13,14 @@ export function VehicleCatalog() {
 
   if (!vehicles || vehicles.length === 0) {
     return (
-      <div className="text-center py-12 text-muted-foreground">
+      <div className="rounded-[2rem] border border-dashed border-border bg-secondary/50 py-16 text-center text-muted-foreground">
         Nenhum veículo disponível no momento.
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-7 lg:grid-cols-2">
       {vehicles.map((vehicle) => (
         <VehicleCard key={vehicle.id} vehicle={vehicle} />
       ))}
