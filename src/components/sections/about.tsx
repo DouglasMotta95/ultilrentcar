@@ -8,33 +8,49 @@ const highlights = [
 
 export function About() {
   return (
-    <section id="quem-somos" className="py-20 md:py-28">
+    <section id="quem-somos" className="section-section bg-surface">
       <div className="container mx-auto px-4">
-        <span className="eyebrow">Quem somos</span>
-        <h2 className="mt-6 max-w-3xl font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-          Uma locadora focada na rotina de quem vive do volante
-        </h2>
-        <div className="mt-6 max-w-4xl space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          <p>
-            A UTIL LOCADORA atende motoristas de aplicativo em Itu e região com veículos novos, bem cuidados e atendimento direto para quem depende do carro todos os dias.
-          </p>
-          <p>
-            A frota publicada no site é administrada pela própria locadora. Assim, modelos, fotos, valores e disponibilidade podem ser mantidos atualizados sem alterar o código.
-          </p>
-        </div>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
+          <div>
+            <span className="eyebrow">Quem somos</span>
+            <p className="mt-7 font-display text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+              Locação pensada para quem transforma o carro em ferramenta de trabalho.
+            </p>
+          </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {highlights.map((item) => (
-            <div key={item} className="flex items-center gap-3">
-              <Check className="h-5 w-5 shrink-0 text-primary" />
-              <span className="text-base text-foreground">{item}</span>
+          <div>
+            <h2 className="max-w-4xl font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.035em] sm:text-4xl lg:text-5xl">
+              Uma estrutura simples para você escolher, cadastrar e começar a rodar.
+            </h2>
+            <div className="mt-7 max-w-3xl space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
+              <p>
+                A UTIL LOCADORA atende motoristas de aplicativo em Itu e região com uma apresentação clara da frota e atendimento direto para consultar disponibilidade, valores e condições.
+              </p>
+              <p>
+                A ideia é facilitar sua decisão: você conhece o modelo, entende as condições e faz o cadastro sem precisar navegar por uma página cheia de informação desnecessária.
+              </p>
             </div>
-          ))}
-        </div>
 
-        <a href="#frota" className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-bold text-primary-foreground shadow-lg shadow-primary/25 transition hover:brightness-95">
-          Conhecer a frota <ArrowRight className="h-4 w-4" />
-        </a>
+            <div className="mt-8 grid gap-4 border-t border-border pt-7 sm:grid-cols-3">
+              {highlights.map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
+                    <Check className="h-4 w-4" />
+                  </span>
+                  <span className="text-sm font-semibold leading-6 text-foreground">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="#frota"
+              className="mt-9 inline-flex items-center gap-2 font-bold text-primary transition hover:gap-3"
+            >
+              Conhecer a frota
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
