@@ -103,7 +103,11 @@ const publishedFleet = [
     model: "Polo Track",
     body_type: "Hatch",
     gallery_images: [
-      "https://assets.volkswagen.com/is/image/volkswagenag/Polo-Track-IPI-ZERO?Zm10PXBuZy1hbHBoYSZ3aWQ9MjQwMCZiZmM9b2ZmJjBhZmM=%3D",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36482.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36481.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36479.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36478.webp",
+      "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36480.webp",
     ],
     match: (value: string) => value.includes("polo"),
   },
@@ -113,11 +117,11 @@ const publishedFleet = [
     model: "HB20 Hatch",
     body_type: "Hatch",
     gallery_images: [
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
-      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_lateral.webp",
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_traseira.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_lateral.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_grade.webp",
-      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_paineldigital.webp",
+      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_arcondicionado.webp",
     ],
     match: (value: string) =>
       value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
@@ -128,11 +132,11 @@ const publishedFleet = [
     model: "HB20 Sedan (HB20S)",
     body_type: "Sedã",
     gallery_images: [
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_lateral.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_traseira.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_lateral.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_grade.webp",
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/internas/thumb/interna_paineldigital_330x330.webp",
+      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/internas/thumb/interna_arcondicionado_330x330.webp",
     ],
     match: (value: string) =>
       value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
@@ -144,16 +148,16 @@ const publishedFleet = [
     body_type: "Sedã",
     gallery_images: [
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/mh/mh-desk.jpeg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-1.jpg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus.jpg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/accesories/accesories-main/acessorios-todas-as-categorias-onix-plus-2.jpg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh/design/1/design-interior.jpg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-01.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-02.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-03.jpeg?imwidth=2400",
+      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/design/1/design-interior.jpg?imwidth=2400",
     ],
     match: (value: string) => value.includes("onix"),
   },
 ] as const;
 
-function normalizeVehicleName(vehicle: any) {
+function normalizeVehicleNamefunction normalizeVehicleName(vehicle: any) {
   return `${vehicle?.brand ?? ""} ${vehicle?.model ?? ""}`.toLocaleLowerCase("pt-BR");
 }
 
