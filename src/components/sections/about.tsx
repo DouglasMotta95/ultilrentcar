@@ -2,8 +2,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 const highlights = [
   "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan",
-  "Veículos revisados antes da entrega",
-  "Condições de seguro e manutenção informadas no contrato",
+  "Condições de locação apresentadas antes da contratação",
   "Atendimento direto com a locadora",
 ];
 
