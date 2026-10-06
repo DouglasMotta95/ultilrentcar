@@ -60,7 +60,7 @@ const leadSchema = z.object({
 export const submitLead = createServerFn({ method: "POST" })
   .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
-    const insertData: LeadInsert = {
+    const insertData: any = {
       full_name: data.full_name,
       cpf: data.cpf,
       birth_date: data.birth_date,
@@ -164,7 +164,7 @@ function normalizeVehicleNamefunction normalizeVehicleName(vehicle: any) {
 export type LeadFormData = z.infer<typeof leadSchema>;
 
 export async function submitLeadDirect(data: LeadFormData) {
-  const baseData: Record<string, unknown> = {
+  const baseData: any = {
     full_name: data.full_name.trim(),
     cpf: data.cpf,
     birth_date: data.birth_date,
