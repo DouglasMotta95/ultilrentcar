@@ -26,6 +26,7 @@ const services = [
       "As condições de cobertura, assistência e responsabilidades são apresentadas de forma clara antes da contratação.",
   },
   {
+    icon: Car,
     title: "Veículos para trabalhar",
     description:
       "Modelos selecionados para a rotina de quem trabalha com aplicativos, conforme disponibilidade.",
