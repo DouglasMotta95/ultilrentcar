@@ -157,7 +157,7 @@ const publishedFleet = [
   },
 ] as const;
 
-function normalizeVehicleNamefunction normalizeVehicleName(vehicle: any) {
+function normalizeVehicleName(vehicle: any) {
   return `${vehicle?.brand ?? ""} ${vehicle?.model ?? ""}`.toLocaleLowerCase("pt-BR");
 }
 
