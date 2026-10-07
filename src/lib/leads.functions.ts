@@ -252,18 +252,9 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
     }
   }
 
-  // Depois reaproveita os demais registros apenas para preservar os preços
-  // existentes, sem deixar a frota pública desaparecer.
-  for (const target of publishedFleet) {
-    if (assigned.has(target.key)) continue;
-
-    const source = rows.find((vehicle: any) => !usedIds.has(String(vehicle.id)));
-    if (source) {
-      assigned.set(target.key, source);
-      usedIds.add(String(source.id));
-    }
-  }
-
+  // Nunca reutilizamos um veículo de outro modelo para preencher uma vaga.
+  // Quando o registro correto não existe, o alvo publicado usa apenas os dados
+  // oficiais/fallback definidos acima.
   return publishedFleet.map((target, index) => {
     const source = assigned.get(target.key);
 
