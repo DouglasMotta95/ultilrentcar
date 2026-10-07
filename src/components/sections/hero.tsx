@@ -2,6 +2,9 @@ import { ArrowDown, ArrowRight, MessageCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
+const fallbackHeroImage =
+  "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_traseira.webp";
+
 export function Hero() {
   const { data: company } = useCompanyInfo();
 
@@ -73,10 +76,10 @@ export function Hero() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2.5rem] bg-primary/10 blur-3xl" aria-hidden="true" />
             <div className="relative overflow-hidden rounded-[2.25rem] border border-border bg-secondary shadow-2xl">
-              {company.hero_image_url ? (
+              {company.hero_image_url || fallbackHeroImage ? (
                 <img
-                  src={company.hero_image_url}
-                  alt="Frota de veículos da UTIL LOCADORA"
+                  src={company.hero_image_url || fallbackHeroImage}
+                  alt="Veículo da frota da UTIL LOCADORA"
                   fetchPriority="high"
                   decoding="async"
                   sizes="(min-width: 1024px) 55vw, 100vw"
