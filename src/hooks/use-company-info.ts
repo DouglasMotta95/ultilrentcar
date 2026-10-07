@@ -35,7 +35,7 @@ export const fallbackCompanyInfo: CompanyInfo = {
   facebook_url: null,
   logo_url: null,
   hero_image_url: null,
-  hero_title: "LOCAÇÃO DE CARROS PARA APLICATIVOS",
+  hero_title: "LOCAÇÃO DE VEÍCULOS PARA MOTORISTAS DE APLICATIVOS",
   hero_subtitle: "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para a rotina de quem trabalha com aplicativos.",
   weekly_price_from: 700,
   map_embed_url: null,
