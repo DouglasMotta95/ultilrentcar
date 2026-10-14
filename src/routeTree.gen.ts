@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as FrotaVehicleIdRouteImport } from './routes/frota.$vehicleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const PrivacidadeRoute = PrivacidadeRouteImport.update({
   path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrotaVehicleIdRoute = FrotaVehicleIdRouteImport.update({
+  id: '/frota/$vehicleId',
+  path: '/frota/$vehicleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/frota/$vehicleId': typeof FrotaVehicleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/frota/$vehicleId': typeof FrotaVehicleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/frota/$vehicleId': typeof FrotaVehicleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/cadastro' | '/privacidade'
+  fullPaths: '/' | '/admin' | '/cadastro' | '/privacidade' | '/frota/$vehicleId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/cadastro' | '/privacidade'
-  id: '__root__' | '/' | '/admin' | '/cadastro' | '/privacidade'
+  to: '/' | '/admin' | '/cadastro' | '/privacidade' | '/frota/$vehicleId'
+  id: '__root__' | '/' | '/admin' | '/cadastro' | '/privacidade' | '/frota/$vehicleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   CadastroRoute: typeof CadastroRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  FrotaVehicleIdRoute: typeof FrotaVehicleIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/frota/$vehicleId': {
+      id: '/frota/$vehicleId'
+      path: '/frota/$vehicleId'
+      fullPath: '/frota/$vehicleId'
+      preLoaderRoute: typeof FrotaVehicleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   CadastroRoute: CadastroRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  FrotaVehicleIdRoute: FrotaVehicleIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
