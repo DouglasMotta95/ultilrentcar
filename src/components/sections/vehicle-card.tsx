@@ -34,9 +34,14 @@ const isExteriorPhoto = (url: string) =>
 function preferredPhotos(vehicle: Vehicle): string[] {
   const model = `${vehicle.brand} ${vehicle.model}`.toLocaleLowerCase("pt-BR");
   if (model.includes("polo")) return poloTrackPhotos;
-  if (model.includes("hb20s") || model.includes("sedan") || model.includes("sedã")) return hb20SedanPhotos;
-  if (model.includes("hb20")) return hb20HatchPhotos;
   if (model.includes("onix")) return onixPlusPhotos;
+  if (
+    model.includes("hb20s") ||
+    (model.includes("hb20") && (model.includes("sedan") || model.includes("sedã")))
+  ) {
+    return hb20SedanPhotos;
+  }
+  if (model.includes("hb20")) return hb20HatchPhotos;
   return [];
 }
 
