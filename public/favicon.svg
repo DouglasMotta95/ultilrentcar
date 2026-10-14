@@ -1,5 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
-  <title id="title">UTIL Locadora</title>
-  <circle cx="32" cy="32" r="29" fill="#ffffff" stroke="#0ea5e9" stroke-width="5"/>
-  <text x="9" y="41" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" fill="#0ea5e9">UTIL</text>
+  <title id="title">UTIL Rent a Car</title>
+  <defs><linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#08b8f0"/><stop offset="1" stop-color="#0755b8"/></linearGradient></defs>
+  <path d="M7 24C20 4 46 4 58 20C43 10 26 12 18 24Z" fill="#292b31"/>
+  <text x="7" y="39" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="900" letter-spacing="-2" fill="url(#blue)">UTIL</text>
+  <path d="M8 44C22 59 44 59 58 44H49C38 52 23 52 14 44Z" fill="url(#blue)"/>
 </svg>
