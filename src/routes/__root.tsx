@@ -41,7 +41,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#0891b2" },
+      { name: "theme-color", content: "#0755b8" },
       { name: "color-scheme", content: "light" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
@@ -50,7 +50,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "UTIL LOCADORA" },
       { name: "robots", content: "index,follow,max-image-preview:large" },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "UTIL LOCADORA" },
+      { property: "og:site_name", content: "UTIL Rent a Car" },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:image", content: "https://utilrentcar.com.br/logo-util-rent.svg" },
       { name: "twitter:card", content: "summary_large_image" },
