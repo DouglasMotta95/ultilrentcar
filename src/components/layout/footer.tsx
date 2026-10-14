@@ -17,7 +17,7 @@ export function Footer() {
   const location = company.address || [company.city, company.state].filter(Boolean).join(" — ");
 
   return (
-    <footer className="bg-ink text-ink-foreground">
+    <footer id="rodape" className="bg-ink text-ink-foreground">
       <div className="container mx-auto max-w-[1320px] px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div className="grid gap-10 border-b border-ink-foreground/10 pb-10 md:grid-cols-[1.15fr_0.8fr_1fr] md:gap-8 lg:gap-14">
           <div>
