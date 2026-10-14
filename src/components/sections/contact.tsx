@@ -13,9 +13,14 @@ export function Contact() {
     company.hours ? { icon: Clock, label: company.hours, href: null } : null,
   ].filter(Boolean) as Array<{ icon: typeof Phone; label: string; href: string | null }>;
 
-  const defaultMap = company.city
-    ? `https://www.google.com/maps?q=${encodeURIComponent([company.address, company.city, company.state, "Brasil"].filter(Boolean).join(", "))}&output=embed`
-    : null;
+  // Só incorporamos um mapa quando houver endereço exato ou URL de mapa
+  // cadastrada. Exibir apenas "Itu - SP" no mapa poderia sugerir um endereço incorreto.
+  const defaultMap =
+    company.address?.trim() && company.city
+      ? `https://www.google.com/maps?q=${encodeURIComponent(
+          [company.address, company.city, company.state, "Brasil"].filter(Boolean).join(", "),
+        )}&output=embed`
+      : null;
   const mapUrl = company.map_embed_url || defaultMap;
 
   return (
@@ -87,15 +92,39 @@ export function Contact() {
               </p>
             </div>
 
-            {mapUrl && (
+            {mapUrl ? (
               <div className="mt-9 overflow-hidden rounded-[2rem] border border-border bg-card shadow-lg">
                 <iframe
-                  title="Localização da UTIL LOCADORA"
+                  title="Localização da UTIL Rent a Car"
                   src={mapUrl}
                   loading="lazy"
                   className="h-[300px] w-full border-0 md:h-[390px]"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
+              </div>
+            ) : (
+              <div className="mt-9 flex min-h-[300px] flex-col justify-center rounded-[2rem] border border-border bg-white p-7 shadow-lg md:min-h-[390px] md:p-10">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 text-primary">
+                  <MapPin className="h-6 w-6" />
+                </span>
+                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.16em] text-sky-700">
+                  Área de atendimento
+                </p>
+                <h4 className="mt-3 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  Itu e região
+                </h4>
+                <p className="mt-3 max-w-lg leading-7 text-muted-foreground">
+                  Consulte a equipe para confirmar o endereço de atendimento, a disponibilidade e o local de retirada do veículo.
+                </p>
+                <a
+                  href={whatsappUrl(company.whatsapp, "Olá! Poderia me informar o endereço de atendimento e o local de retirada dos veículos?")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-bold text-primary-foreground transition hover:brightness-95"
+                >
+                  Consultar endereço
+                  <ArrowRight className="h-4 w-4" />
+                </a>
               </div>
             )}
           </div>
