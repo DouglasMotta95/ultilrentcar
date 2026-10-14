@@ -1,7 +1,8 @@
 import { useCompanyInfo } from "@/hooks/use-company-info";
 
 const nav = [
-  { href: "/#quem-somos", label: "Quem somos" },
+  { href: "/#inicio", label: "Início" },
+  { href: "/#quem-somos", label: "Sobre" },
   { href: "/#servicos", label: "Serviços" },
   { href: "/#frota", label: "Frota" },
   { href: "/#como-funciona", label: "Como funciona" },
@@ -16,11 +17,13 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
-            <img
-              src="/logo-util-rent.svg"
-              alt="UTIL rent a car — Locadora de veículos"
-              className="h-[96px] w-[117px] object-contain object-left brightness-0 invert sm:h-[112px] sm:w-[136px]"
-            />
+            <div className="inline-flex rounded-2xl bg-white px-2 py-1.5">
+              <img
+                src="/logo-util-rent.svg"
+                alt="UTIL Rent a Car — Locadora de veículos"
+                className="h-[86px] w-[106px] object-contain object-left sm:h-[98px] sm:w-[120px]"
+              />
+            </div>
             <p className="mt-5 max-w-sm leading-7 text-white/55">
               Locação de veículos para motoristas de aplicativo em Itu e região.
             </p>
