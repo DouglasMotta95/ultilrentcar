@@ -62,7 +62,7 @@ function Home() {
     name: "UTIL Rent a Car",
     url: "https://utilrentcar.com.br/",
     telephone: "+55 11 94722-9449",
-    email: "utillocadora@gmail.com",
+    email: "comercial@utilrentcar.com.br",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Itu",
