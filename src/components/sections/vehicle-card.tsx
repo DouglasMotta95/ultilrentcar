@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Car } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
-import onixImage from "@/assets/util-hero.jpg.asset.json";
+import onixImage from "@/assets/util-onix.jpg.asset.json";
 
 type Vehicle = Pick<Database["public"]["Tables"]["vehicles"]["Row"], "brand" | "model" | "image_url"> & {
   id?: string;
@@ -23,9 +23,11 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
       ? extra.gallery_images.filter((url): url is string =>
           typeof url === "string" && Boolean(url.trim()) && isExteriorPhoto(url))
       : [];
+    // Para o HB20, prefere a vista externa 360° à miniatura de traseira/lateral.
+    const frontThreeQuarter = gallery.find((url) => /veiculo\/360\/externo/i.test(url));
     const directImage = vehicle.image_url && isExteriorPhoto(vehicle.image_url) ? [vehicle.image_url] : [];
     const onixFallback = /onix/i.test(vehicle.model) ? [onixImage.url] : [];
-    return Array.from(new Set([...gallery, ...directImage, ...onixFallback]));
+    return Array.from(new Set([...(frontThreeQuarter ? [frontThreeQuarter] : []), ...gallery, ...directImage, ...onixFallback]));
   }, [extra.gallery_images, vehicle.image_url, vehicle.model]);
 
   useEffect(() => {
