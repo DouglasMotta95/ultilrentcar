@@ -28,7 +28,7 @@ export function Hero() {
         <span className="absolute bottom-3 right-4 rounded-full bg-background/90 px-3 py-1 text-[10px] text-foreground">Imagem ilustrativa</span>
       </div>
       <div className="border-b border-border bg-surface"><div className="container mx-auto flex flex-wrap items-center justify-between gap-3 py-4 text-xs font-semibold text-muted-foreground sm:text-sm">
-        <span className="inline-flex items-center gap-2"><Car className="h-4 w-4 text-primary" />Polo Track · HB20 · Onix Sedan</span>
+        <span className="inline-flex items-center gap-2"><Car className="h-4 w-4 text-primary" />Polo Track · HB20 Hatch · HB20 Sedan · Onix Plus</span>
         <a href="#frota" className="inline-flex items-center gap-2 text-primary">Conheça nossa frota <ArrowRight className="h-4 w-4" /></a>
       </div></div>
     </section>
