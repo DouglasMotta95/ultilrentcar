@@ -121,7 +121,6 @@ const publishedFleet = [
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_lateral.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/features/thumb/design_grade.webp",
-      "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_arcondicionado.webp",
     ],
     match: (value: string) =>
       value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
@@ -136,7 +135,6 @@ const publishedFleet = [
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_lateral.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
       "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/features/thumb/design_grade.webp",
-      "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/design/internas/thumb/interna_arcondicionado_330x330.webp",
     ],
     match: (value: string) =>
       value.includes("hb20s") || (value.includes("hb20") && value.includes("sedan")),
@@ -151,7 +149,6 @@ const publishedFleet = [
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-01.jpeg?imwidth=2400",
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-02.jpeg?imwidth=2400",
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-03.jpeg?imwidth=2400",
-      "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/design/1/design-interior.jpg?imwidth=2400",
     ],
     match: (value: string) => value.includes("onix"),
   },
@@ -259,9 +256,13 @@ export const getVehicles = createServerFn({ method: "GET" }).handler(async () =>
     const source = assigned.get(target.key);
 
     const sourceMatchesModel = source ? target.match(normalizeVehicleName(source)) : false;
+    // Exibimos somente fotos externas para não sugerir equipamentos internos
+    // (como central multimídia) que podem variar conforme o veículo entregue.
+    const isExteriorPhoto = (url: string) =>
+      !/(interior|interna|interior|painel|dashboard|cockpit)/i.test(url);
     const managedGallery =
       sourceMatchesModel && Array.isArray(source?.gallery_images)
-        ? source.gallery_images.filter(Boolean)
+        ? source.gallery_images.filter((url: string) => Boolean(url) && isExteriorPhoto(url))
         : [];
     const gallery = managedGallery.length > 0 ? managedGallery : [...target.gallery_images];
 
