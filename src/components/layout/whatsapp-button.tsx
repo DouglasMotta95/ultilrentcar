@@ -9,7 +9,7 @@ export function WhatsappButton() {
       href={whatsappUrl(company.whatsapp)}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Falar com a UTIL LOCADORA no WhatsApp"
+      aria-label="Falar com a UTIL Rent a Car no WhatsApp"
       className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl transition hover:scale-105 hover:bg-emerald-600"
     >
       <MessageCircle className="h-7 w-7" />
