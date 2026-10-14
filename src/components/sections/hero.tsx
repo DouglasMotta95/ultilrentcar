@@ -22,20 +22,15 @@ export function Hero() {
                 "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para motoristas de aplicativos."}
             </p>
 
-            {company.weekly_price_from != null &&
-              Number(company.weekly_price_from) > 0 && (
-                <div className="mt-6 inline-flex items-baseline gap-2 rounded-2xl border border-border bg-background px-4 py-3 shadow-sm">
-                  <span className="text-sm font-semibold text-muted-foreground">
-                    Locação a partir de
-                  </span>
-                  <strong className="font-display text-xl font-extrabold text-foreground">
-                    R$ {Number(company.weekly_price_from).toLocaleString("pt-BR", {
-                      minimumFractionDigits: 2,
-                    })}
-                  </strong>
-                  <span className="text-sm text-muted-foreground">/ semana</span>
-                </div>
-              )}
+            <div className="mt-6 inline-flex items-baseline gap-2 rounded-2xl border border-border bg-background px-4 py-3 shadow-sm">
+              <span className="text-sm font-semibold text-muted-foreground">
+                Locação a partir de
+              </span>
+              <strong className="font-display text-xl font-extrabold text-foreground">
+                R$ 700,00
+              </strong>
+              <span className="text-sm text-muted-foreground">/ semana</span>
+            </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
