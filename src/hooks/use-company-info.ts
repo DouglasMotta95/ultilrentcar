@@ -26,7 +26,7 @@ export const fallbackCompanyInfo: CompanyInfo = {
   name: "UTIL LOCADORA",
   phone: "(11) 94722-9449",
   whatsapp: "5511947229449",
-  email: "utillocadora@gmail.com",
+  email: "comercial@utilrentcar.com.br",
   address: null,
   city: "Itu",
   state: "SP",
