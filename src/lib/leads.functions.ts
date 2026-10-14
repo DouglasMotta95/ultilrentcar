@@ -3,15 +3,13 @@ import { createServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 
-type LeadInsert = Database["public"]["Tables"]["leads"]["Insert"];
-
 function digits(value: string) {
-  return value.replace(/\\D/g, "");
+  return value.replace(/\D/g, "");
 }
 
 function isValidCpf(value: string) {
   const cpf = digits(value);
-  if (cpf.length !== 11 || /^([0-9])\\1{10}$/.test(cpf)) return false;
+  if (cpf.length !== 11 || /^([0-9])\1{10}$/.test(cpf)) return false;
   let sum = 0;
   for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
   let check = (sum * 10) % 11;
