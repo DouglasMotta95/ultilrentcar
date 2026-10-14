@@ -38,7 +38,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-        {image && !imageFailed ? (
+        {image && (!imageFailed || /onix/i.test(vehicle.model)) ? (
           <img
             src={imageFailed && /onix/i.test(vehicle.model) ? onixImage.url : image}
             alt={`${vehicle.brand} ${vehicle.model} — foto externa ilustrativa`}
