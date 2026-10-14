@@ -24,7 +24,11 @@ function isValidCpf(value: string) {
 
 function isValidPhone(value: string) {
   const phone = digits(value);
-  return phone.length === 10 || phone.length === 11;
+  const nationalPhone =
+    phone.startsWith("55") && (phone.length === 12 || phone.length === 13)
+      ? phone.slice(2)
+      : phone;
+  return nationalPhone.length === 10 || nationalPhone.length === 11;
 }
 
 function isValidCep(value: string) {
