@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Locação de veículos para motoristas de aplicativo em Itu e região. Conheça a frota da UTIL LOCADORA, consulte condições e faça seu cadastro.",
+          "Locação de veículos para motoristas de aplicativo em Itu e região. Conheça a frota da UTIL Rent a Car, consulte condições e faça seu cadastro.",
       },
       {
         name: "keywords",
