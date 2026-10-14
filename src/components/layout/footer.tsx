@@ -1,6 +1,5 @@
 import { ArrowRight, Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
-import logo from "@/assets/util-logo-original.jpg.asset.json";
 
 const nav = [
   { href: "/#inicio", label: "Início" },
@@ -22,7 +21,7 @@ export function Footer() {
         <div className="grid gap-10 border-b border-ink-foreground/10 pb-10 md:grid-cols-[1.15fr_0.8fr_1fr] md:gap-8 lg:gap-14">
           <div>
             <div className="inline-flex rounded-xl bg-white p-2 shadow-sm">
-              <img src={logo.url} alt="UTIL Rent a Car" width={1048} height={730} className="h-[68px] w-[100px] object-contain sm:h-[74px] sm:w-[110px]" />
+              <img src="/logo-util-rent.svg" alt="UTIL Rent a Car" width={1048} height={730} className="h-[76px] w-[142px] object-contain sm:h-[84px] sm:w-[158px]" />
             </div>
             <p className="mt-5 max-w-sm text-sm leading-7 text-ink-foreground/70">
               Locação de veículos para motoristas de aplicativo em Itu e região.
@@ -34,7 +33,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-foreground/85">Navegação</h3>
-            <nav aria-label="Links do rodapé" className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 md:grid-cols-1">
+            <nav aria-label="Links do rodapé" className="mt-5 grid grid-cols-2 gap-x-5 gap-y-3">
               {nav.map((link) => (
                 <a key={link.href} href={link.href} className="text-sm font-medium text-ink-foreground/65 transition hover:text-white">
                   {link.label}
