@@ -7,7 +7,6 @@ import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { Services } from "@/components/sections/services";
 import { HowItWorks } from "@/components/sections/how-it-works";
-import { Benefits } from "@/components/sections/benefits";
 import { VehicleCatalog } from "@/components/sections/vehicle-catalog";
 import { Faq } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
@@ -83,8 +82,6 @@ function Home() {
       />
       <Navbar />
       <Hero />
-      <About />
-      <Services />
 
       <section id="frota" className="section-section scroll-mt-24 bg-background">
         <div className="container mx-auto px-4">
@@ -114,8 +111,9 @@ function Home() {
         </div>
       </section>
 
+      <About />
+      <Services />
       <HowItWorks />
-      <Benefits />
       <Faq />
       <Contact />
       <Footer />
