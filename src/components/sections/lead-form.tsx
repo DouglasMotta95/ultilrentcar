@@ -137,7 +137,7 @@ export function LeadForm() {
         toast.success("Cadastro registrado e notificação enviada para a equipe da UTIL Rent a Car.");
         navigate({ to: "/" });
       } else {
-        toast.warning("Seu cadastro foi registrado, mas o aviso por e-mail está pendente de configuração. Não envie novamente; confirme o recebimento pelo WhatsApp da locadora.");
+        toast.warning("Seu cadastro foi registrado, mas não conseguimos enviar o aviso por e-mail. Não envie novamente; confirme o recebimento pelo WhatsApp da locadora.");
         navigate({ to: "/" });
       }
     } catch (error) {
