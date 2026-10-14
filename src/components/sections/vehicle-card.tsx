@@ -1,14 +1,14 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Car } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
 type Vehicle = Database["public"]["Tables"]["vehicles"]["Row"];
 
-// O filtro é puro e fica fora do componente para evitar dependências instáveis
-// no useMemo e impedir o uso de fotos internas identificáveis pelo nome do arquivo.
+// Não mostramos imagens que aparentam ser de interiores ou equipamentos específicos,
+// porque a versão efetivamente alugada pode ser diferente da foto de referência.
 const isExteriorPhoto = (url: string) =>
-  !/(interior|interna|internas|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(url);
+  !/(interior|intern[oa]s?|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(url);
 
 export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const extra = vehicle as Vehicle & {
@@ -16,32 +16,39 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
     gallery_images?: string[] | null;
   };
   const { data: company } = useCompanyInfo();
-  const [imageFailed, setImageFailed] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
 
-  const image = useMemo(() => {
+  const images = useMemo(() => {
     const gallery = Array.isArray(extra.gallery_images)
       ? extra.gallery_images.filter(
-          (url): url is string => typeof url === "string" && Boolean(url) && isExteriorPhoto(url),
+          (url): url is string =>
+            typeof url === "string" && Boolean(url.trim()) && isExteriorPhoto(url),
         )
       : [];
     const directImage =
-      vehicle.image_url && isExteriorPhoto(vehicle.image_url) ? vehicle.image_url : null;
-    return gallery[0] || directImage || null;
+      vehicle.image_url && isExteriorPhoto(vehicle.image_url) ? [vehicle.image_url] : [];
+    return Array.from(new Set([...gallery, ...directImage]));
   }, [extra.gallery_images, vehicle.image_url]);
 
+  useEffect(() => {
+    setImageIndex(0);
+  }, [vehicle.id, images.length]);
+
+  const image = images[imageIndex] ?? null;
   const message = `Olá, tenho interesse no ${vehicle.brand} ${vehicle.model}. Gostaria de consultar a disponibilidade, o valor semanal e os equipamentos do veículo disponível.`;
 
   return (
     <article className="overflow-hidden rounded-[2rem] border border-border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-        {image && !imageFailed ? (
+        {image ? (
           <img
+            key={image}
             src={image}
             alt={`${vehicle.brand} ${vehicle.model} — foto externa ilustrativa`}
             loading="lazy"
             decoding="async"
             className="h-full w-full object-cover"
-            onError={() => setImageFailed(true)}
+            onError={() => setImageIndex((current) => Math.min(current + 1, images.length))}
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted-foreground">
