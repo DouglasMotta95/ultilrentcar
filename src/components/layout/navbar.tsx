@@ -4,8 +4,8 @@ import { Link } from "@tanstack/react-router";
 
 const links = [
   { href: "/#quem-somos", label: "Sobre" },
-  { href: "/#frota", label: "Frota" },
   { href: "/#servicos", label: "Serviços" },
+  { href: "/#frota", label: "Frota" },
   { href: "/#contato", label: "Contato" },
 ];
 
