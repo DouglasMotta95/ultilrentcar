@@ -7,7 +7,6 @@ const fleetModels = ["Polo Track", "HB20 Hatch", "HB20 Sedan", "Onix Plus"];
 
 export function Hero() {
   const { data: company } = useCompanyInfo();
-  const weeklyPrice = Number(company.weekly_price_from ?? 700);
 
   return (
     <section id="inicio" className="bg-background pt-[140px] sm:pt-[150px] lg:pt-[132px]">
@@ -23,16 +22,6 @@ export function Hero() {
             <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
               Consulte os modelos disponíveis, confirme as condições e escolha o veículo para sua rotina de trabalho.
             </p>
-
-            {Number.isFinite(weeklyPrice) && weeklyPrice > 0 && (
-              <div className="mt-6 inline-flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-2xl border border-border bg-white px-5 py-3.5 shadow-sm">
-                <span className="text-sm font-semibold text-muted-foreground">A partir de</span>
-                <strong className="font-display text-2xl font-extrabold text-foreground">
-                  {weeklyPrice.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2 })}
-                </strong>
-                <span className="text-sm text-muted-foreground">/ semana</span>
-              </div>
-            )}
 
             <div className="mt-7 flex flex-wrap gap-3">
               <Button asChild className="h-12 rounded-full px-6 font-bold">
