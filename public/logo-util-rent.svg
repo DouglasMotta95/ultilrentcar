@@ -1,21 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" role="img" aria-labelledby="title desc">
   <title id="title">UTIL Rent a Car</title>
-  <desc id="desc">Logomarca UTIL Rent a Car em azul e preto, com arcos curvos envolvendo o nome.</desc>
+  <desc id="desc">Logomarca UTIL Rent a Car em azul e preto, com arcos superior e inferior.</desc>
   <defs>
-    <linearGradient id="blue" x1="0" y1="0" x2="0.9" y2="1">
+    <linearGradient id="util-blue" x1="0" y1="0" x2="0.92" y2="1">
       <stop offset="0" stop-color="#08b8f0"/>
       <stop offset="1" stop-color="#0755b8"/>
     </linearGradient>
-    <linearGradient id="black" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#292b31"/>
-      <stop offset="1" stop-color="#454750"/>
+    <linearGradient id="util-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#282a30"/>
+      <stop offset="1" stop-color="#44464e"/>
     </linearGradient>
   </defs>
-  <path d="M168 118 C315 -25 690 -24 835 102 C694 7 425 15 318 118 Z" fill="url(#black)"/>
-  <path d="M158 206 C295 350 662 350 840 210 L758 210 C615 300 349 306 221 220 Z" fill="url(#blue)"/>
-  <g fill="url(#blue)" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-stretch="condensed" letter-spacing="-12">
-    <text x="145" y="211" font-size="180">UTIL</text>
-  </g>
-  <path d="M130 298 H220 M780 298 H870" stroke="#0b9fe0" stroke-width="6" stroke-linecap="round"/>
-  <text x="500" y="315" text-anchor="middle" fill="#202127" font-family="Arial, Helvetica, sans-serif" font-size="62" font-style="italic" font-weight="900" letter-spacing="1">RENT A CAR</text>
+  <path d="M165 205 C330 -10 680 -15 842 172 C683 65 426 72 320 205 Z" fill="url(#util-dark)"/>
+  <text x="112" y="430" font-family="Arial, Helvetica, sans-serif" font-size="235" font-weight="900" letter-spacing="-12" fill="url(#util-blue)">UTIL</text>
+  <path d="M155 468 C300 652 690 665 875 472 L760 472 C610 588 355 600 222 484 Z" fill="url(#util-blue)"/>
+  <path d="M88 681 H245 M755 681 H912" stroke="#0b9fe0" stroke-width="7" stroke-linecap="round"/>
+  <text x="500" y="704" text-anchor="middle" fill="#202127" font-family="Arial, Helvetica, sans-serif" font-size="74" font-style="italic" font-weight="900" letter-spacing="0.5">RENT A CAR</text>
 </svg>
