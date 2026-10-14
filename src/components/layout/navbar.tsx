@@ -40,7 +40,7 @@ export function Navbar() {
           <img
             src="/logo-util-rent.svg"
             alt="UTIL Rent a Car"
-            className="h-[82px] w-[108px] object-contain object-left sm:h-[96px] sm:w-[126px] lg:h-[110px] lg:w-[145px]"
+            className="h-[88px] w-[132px] object-contain object-left sm:h-[102px] sm:w-[153px] lg:h-[120px] lg:w-[180px]"
           />
         </Link>
 
