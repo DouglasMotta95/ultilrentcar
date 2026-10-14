@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { Mail } from "lucide-react";
 
 export const Route = createFileRoute("/privacidade")({
   component: PrivacyPage,
