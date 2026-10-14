@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { submitLeadDirect } from "@/lib/leads.functions";
+import { submitLead } from "@/lib/leads.functions";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -124,12 +124,16 @@ export function LeadForm() {
 
   async function onSubmit(values: FormValues) {
     try {
-      await submitLeadDirect(values);
-      toast.success("Cadastro enviado com sucesso! A equipe entrará em contato.");
-      navigate({ to: "/" });
+      const result = await submitLead({ data: values });
+      if (result.emailSent) {
+        toast.success("Cadastro registrado e notificação enviada para a equipe da UTIL Rent a Car.");
+        navigate({ to: "/" });
+      } else {
+        toast.warning("Seu cadastro foi registrado, mas a notificação por e-mail não foi enviada. Não envie novamente; confirme o recebimento pelo WhatsApp da locadora.");
+      }
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Erro ao enviar cadastro. Tente novamente.";
+        error instanceof Error ? error.message : "Não foi possível registrar seu cadastro. Tente novamente.";
       toast.error(message);
     }
   }
