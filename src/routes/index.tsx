@@ -14,7 +14,7 @@ import { Contact } from "@/components/sections/contact";
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
-    title: "UTIL LOCADORA | Locação de veículos para motoristas de aplicativo",
+    title: "UTIL Rent a Car | Locação de veículos para motoristas de aplicativo",
     meta: [
       {
         name: "description",
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "UTIL LOCADORA | Locação de veículos para motoristas de aplicativo",
+        content: "UTIL Rent a Car | Locação de veículos para motoristas de aplicativo",
       },
       {
         property: "og:description",
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:title",
-        content: "UTIL LOCADORA | Locação de veículos para motoristas de aplicativo",
+        content: "UTIL Rent a Car | Locação de veículos para motoristas de aplicativo",
       },
       {
         name: "twitter:description",
@@ -59,7 +59,7 @@ function Home() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "AutoRental",
-    name: "UTIL LOCADORA",
+    name: "UTIL Rent a Car",
     url: "https://utilrentcar.com.br/",
     telephone: "+55 11 94722-9449",
     email: "utillocadora@gmail.com",
@@ -82,6 +82,8 @@ function Home() {
       />
       <Navbar />
       <Hero />
+      <About />
+      <Services />
 
       <section id="frota" className="section-section scroll-mt-24 bg-background">
         <div className="container mx-auto px-4">
@@ -111,8 +113,6 @@ function Home() {
         </div>
       </section>
 
-      <About />
-      <Services />
       <HowItWorks />
       <Faq />
       <Contact />
