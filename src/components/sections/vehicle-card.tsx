@@ -35,6 +35,7 @@ const hb20SedanPhotos = [
 ];
 
 const onixPlusPhotos = [
+  "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh/versiones/mt-turbo.png?imwidth=1200",
   onixImage.url,
   "https://chevroletorca.com.br/uploads/products/versions/colors/onixplus-at-branco-summit-1.png",
   "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-01.jpeg?imwidth=2400",
