@@ -22,7 +22,8 @@ export function Contact() {
         )}&output=embed`
       : null;
   const hasExactAddress = Boolean(company.address?.trim() && company.city?.trim());
-  const mapUrl = hasExactAddress ? company.map_embed_url || defaultMap : null;
+  // Prioriza o endereço confirmado para não reutilizar um mapa antigo que só aponta para a cidade.
+  const mapUrl = hasExactAddress ? defaultMap : null;
 
   return (
     <section id="contato" className="section-section bg-surface">
