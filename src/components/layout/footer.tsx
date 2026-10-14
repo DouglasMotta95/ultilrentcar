@@ -17,7 +17,7 @@ export function Footer() {
         <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
             <img
-              src="/logo-util-rent.svg"
+              src={company.logo_url || "/logo-util-rent.svg"}
               alt="UTIL rent a car — Locadora de veículos"
               className="h-12 w-auto max-w-[240px] object-contain object-left brightness-0 invert"
             />

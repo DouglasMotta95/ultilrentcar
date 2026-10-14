@@ -6,12 +6,12 @@ import type { Database } from "@/integrations/supabase/types";
 type LeadInsert = Database["public"]["Tables"]["leads"]["Insert"];
 
 function digits(value: string) {
-  return value.replace(/\\D/g, "");
+  return value.replace(/\D/g, "");
 }
 
 function isValidCpf(value: string) {
   const cpf = digits(value);
-  if (cpf.length !== 11 || /^([0-9])\\1{10}$/.test(cpf)) return false;
+  if (cpf.length !== 11 || /^([0-9])\1{10}$/.test(cpf)) return false;
   let sum = 0;
   for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
   let check = (sum * 10) % 11;
@@ -62,12 +62,12 @@ export const submitLead = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const insertData: any = {
       full_name: data.full_name,
-      cpf: data.cpf,
+      cpf: digits(data.cpf),
       birth_date: data.birth_date,
-      cellphone: data.cellphone,
-      landline: data.landline || null,
+      cellphone: digits(data.cellphone),
+      landline: data.landline ? digits(data.landline) : null,
       email: data.email,
-      cep: data.cep,
+      cep: digits(data.cep),
       street: data.street,
       number: data.number,
       complement: data.complement || null,
@@ -78,8 +78,8 @@ export const submitLead = createServerFn({ method: "POST" })
       platform: data.platform,
       facebook: data.facebook || null,
       instagram: data.instagram || null,
-      ref_phone_1: data.ref_phone_1,
-      ref_phone_2: data.ref_phone_2,
+      ref_phone_1: digits(data.ref_phone_1),
+      ref_phone_2: digits(data.ref_phone_2),
       vehicle_interest: data.vehicle_interest || null,
       status: "em_analise",
       privacy_consent_at: new Date().toISOString(),
@@ -109,7 +109,7 @@ const publishedFleet = [
       "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36478.webp",
       "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36480.webp",
     ],
-    match: (value: string) => value.includes("polo"),
+    match: (value: string) => value.includes("polo track"),
   },
   {
     key: "hb20-hatch",
@@ -124,7 +124,7 @@ const publishedFleet = [
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_arcondicionado.webp",
     ],
     match: (value: string) =>
-      value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
+      value.includes("hb20") && value.includes("hatch") && !value.includes("hb20s") && !value.includes("sedan"),
   },
   {
     key: "hb20-sedan",
@@ -153,7 +153,7 @@ const publishedFleet = [
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-03.jpeg?imwidth=2400",
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/design/1/design-interior.jpg?imwidth=2400",
     ],
-    match: (value: string) => value.includes("onix"),
+    match: (value: string) => value.includes("onix plus") || value.includes("onix sedan"),
   },
 ] as const;
 
@@ -166,12 +166,12 @@ export type LeadFormData = z.infer<typeof leadSchema>;
 export async function submitLeadDirect(data: LeadFormData) {
   const baseData: any = {
     full_name: data.full_name.trim(),
-    cpf: data.cpf,
+    cpf: digits(data.cpf),
     birth_date: data.birth_date,
-    cellphone: data.cellphone,
-    landline: data.landline || null,
+    cellphone: digits(data.cellphone),
+    landline: data.landline ? digits(data.landline) : null,
     email: data.email.trim(),
-    cep: data.cep,
+    cep: digits(data.cep),
     street: data.street.trim(),
     number: data.number.trim(),
     complement: data.complement?.trim() || null,
@@ -182,8 +182,8 @@ export async function submitLeadDirect(data: LeadFormData) {
     platform: data.platform,
     facebook: data.facebook?.trim() || null,
     instagram: data.instagram?.trim() || null,
-    ref_phone_1: data.ref_phone_1,
-    ref_phone_2: data.ref_phone_2,
+    ref_phone_1: digits(data.ref_phone_1),
+    ref_phone_2: digits(data.ref_phone_2),
     vehicle_interest: data.vehicle_interest || null,
     status: "em_analise",
   };

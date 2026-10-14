@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useCompanyInfo } from "@/hooks/use-company-info";
 
 const links = [
   { href: "/#quem-somos", label: "Quem somos" },
@@ -11,6 +12,7 @@ const links = [
 ];
 
 export function Navbar() {
+  const { data: company } = useCompanyInfo();
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -36,7 +38,7 @@ export function Navbar() {
           className="min-w-0 shrink-0"
         >
           <img
-            src="/logo-util-rent.svg"
+            src={company.logo_url || "/logo-util-rent.svg"}
             alt="UTIL rent a car — Locadora de veículos"
             className="h-10 w-auto max-w-[235px] object-contain object-left sm:h-12 sm:max-w-[285px]"
           />
