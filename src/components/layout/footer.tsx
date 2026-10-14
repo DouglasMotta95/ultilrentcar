@@ -77,7 +77,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-3 pt-7 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 {company.name}. Todos os direitos reservados.</p>
+          <p>© 2026 UTIL Rent a Car. Todos os direitos reservados.</p>
           <p>Locação sujeita a análise e às condições vigentes.</p>
         </div>
       </div>
