@@ -5,10 +5,40 @@ import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
 type Vehicle = Database["public"]["Tables"]["vehicles"]["Row"];
 
-// Não mostramos imagens que aparentam ser de interiores ou equipamentos específicos,
-// porque a versão efetivamente alugada pode ser diferente da foto de referência.
+// Fotos externas em vista dianteira de três-quartos, priorizando o carro inteiro
+// e um enquadramento de catálogo semelhante ao usado no Polo Track.
+const poloTrackPhotos = [
+  "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36482.webp",
+  "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36481.webp",
+  "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36479.webp",
+];
+
+const hb20HatchPhotos = [
+  "https://cloudfront.alpes.one/public/68d/ebb/7ff/68debb7ff3179468652627.webp",
+  "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/veiculo/360/externo/hb20_cinza_shadow_01.webp",
+];
+
+const hb20SedanPhotos = [
+  "https://production.autoforce.com/uploads/version/profile_image/12809/model_main_webp_comprar-limited_99e01c40a7.png.webp",
+  "https://www.hyundai.com.br/content/dam/hmb/product-page/novo-hyundai-hb20s/veiculo/360/externo_v2/hb20s_cinza_shadow_01.webp",
+];
+
+const onixPlusPhotos = [
+  "https://production.autoforce.com/uploads/version/profile_image/13256/model_main_webp_comprar-lt-at-turbo_6765fecda9.png.webp",
+  "https://www.jorlan.com.br/df/uploads/products/versions/colors/onixplus-at-branco-summit-1.png",
+];
+
 const isExteriorPhoto = (url: string) =>
   !/(interior|intern[oa]s?|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(url);
+
+function preferredPhotos(vehicle: Vehicle): string[] {
+  const model = `${vehicle.brand} ${vehicle.model}`.toLocaleLowerCase("pt-BR");
+  if (model.includes("polo")) return poloTrackPhotos;
+  if (model.includes("hb20s") || model.includes("sedan") || model.includes("sedã")) return hb20SedanPhotos;
+  if (model.includes("hb20")) return hb20HatchPhotos;
+  if (model.includes("onix")) return onixPlusPhotos;
+  return [];
+}
 
 export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const extra = vehicle as Vehicle & {
@@ -27,8 +57,9 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
       : [];
     const directImage =
       vehicle.image_url && isExteriorPhoto(vehicle.image_url) ? [vehicle.image_url] : [];
-    return Array.from(new Set([...gallery, ...directImage]));
-  }, [extra.gallery_images, vehicle.image_url]);
+    // As fotos de catálogo ficam primeiro; imagens já cadastradas continuam como reserva.
+    return Array.from(new Set([...preferredPhotos(vehicle), ...gallery, ...directImage]));
+  }, [extra.gallery_images, vehicle.image_url, vehicle.brand, vehicle.model]);
 
   useEffect(() => {
     setImageIndex(0);
@@ -39,7 +70,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 
   return (
     <article className="overflow-hidden rounded-[2rem] border border-border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
-      <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-white px-4 py-3 sm:px-5">
         {image ? (
           <img
             key={image}
@@ -47,7 +78,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             alt={`${vehicle.brand} ${vehicle.model} — foto externa ilustrativa`}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-2"
             onError={() => setImageIndex((current) => Math.min(current + 1, images.length))}
           />
         ) : (
