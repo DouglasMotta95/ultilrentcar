@@ -39,7 +39,11 @@ const validCpf = (value: string) => {
   if (check === 10) check = 0;
   return check === Number(cpf[10]);
 };
-const validPhone = (value: string) => [10, 11].includes(onlyDigits(value).length);
+const phoneDigits = (value: string) => {
+  const digits = onlyDigits(value);
+  return digits.startsWith("55") && [12, 13].includes(digits.length) ? digits.slice(2) : digits;
+};
+const validPhone = (value: string) => [10, 11].includes(phoneDigits(value).length);
 const validCep = (value: string) => onlyDigits(value).length === 8;
 
 const formSchema = z.object({
