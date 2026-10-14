@@ -21,7 +21,8 @@ export function Contact() {
           [company.address, company.city, company.state, "Brasil"].filter(Boolean).join(", "),
         )}&output=embed`
       : null;
-  const mapUrl = company.map_embed_url || defaultMap;
+  const hasExactAddress = Boolean(company.address?.trim() && company.city?.trim());
+  const mapUrl = hasExactAddress ? company.map_embed_url || defaultMap : null;
 
   return (
     <section id="contato" className="section-section bg-surface">
