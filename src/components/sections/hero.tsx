@@ -15,7 +15,7 @@ export function Hero() {
     : fallbackHeroImage;
 
   return (
-    <section id="inicio" className="relative overflow-hidden bg-white pt-28 md:pt-40">
+    <section id="inicio" className="relative overflow-hidden bg-white pt-32 md:pt-40">
       <div aria-hidden="true" className="pointer-events-none absolute -right-36 top-24 h-96 w-96 rounded-full bg-sky-100/70 blur-3xl" />
       <div className="container relative mx-auto px-4">
         <div className="grid min-h-[570px] items-center gap-12 pb-16 pt-5 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16 lg:pb-24">
