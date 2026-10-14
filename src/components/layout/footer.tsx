@@ -1,4 +1,5 @@
 import { useCompanyInfo } from "@/hooks/use-company-info";
+import logo from "@/assets/util-logo-original.jpg.asset.json";
 
 const nav = [
   { href: "/#quem-somos", label: "Quem somos" },
@@ -14,20 +15,20 @@ export function Footer() {
   return (
     <footer className="bg-ink py-14 text-ink-foreground">
       <div className="container mx-auto px-4">
-        <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_0.8fr_1fr]">
+        <div className="grid gap-10 border-b border-ink-foreground/10 pb-12 md:grid-cols-[1.2fr_0.8fr_1fr]">
           <div>
             <img
-              src="/logo-util-rent.svg"
+              src={logo.url}
               alt="UTIL rent a car — Locadora de veículos"
-              className="h-12 w-auto max-w-[240px] object-contain object-left brightness-0 invert"
+              className="h-[98px] w-[148px] rounded-md bg-background p-2 object-contain"
             />
-            <p className="mt-5 max-w-sm leading-7 text-white/55">
+            <p className="mt-5 max-w-sm leading-7 text-ink-foreground/55">
               Locação de veículos para motoristas de aplicativo em Itu e região.
             </p>
           </div>
 
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-[0.16em] text-white/75">
+            <h3 className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-foreground/75">
               Navegação
             </h3>
             <nav className="mt-5 space-y-3">
@@ -35,14 +36,14 @@ export function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-sm font-semibold text-white/55 transition hover:text-white"
+                  className="block text-sm font-semibold text-ink-foreground/55 transition hover:text-ink-foreground"
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="/privacidade"
-                className="block text-sm font-semibold text-white/55 transition hover:text-white"
+                className="block text-sm font-semibold text-ink-foreground/55 transition hover:text-ink-foreground"
               >
                 Política de Privacidade
               </a>
@@ -50,14 +51,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-[0.16em] text-white/75">
+            <h3 className="text-xs font-extrabold uppercase tracking-[0.16em] text-ink-foreground/75">
               Contato
             </h3>
-            <div className="mt-5 space-y-3 text-sm text-white/55">
+            <div className="mt-5 space-y-3 text-sm text-ink-foreground/55">
               {company.phone && (
                 <a
                   href={`tel:${company.phone.replace(/\D/g, "")}`}
-                  className="block transition hover:text-white"
+                  className="block transition hover:text-ink-foreground"
                 >
                   {company.phone}
                 </a>
@@ -65,7 +66,7 @@ export function Footer() {
               {company.email && (
                 <a
                   href={`mailto:${company.email}`}
-                  className="block break-words transition hover:text-white"
+                  className="block break-words transition hover:text-ink-foreground"
                 >
                   {company.email}
                 </a>
@@ -76,7 +77,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 pt-7 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 pt-7 text-xs text-ink-foreground/35 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 {company.name}. Todos os direitos reservados.</p>
           <p>Locação sujeita a análise e às condições vigentes.</p>
         </div>

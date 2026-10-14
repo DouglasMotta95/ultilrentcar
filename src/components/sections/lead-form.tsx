@@ -123,8 +123,9 @@ export function LeadForm() {
   }
 
   async function onSubmit(values: FormValues) {
+    if (!values.privacy_consent) return;
     try {
-      await submitLeadDirect(values);
+      await submitLeadDirect({ ...values, privacy_consent: true });
       toast.success("Cadastro enviado com sucesso! A equipe entrará em contato.");
       navigate({ to: "/" });
     } catch (error) {

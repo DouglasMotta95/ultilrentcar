@@ -1,6 +1,6 @@
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -48,7 +48,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.01 260);
 
-  --primary: oklch(0.68 0.15 231);
+  --primary: oklch(0.53 0.17 249);
   --primary-foreground: oklch(1 0 0);
 
   --secondary: oklch(0.96 0.01 240);
@@ -65,7 +65,8 @@
 
   --border: oklch(0.91 0.006 250);
   --input: oklch(0.91 0.006 250);
-  --ring: oklch(0.68 0.15 231 / 0.4);
+  --ring: oklch(0.53 0.17 249 / 0.4);
+  --shadow-soft: 0 12px 34px -22px oklch(0.25 0.03 249 / 0.24);
   --radius: 1.15rem;
 
   --ink: oklch(0.24 0.005 260);
@@ -87,6 +88,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-sans);
   }
 
   h1,
@@ -97,7 +99,7 @@
   h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 }
 
@@ -119,26 +121,33 @@
 }
 
 @utility section-section {
-  padding-top: 5.5rem;
-  padding-bottom: 5.5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 @media (min-width: 768px) {
   .section-section {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 }
 
 @utility soft-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 1.5rem;
-  box-shadow: 0 12px 34px -22px rgb(15 30 60 / 0.24);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+}
+
+.container { width: 100%; max-width: 1200px; padding-inline: 24px; }
+.hero-panorama { height: 290px; }
+@media (max-width: 639px) {
+  .container { padding-inline: 20px; }
+  .hero-panorama { height: 160px; }
 }
