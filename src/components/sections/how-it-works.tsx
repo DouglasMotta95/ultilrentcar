@@ -4,21 +4,21 @@ import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 const steps = [
   {
     n: "01",
-    icon: MessageCircle,
-    title: "Fale com a gente",
-    description: "Chame no WhatsApp e conte como você pretende utilizar o veículo.",
+    icon: Search,
+    title: "Conheça a frota",
+    description: "Veja os modelos e escolha qual deseja consultar.",
   },
   {
     n: "02",
-    icon: FileText,
-    title: "Faça seu cadastro",
-    description: "Preencha os dados para a análise inicial da sua solicitação.",
+    icon: MessageCircle,
+    title: "Confirme as condições",
+    description: "Converse no WhatsApp sobre disponibilidade, preço e equipamentos.",
   },
   {
     n: "03",
-    icon: Search,
-    title: "Escolha o veículo",
-    description: "Veja os modelos disponíveis, valores e condições antes de decidir.",
+    icon: FileText,
+    title: "Faça seu cadastro",
+    description: "Envie seus dados para a análise inicial da locadora.",
   },
   {
     n: "04",
