@@ -109,7 +109,7 @@ const publishedFleet = [
       "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36478.webp",
       "https://cdn.dealerspace.ai/dealersites/vehicles/models/volkswagen/foto730_36480.webp",
     ],
-    match: (value: string) => value.includes("polo"),
+    match: (value: string) => value.includes("polo track"),
   },
   {
     key: "hb20-hatch",
@@ -124,7 +124,7 @@ const publishedFleet = [
       "https://hyundai.com.br/content/dam/hmb/product-page/novo-hyndai-hb20/design/internas/interna_arcondicionado.webp",
     ],
     match: (value: string) =>
-      value.includes("hb20") && !value.includes("hb20s") && !value.includes("sedan"),
+      value.includes("hb20") && value.includes("hatch") && !value.includes("hb20s") && !value.includes("sedan"),
   },
   {
     key: "hb20-sedan",
@@ -153,7 +153,7 @@ const publishedFleet = [
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/gallery/abierta/galeria-03.jpeg?imwidth=2400",
       "https://www.chevrolet.com.br/content/dam/chevrolet/south-america/brazil/portuguese/index/visid/cars/onix-plus/refresh-v2/design/1/design-interior.jpg?imwidth=2400",
     ],
-    match: (value: string) => value.includes("onix"),
+    match: (value: string) => value.includes("onix plus") || value.includes("onix sedan"),
   },
 ] as const;
 
