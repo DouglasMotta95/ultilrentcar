@@ -8,7 +8,7 @@ export function Contact() {
 
   const infos = [
     company.phone ? { icon: Phone, label: company.phone, href: phoneHref } : null,
-    company.email ? { icon: Mail, label: company.email, href: `mailto:${company.email}` } : null,
+    { icon: Mail, label: "comercial@utilrentcar.com.br", href: "mailto:comercial@utilrentcar.com.br" },
     location ? { icon: MapPin, label: location, href: null } : null,
     company.hours ? { icon: Clock, label: company.hours, href: null } : null,
   ].filter(Boolean) as Array<{ icon: typeof Phone; label: string; href: string | null }>;
