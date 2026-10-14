@@ -19,7 +19,7 @@ export function Footer() {
             <img
               src="/logo-util-rent.svg"
               alt="UTIL rent a car — Locadora de veículos"
-              className="h-[82px] w-[108px] object-contain object-left brightness-0 invert sm:h-[88px] sm:w-[116px]"
+              className="h-[88px] w-[132px] object-contain object-left brightness-0 invert sm:h-[100px] sm:w-[150px]"
             />
             <p className="mt-5 max-w-sm leading-7 text-white/55">
               Locação de veículos para motoristas de aplicativo em Itu e região.
