@@ -10,6 +10,9 @@ export function Hero() {
   const weeklyPrice = Number(company.weekly_price_from ?? 700);
   const storedTitle = (company.hero_title || "Locação de veículos para motoristas de aplicativos").trim();
   const title = storedTitle.charAt(0).toLocaleUpperCase("pt-BR") + storedTitle.slice(1).toLocaleLowerCase("pt-BR");
+  const heroImage = company.hero_image_url && !/(interior|interna|internas|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(company.hero_image_url)
+    ? company.hero_image_url
+    : fallbackHeroImage;
 
   return (
     <section id="inicio" className="relative overflow-hidden bg-white pt-28 md:pt-36">
@@ -76,7 +79,7 @@ export function Hero() {
             <div aria-hidden="true" className="absolute -inset-4 rounded-[2.5rem] bg-sky-100/80 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-black/5 bg-surface shadow-[0_28px_80px_-32px_rgba(15,23,42,0.35)]">
               <img
-                src={company.hero_image_url || fallbackHeroImage}
+                src={heroImage}
                 alt="Foto externa ilustrativa de um veículo da frota UTIL Rent a Car"
                 fetchPriority="high"
                 decoding="async"
