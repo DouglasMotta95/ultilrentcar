@@ -1,8 +1,20 @@
 const benefits = [
-  { title: "Frota objetiva", description: "Quatro modelos apresentados de forma simples, com fotos e informações essenciais." },
-  { title: "Atendimento direto", description: "Você fala com a locadora para confirmar disponibilidade, valores e condições." },
-  { title: "Processo claro", description: "Cadastro, análise e contratação organizados em etapas fáceis de acompanhar." },
-  { title: "Foco em quem roda", description: "A comunicação do site é pensada para o motorista de aplicativo." },
+  {
+    title: "Fotos externas de referência",
+    description: "Compare o formato dos modelos. Ano, versão e equipamentos são confirmados com a locadora.",
+  },
+  {
+    title: "Consulta por modelo",
+    description: "O botão de cada veículo abre o WhatsApp com o modelo de interesse já informado.",
+  },
+  {
+    title: "Cadastro em etapas",
+    description: "Envie a solicitação online para análise inicial antes de seguir para a contratação.",
+  },
+  {
+    title: "Condições antes de fechar",
+    description: "Confirme preço, disponibilidade, caução e regras de locação diretamente com a equipe.",
+  },
 ];
 
 export function Benefits() {
