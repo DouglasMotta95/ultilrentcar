@@ -90,7 +90,7 @@ export function Contact() {
             {mapUrl && (
               <div className="mt-9 overflow-hidden rounded-[2rem] border border-border bg-card shadow-lg">
                 <iframe
-                  title="Localização da UTIL LOCADORA"
+                  title={company.address || company.map_embed_url ? "Localização da UTIL LOCADORA" : "Mapa da região de atendimento da UTIL LOCADORA"}
                   src={mapUrl}
                   loading="lazy"
                   className="h-[300px] w-full border-0 md:h-[390px]"
