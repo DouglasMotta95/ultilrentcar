@@ -7,7 +7,6 @@ const fallbackHeroImage =
 
 export function Hero() {
   const { data: company } = useCompanyInfo();
-  const weeklyPrice = Number(company.weekly_price_from ?? 700);
   const storedTitle = (company.hero_title || "Locação de veículos para motoristas de aplicativos").trim();
   const title = storedTitle.charAt(0).toLocaleUpperCase("pt-BR") + storedTitle.slice(1).toLocaleLowerCase("pt-BR");
   const heroImage = company.hero_image_url && !/(interior|interna|internas|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(company.hero_image_url)
@@ -32,19 +31,6 @@ export function Hero() {
                 "Polo Track, HB20 Hatch, HB20 Sedan e Onix Sedan para a rotina de quem trabalha com aplicativos."}
             </p>
 
-            {Number.isFinite(weeklyPrice) && weeklyPrice > 0 && (
-              <div className="mt-6 inline-flex items-baseline gap-2 rounded-2xl border border-border bg-surface px-5 py-3.5">
-                <span className="text-sm font-semibold text-muted-foreground">Locação a partir de</span>
-                <strong className="font-display text-xl font-extrabold text-foreground">
-                  {weeklyPrice.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                    minimumFractionDigits: 2,
-                  })}
-                </strong>
-                <span className="text-sm text-muted-foreground">/ semana</span>
-              </div>
-            )}
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
