@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { submitLeadDirect } from "@/lib/leads.functions";
+import { submitLead } from "@/lib/leads.functions";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -86,6 +87,7 @@ const stepTwoFields: Array<keyof FormValues> = [
 
 export function LeadForm() {
   const navigate = useNavigate();
+  const submitLeadFn = useServerFn(submitLead);
   const [step, setStep] = useState(1);
 
   const form = useForm<FormValues>({
@@ -124,7 +126,7 @@ export function LeadForm() {
 
   async function onSubmit(values: FormValues) {
     try {
-      await submitLeadDirect(values);
+      await submitLeadFn({ data: { ...values, privacy_consent: true } });
       toast.success("Cadastro enviado com sucesso! A equipe entrará em contato.");
       navigate({ to: "/" });
     } catch (error) {
