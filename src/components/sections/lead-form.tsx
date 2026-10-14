@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/leads.functions";
 import { Button } from "@/components/ui/button";
@@ -86,6 +87,7 @@ const stepTwoFields: Array<keyof FormValues> = [
 
 export function LeadForm() {
   const navigate = useNavigate();
+  const submitLeadFn = useServerFn(submitLead);
   const [step, setStep] = useState(1);
 
   const form = useForm<FormValues>({
@@ -124,7 +126,7 @@ export function LeadForm() {
 
   async function onSubmit(values: FormValues) {
     try {
-      const result = await submitLead({ data: values });
+      const result = await submitLeadFn({ data: values });
       if (result.emailSent) {
         toast.success("Cadastro registrado e notificação enviada para a equipe da UTIL Rent a Car.");
         navigate({ to: "/" });
