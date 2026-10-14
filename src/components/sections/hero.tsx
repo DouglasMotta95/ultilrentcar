@@ -8,7 +8,7 @@ export function Hero() {
   const { data: company } = useCompanyInfo();
   const weeklyPrice = Number(company.weekly_price_from ?? 700);
   return (
-    <section id="inicio" className="bg-background pt-[100px] sm:pt-[116px]">
+    <section id="inicio" className="bg-background pt-[112px] sm:pt-[124px]">
       <div className="container mx-auto pb-7 pt-6 sm:pb-10 sm:pt-10">
         <div className="flex items-center gap-2 text-xs font-bold text-primary"><MapPin className="h-3.5 w-3.5" />UTIL RENT A CAR · ITU E REGIÃO</div>
         <div className="mt-4 grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-16">
