@@ -27,9 +27,9 @@ export function Navbar() {
   const closeMenu = () => setOpen(false);
   return (
     <nav aria-label="Navegação principal" className={`fixed inset-x-0 top-0 z-50 border-b bg-background/95 backdrop-blur-xl transition-all ${isScrolled ? "border-border py-2 shadow-sm" : "border-border/60 py-3"}`}>
-      <div className="container mx-auto flex items-center justify-between gap-6">
+      <div className="container mx-auto flex items-center justify-between gap-4 px-4 sm:gap-6">
         <Link to="/" aria-label="UTIL Rent a Car — página inicial" onClick={closeMenu} className="shrink-0">
-          <img src={logo.url} alt="UTIL Rent a Car" width={1048} height={730} className="h-[64px] w-[110px] object-contain sm:h-[76px] sm:w-[132px]" />
+          <img src={logo.url} alt="UTIL Rent a Car" width={1048} height={730} className="h-[72px] w-[118px] object-contain sm:h-[80px] sm:w-[140px]" />
         </Link>
         <div className="hidden items-center gap-1 lg:flex">
           <Button asChild className="h-11 rounded-full bg-ink px-5 text-ink-foreground hover:bg-primary"><a href="/#inicio"><Home /> Início</a></Button>
