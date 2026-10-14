@@ -5,25 +5,18 @@ import { VehicleCard } from "./vehicle-card";
 
 export function VehicleCatalog() {
   const getVehiclesFn = useServerFn(getVehicles);
-
   const { data: vehicles } = useSuspenseQuery({
     queryKey: ["vehicles"],
     queryFn: () => getVehiclesFn(),
   });
 
   if (!vehicles || vehicles.length === 0) {
-    return (
-      <div className="rounded-[2rem] border border-dashed border-border bg-secondary/50 py-16 text-center text-muted-foreground">
-        Nenhum veículo disponível no momento.
-      </div>
-    );
+    return <div className="rounded-2xl border border-dashed border-border bg-surface py-14 text-center text-muted-foreground">Nenhum veículo disponível no momento.</div>;
   }
 
   return (
-    <div className="grid gap-7 lg:grid-cols-2">
-      {vehicles.map((vehicle) => (
-        <VehicleCard key={vehicle.id} vehicle={vehicle} />
-      ))}
+    <div className="grid items-stretch gap-5 sm:gap-6 lg:grid-cols-2">
+      {vehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
     </div>
   );
 }
