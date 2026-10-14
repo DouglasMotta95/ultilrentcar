@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { useCompanyInfo } from "@/hooks/use-company-info";
+import { Mail } from "lucide-react";
 
 export const Route = createFileRoute("/privacidade")({
   component: PrivacyPage,
@@ -16,7 +16,6 @@ export const Route = createFileRoute("/privacidade")({
 });
 
 function PrivacyPage() {
-  const { data: company } = useCompanyInfo();
   return (
     <main className="min-h-screen bg-background pt-28">
       <Navbar />
@@ -34,7 +33,7 @@ function PrivacyPage() {
           <section><h2 className="font-display text-xl font-bold text-foreground">7. Direitos do titular</h2><p className="mt-3">Conforme a legislação aplicável, o titular pode solicitar confirmação da existência de tratamento, acesso aos dados, correção de informações incompletas ou desatualizadas, informações sobre compartilhamento, anonimização, bloqueio ou eliminação quando cabível, portabilidade e revogação do consentimento, observadas as hipóteses e limitações previstas em lei.</p></section>
           <section><h2 className="font-display text-xl font-bold text-foreground">8. Cookies e tecnologias semelhantes</h2><p className="mt-3">O funcionamento do site pode envolver tecnologias técnicas necessárias para carregar páginas, fontes, recursos de segurança e serviços essenciais. Caso sejam adicionadas tecnologias não essenciais que realizem medição, publicidade ou personalização, as informações e eventuais mecanismos de escolha serão atualizados nesta política.</p></section>
           <section><h2 className="font-display text-xl font-bold text-foreground">9. Segurança</h2><p className="mt-3">Nenhum ambiente digital é completamente livre de riscos. A UTIL LOCADORA (marca UTIL Rent a Car) busca aplicar controles técnicos e administrativos compatíveis com a operação para proteger os dados contra incidentes e acessos não autorizados.</p></section>
-          <section><h2 className="font-display text-xl font-bold text-foreground">10. Atendimento sobre privacidade</h2><p className="mt-3">Para exercer direitos, esclarecer dúvidas ou solicitar informações sobre o tratamento de dados, utilize o canal de contato da locadora:{company.email ? <> <a className="font-semibold text-primary underline underline-offset-2" href={`mailto:${company.email}`}>{company.email}</a></> : " os canais de atendimento informados no site"}.</p><p className="mt-3">Solicitações podem exigir confirmação da identidade do titular para proteger informações pessoais e evitar acesso indevido por terceiros.</p></section>
+          <section><h2 className="font-display text-xl font-bold text-foreground">10. Atendimento sobre privacidade</h2><p className="mt-3">Para exercer direitos, esclarecer dúvidas ou solicitar informações sobre o tratamento de dados, utilize o canal de contato da locadora: <a className="font-semibold text-primary underline underline-offset-2" href="mailto:comercial@utilrentcar.com.br">comercial@utilrentcar.com.br</a>.</p><p className="mt-3">Solicitações podem exigir confirmação da identidade do titular para proteger informações pessoais e evitar acesso indevido por terceiros.</p></section>
           <section className="rounded-3xl border border-border bg-secondary/40 p-6"><h2 className="font-display text-xl font-bold text-foreground">Transparência</h2><p className="mt-3">Esta política pode ser atualizada para refletir mudanças no site, nos processos de atendimento ou na legislação aplicável. A versão vigente será publicada nesta página com a respectiva data de atualização.</p></section>
         </div>
       </article>
