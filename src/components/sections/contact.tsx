@@ -16,7 +16,8 @@ export function Contact() {
   const defaultMap = company.city
     ? `https://www.google.com/maps?q=${encodeURIComponent([company.address, company.city, company.state, "Brasil"].filter(Boolean).join(", "))}&output=embed`
     : null;
-  const mapUrl = company.map_embed_url || defaultMap;
+  // Não criar mapa com base apenas na cidade; exigir endereço cadastrado ou mapa específico configurado.
+  const mapUrl = company.map_embed_url?.trim() || (company.address?.trim() && company.city ? defaultMap : null);
 
   return (
     <section id="contato" className="section-section bg-surface">
