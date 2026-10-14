@@ -8,13 +8,13 @@ import { LeadForm } from "@/components/sections/lead-form";
 export const Route = createFileRoute("/cadastro")({
   component: Cadastro,
   head: () => ({
-    title: "Cadastro | UTIL LOCADORA",
     meta: [
-      {
-        name: "description",
-        content:
-          "Faça seu cadastro online na UTIL LOCADORA e envie sua solicitação de locação.",
-      },
+      { title: "Cadastro | Util Rent a Car" },
+      { name: "description", content: "Solicite seu carro de trabalho na Util Rent a Car. Faça seu cadastro para locação em Itu e região." },
+      { property: "og:title", content: "Cadastro | Util Rent a Car" },
+      { property: "og:description", content: "Solicite seu carro de trabalho na Util Rent a Car. Faça seu cadastro para locação em Itu e região." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex,follow" },
     ],
     links: [{ rel: "canonical", href: "https://utilrentcar.com.br/cadastro" }],

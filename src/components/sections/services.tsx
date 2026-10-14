@@ -20,17 +20,17 @@ const services = [
 
 export function Services() {
   return (
-    <section id="servicos" className="section-section bg-white">
+    <section id="servicos" className="section-section bg-background">
       <div className="container mx-auto px-4">
         <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr] lg:items-end">
           <div>
             <span className="eyebrow">Serviços</span>
-            <h2 className="mt-6 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.035em] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-6 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-normal sm:text-3xl lg:text-4xl">
               Tudo o que você precisa confirmar antes de alugar.
             </h2>
           </div>
           <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Informações essenciais, contato simples e próximos passos apresentados sem prometer equipamentos ou condições não confirmadas.
+            Da escolha do carro à retirada, conte com um atendimento próximo para esclarecer cada etapa da locação.
           </p>
         </div>
 
@@ -38,10 +38,10 @@ export function Services() {
           {services.map(({ icon: Icon, title, description }, index) => (
             <article
               key={title}
-              className="rounded-[1.5rem] border border-border bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8"
+              className="rounded-lg border border-border bg-background p-7 transition duration-300 hover:-translate-y-1 hover:shadow-xl md:p-8"
             >
               <div className="flex items-center justify-between">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 text-primary">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-primary">
                   <Icon className="h-5 w-5" />
                 </span>
                 <span className="font-mono text-xs font-bold text-muted-foreground/60">

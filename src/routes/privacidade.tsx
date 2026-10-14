@@ -6,9 +6,13 @@ import { useCompanyInfo } from "@/hooks/use-company-info";
 export const Route = createFileRoute("/privacidade")({
   component: PrivacyPage,
   head: () => ({
-    title: "Política de Privacidade | UTIL LOCADORA",
     meta: [
-      { name: "description", content: "Política de Privacidade da UTIL LOCADORA: informações sobre coleta, uso, armazenamento, compartilhamento e direitos relacionados aos dados pessoais." },
+      { title: "Política de Privacidade | Util Rent a Car" },
+      { name: "description", content: "Conheça como a Util Rent a Car trata seus dados pessoais e saiba como exercer seus direitos." },
+      { property: "og:title", content: "Política de Privacidade | Util Rent a Car" },
+      { property: "og:description", content: "Conheça como a Util Rent a Car trata seus dados pessoais e saiba como exercer seus direitos." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "index,follow" },
     ],
     links: [{ rel: "canonical", href: "https://utilrentcar.com.br/privacidade" }],

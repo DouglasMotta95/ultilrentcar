@@ -14,8 +14,9 @@ import { Contact } from "@/components/sections/contact";
 export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
-    title: "UTIL LOCADORA | Locação de veículos para motoristas de aplicativo",
     meta: [
+      { title: "Util Rent a Car | Aluguel de carros para aplicativos em Itu" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         name: "description",
         content:
@@ -37,10 +38,6 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "https://utilrentcar.com.br/" },
       { property: "og:type", content: "website" },
-      {
-        property: "og:image",
-        content: "https://utilrentcar.com.br/logo-util-rent.svg",
-      },
       {
         name: "twitter:title",
         content: "UTIL LOCADORA | Locação de veículos para motoristas de aplicativo",
@@ -88,19 +85,19 @@ function Home() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <span className="eyebrow">Nossa frota</span>
-              <h2 className="mt-6 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-[-0.03em] sm:text-4xl lg:text-5xl">
-                Escolha o modelo que combina com o seu dia a dia.
+              <h2 className="mt-4 max-w-2xl font-display text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
+                Seu próximo carro está aqui.
               </h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Fotos em destaque, identificação clara do modelo e acesso direto à consulta de disponibilidade.
+              Compare os modelos e fale com a equipe para consultar valores e disponibilidade.
             </p>
           </div>
 
           <div className="mt-12">
             <Suspense
               fallback={
-                <div className="rounded-[2rem] border border-border bg-secondary/50 py-16 text-center text-muted-foreground">
+                <div className="rounded-lg border border-border bg-secondary/50 py-16 text-center text-muted-foreground">
                   Carregando frota...
                 </div>
               }

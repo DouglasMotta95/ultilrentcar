@@ -2,8 +2,12 @@ import { useMemo, useState } from "react";
 import { ArrowRight, Car } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
+import onixImage from "@/assets/util-hero.jpg.asset.json";
 
-type Vehicle = Database["public"]["Tables"]["vehicles"]["Row"];
+type Vehicle = Pick<Database["public"]["Tables"]["vehicles"]["Row"], "brand" | "model" | "image_url"> & {
+  body_type?: string | null;
+  gallery_images?: string[] | null;
+};
 
 // O filtro é puro e fica fora do componente para evitar dependências instáveis
 // no useMemo e impedir o uso de fotos internas identificáveis pelo nome do arquivo.
@@ -32,11 +36,11 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const message = `Olá, tenho interesse no ${vehicle.brand} ${vehicle.model}. Gostaria de consultar a disponibilidade, o valor semanal e os equipamentos do veículo disponível.`;
 
   return (
-    <article className="overflow-hidden rounded-[2rem] border border-border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+    <article className="overflow-hidden rounded-lg border border-border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
-        {image && !imageFailed ? (
+        {image && (!imageFailed || /onix/i.test(vehicle.model)) ? (
           <img
-            src={image}
+            src={imageFailed && /onix/i.test(vehicle.model) ? onixImage.url : image}
             alt={`${vehicle.brand} ${vehicle.model} — foto externa ilustrativa`}
             loading="lazy"
             decoding="async"
@@ -49,8 +53,8 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             <span className="text-xs">Foto externa em atualização</span>
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-5 pt-12">
-          <span className="rounded-full bg-white/95 px-3 py-1.5 text-xs font-extrabold uppercase text-foreground shadow-sm">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/65 to-transparent p-5 pt-12">
+          <span className="rounded-full bg-background/95 px-3 py-1.5 text-xs font-extrabold uppercase text-foreground shadow-sm">
             {extra.body_type || "Veículo"}
           </span>
         </div>
