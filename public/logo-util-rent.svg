@@ -12,7 +12,7 @@
     </linearGradient>
   </defs>
   <path d="M165 205 C330 -10 680 -15 842 172 C683 65 426 72 320 205 Z" fill="url(#util-dark)"/>
-  <text x="112" y="430" font-family="Arial, Helvetica, sans-serif" font-size="235" font-weight="900" letter-spacing="-12" fill="url(#util-blue)">UTIL</text>
+  <text x="500" y="430" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="235" font-weight="900" letter-spacing="-12" fill="url(#util-blue)">UTIL</text>
   <path d="M155 468 C300 652 690 665 875 472 L760 472 C610 588 355 600 222 484 Z" fill="url(#util-blue)"/>
   <path d="M88 681 H245 M755 681 H912" stroke="#0b9fe0" stroke-width="7" stroke-linecap="round"/>
   <text x="500" y="704" text-anchor="middle" fill="#202127" font-family="Arial, Helvetica, sans-serif" font-size="74" font-style="italic" font-weight="900" letter-spacing="0.5">RENT A CAR</text>
