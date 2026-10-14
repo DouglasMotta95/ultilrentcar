@@ -40,7 +40,13 @@ const validCpf = (value: string) => {
   if (check === 10) check = 0;
   return check === Number(cpf[10]);
 };
-const validPhone = (value: string) => [10, 11].includes(onlyDigits(value).length);
+const validPhone = (value: string) => {
+  const valueDigits = onlyDigits(value);
+  const nationalDigits = valueDigits.startsWith("55") && [12, 13].includes(valueDigits.length)
+    ? valueDigits.slice(2)
+    : valueDigits;
+  return [10, 11].includes(nationalDigits.length);
+};
 const validCep = (value: string) => onlyDigits(value).length === 8;
 
 const formSchema = z.object({
@@ -131,7 +137,8 @@ export function LeadForm() {
         toast.success("Cadastro registrado e notificação enviada para a equipe da UTIL Rent a Car.");
         navigate({ to: "/" });
       } else {
-        toast.warning("Seu cadastro foi registrado, mas a notificação por e-mail não foi enviada. Não envie novamente; confirme o recebimento pelo WhatsApp da locadora.");
+        toast.warning("Seu cadastro foi registrado, mas o aviso por e-mail está pendente de configuração. Não envie novamente; confirme o recebimento pelo WhatsApp da locadora.");
+        navigate({ to: "/" });
       }
     } catch (error) {
       const message =
