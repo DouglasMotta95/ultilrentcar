@@ -5,6 +5,11 @@ import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
 
 type Vehicle = Database["public"]["Tables"]["vehicles"]["Row"];
 
+// O filtro é puro e fica fora do componente para evitar dependências instáveis
+// no useMemo e impedir o uso de fotos internas identificáveis pelo nome do arquivo.
+const isExteriorPhoto = (url: string) =>
+  !/(interior|interna|internas|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(url);
+
 export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const extra = vehicle as Vehicle & {
     body_type?: string | null;
@@ -12,11 +17,6 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   };
   const { data: company } = useCompanyInfo();
   const [imageFailed, setImageFailed] = useState(false);
-
-  // Mostra somente uma foto externa por modelo. Evita que o carrossel passe
-  // por imagens internas ou por equipamentos que podem variar entre veículos.
-  const isExteriorPhoto = (url: string) =>
-    !/(interior|interna|internas|painel|dashboard|cockpit|console|multim[ií]dia|bancos|estofado)/i.test(url);
 
   const image = useMemo(() => {
     const gallery = Array.isArray(extra.gallery_images)
