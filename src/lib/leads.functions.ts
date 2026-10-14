@@ -55,24 +55,111 @@ const leadSchema = z.object({
   privacy_consent: z.literal(true),
 });
 
+function leadInsertError(error: { code?: string; message?: string }) {
+  const code = error.code || "";
+  const message = error.message || "";
+
+  if (code === "23505" && /cpf|leads.*key/i.test(message)) {
+    return "Já existe um cadastro com este CPF. Não envie novamente; fale com a equipe pelo WhatsApp para conferir sua solicitação.";
+  }
+  if (/Limite temporário/i.test(message)) {
+    return "Foram recebidas várias tentativas recentes com estes dados. Entre em contato com a equipe pelo WhatsApp para continuar.";
+  }
+  if (code === "42501" || /row-level security|permission denied/i.test(message)) {
+    return "O sistema está sem permissão para concluir o cadastro. A equipe precisa ajustar a configuração do site.";
+  }
+  if (code === "23502" || code === "22P02" || code === "22007" || code === "23514") {
+    return "Algum dado não foi aceito pelo sistema. Confira CPF, data de nascimento, telefones e estado e tente novamente.";
+  }
+  if (code === "23505") {
+    return "Já existe uma solicitação com alguns desses dados. Fale com a equipe para confirmar se o cadastro anterior foi recebido.";
+  }
+  console.error("Falha ao gravar cadastro no banco:", { code, message });
+  return "Não foi possível registrar seu cadastro agora. Tente novamente ou fale com a equipe pelo WhatsApp.";
+}
+
+async function sendLeadNotification(data: z.infer<typeof leadSchema>): Promise<boolean> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.RESEND_FROM_EMAIL || "UTIL Rent a Car <comercial@utilrentcar.com.br>";
+
+  if (!apiKey) {
+    console.error("[UTIL cadastro] E-mail não enviado: falta configurar a variável segura RESEND_API_KEY.");
+    return false;
+  }
+
+  const details: Array<[string, string]> = [
+    ["Nome completo", data.full_name],
+    ["CPF", data.cpf],
+    ["Data de nascimento", data.birth_date],
+    ["Celular / WhatsApp", data.cellphone],
+    ["E-mail do solicitante", data.email],
+    ["CEP", data.cep],
+    ["Rua", data.street],
+    ["Número", data.number],
+    ["Complemento", data.complement || "Não informado"],
+    ["Bairro", data.neighborhood],
+    ["Cidade", data.city],
+    ["Estado", data.state],
+    ["Profissão", data.profession],
+    ["Plataforma principal", data.platform],
+    ["Veículo de interesse", data.vehicle_interest || "Não selecionado"],
+    ["Telefone de referência 1", data.ref_phone_1],
+    ["Telefone de referência 2", data.ref_phone_2],
+  ];
+  const text = [
+    "Nova solicitação de locação recebida pelo site da UTIL Rent a Car.",
+    "",
+    ...details.map(([label, value]) => `${label}: ${value}`),
+    "",
+    "Este aviso foi gerado automaticamente pelo formulário de cadastro.",
+  ].join("\n");
+
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: ["comercial@utilrentcar.com.br"],
+        reply_to: data.email,
+        subject: `Novo cadastro de locação — ${data.full_name.slice(0, 100)}`,
+        text,
+      }),
+    });
+
+    if (!response.ok) {
+      const providerMessage = await response.text().catch(() => "");
+      console.error("[UTIL cadastro] Provedor recusou o e-mail:", response.status, providerMessage.slice(0, 500));
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("[UTIL cadastro] Erro ao chamar provedor de e-mail:", error);
+    return false;
+  }
+}
+
 export const submitLead = createServerFn({ method: "POST" })
   .validator((data: unknown) => leadSchema.parse(data))
   .handler(async ({ data }) => {
     const insertData: any = {
-      full_name: data.full_name,
+      full_name: data.full_name.trim(),
       cpf: data.cpf,
       birth_date: data.birth_date,
       cellphone: data.cellphone,
       landline: data.landline || null,
-      email: data.email,
+      email: data.email.trim(),
       cep: data.cep,
-      street: data.street,
-      number: data.number,
-      complement: data.complement || null,
-      neighborhood: data.neighborhood,
-      city: data.city,
-      state: data.state,
-      profession: data.profession,
+      street: data.street.trim(),
+      number: data.number.trim(),
+      complement: data.complement?.trim() || null,
+      neighborhood: data.neighborhood.trim(),
+      city: data.city.trim(),
+      state: data.state.toUpperCase(),
+      profession: data.profession.trim(),
       platform: data.platform,
       facebook: data.facebook || null,
       instagram: data.instagram || null,
@@ -84,14 +171,25 @@ export const submitLead = createServerFn({ method: "POST" })
       privacy_policy_version: "2026-09",
     };
 
-    const { error } = await supabase.from("leads").insert([insertData]);
+    let result = await supabase.from("leads").insert([insertData]);
 
-    if (error) {
-      console.error("Error submitting lead:", error);
-      throw new Error("Falha ao enviar cadastro. Verifique os dados e tente novamente.");
+    // Compatibility when the production database has not yet received the privacy migration.
+    if (
+      result.error &&
+      /privacy_consent_at|privacy_policy_version|schema cache|column.*does not exist/i.test(
+        result.error.message || "",
+      )
+    ) {
+      const { privacy_consent_at: _consentAt, privacy_policy_version: _policyVersion, ...legacyData } = insertData;
+      result = await supabase.from("leads").insert([legacyData]);
     }
 
-    return { success: true };
+    if (result.error) {
+      throw new Error(leadInsertError(result.error));
+    }
+
+    const emailSent = await sendLeadNotification(data);
+    return { success: true as const, emailSent };
   });
 
 const publishedFleet = [
