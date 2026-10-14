@@ -41,3 +41,13 @@ npm run build
 ```
 
 O projeto utiliza TanStack Start, React, Tailwind, Supabase e Lovable.
+
+
+## Notificação de novos cadastros por e-mail
+
+O envio automático de cadastros usa a API do Resend no servidor (nunca exponha a chave no navegador). Configure as variáveis de ambiente de produção:
+
+- `RESEND_API_KEY`: chave privada da conta Resend.
+- `RESEND_FROM_EMAIL`: remetente verificado no Resend, por exemplo `UTIL Rent a Car <cadastro@utilrentcar.com.br>`.
+
+O destinatário das notificações está definido como `comercial@utilrentcar.com.br`. Antes de publicar, confirme que o domínio `utilrentcar.com.br` ou o endereço escolhido como remetente está verificado no Resend e que essas variáveis existem no ambiente que executa o servidor. Sem a chave, o cadastro ainda é gravado no banco, mas a notificação por e-mail não é enviada; a tela informa essa situação.
