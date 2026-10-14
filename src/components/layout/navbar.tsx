@@ -16,8 +16,13 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
+    const onHashChange = () => setOpen(false);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("hashchange", onHashChange);
+    };
   }, []);
   const closeMenu = () => setOpen(false);
   return (
