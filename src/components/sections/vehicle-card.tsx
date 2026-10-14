@@ -2,8 +2,12 @@ import { useMemo, useState } from "react";
 import { ArrowRight, Car } from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 import { useCompanyInfo, whatsappUrl } from "@/hooks/use-company-info";
+import onixImage from "@/assets/util-hero.jpg.asset.json";
 
-type Vehicle = Pick<Database["public"]["Tables"]["vehicles"]["Row"], "brand" | "model" | "image_url" | "body_type" | "gallery_images">;
+type Vehicle = Pick<Database["public"]["Tables"]["vehicles"]["Row"], "brand" | "model" | "image_url"> & {
+  body_type?: string | null;
+  gallery_images?: string[] | null;
+};
 
 // O filtro é puro e fica fora do componente para evitar dependências instáveis
 // no useMemo e impedir o uso de fotos internas identificáveis pelo nome do arquivo.
@@ -36,7 +40,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
         {image && !imageFailed ? (
           <img
-            src={image}
+            src={imageFailed && /onix/i.test(vehicle.model) ? onixImage.url : image}
             alt={`${vehicle.brand} ${vehicle.model} — foto externa ilustrativa`}
             loading="lazy"
             decoding="async"
