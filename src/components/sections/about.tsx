@@ -13,7 +13,7 @@ export function About() {
         <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
           <div>
             <span className="eyebrow">Sobre a UTIL</span>
-            <h2 className="mt-6 max-w-xl font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-6 max-w-xl font-display text-3xl font-extrabold leading-[1.08] tracking-normal sm:text-3xl lg:text-4xl">
               Uma locação mais clara para quem vive na rua trabalhando.
             </h2>
           </div>

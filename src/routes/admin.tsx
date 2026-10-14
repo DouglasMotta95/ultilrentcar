@@ -19,8 +19,13 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
   head: () => ({
-    title: "Painel Administrativo | UTIL LOCADORA",
-    meta: [{ name: "robots", content: "noindex,nofollow" }],
+    meta: [
+      { title: "Administração | Util Rent a Car" },
+      { name: "description", content: "Área restrita da Util Rent a Car para gestão da frota, solicitações de locação e dados da empresa." },
+      { property: "og:title", content: "Administração | Util Rent a Car" },
+      { property: "og:description", content: "Área restrita da Util Rent a Car para gestão da frota, solicitações de locação e dados da empresa." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },{ name: "robots", content: "noindex,nofollow" }],
   }),
 });
 
