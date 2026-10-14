@@ -8,12 +8,12 @@ import { LeadForm } from "@/components/sections/lead-form";
 export const Route = createFileRoute("/cadastro")({
   component: Cadastro,
   head: () => ({
-    title: "Cadastro | UTIL LOCADORA",
+    title: "Cadastro | UTIL Rent a Car",
     meta: [
       {
         name: "description",
         content:
-          "Faça seu cadastro online na UTIL LOCADORA e envie sua solicitação de locação.",
+          "Faça seu cadastro online na UTIL Rent a Car e envie sua solicitação de locação.",
       },
       { name: "robots", content: "noindex,follow" },
     ],
