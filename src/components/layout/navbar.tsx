@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Home } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/util-logo-original.jpg.asset.json";
 
 const links = [
   { href: "/#quem-somos", label: "Sobre" },
@@ -42,11 +41,11 @@ export function Navbar() {
         <div className="flex min-h-[72px] items-center justify-between gap-3 px-3 sm:min-h-[82px] sm:px-5 lg:px-6">
           <Link to="/" aria-label="UTIL Rent a Car — página inicial" className="flex shrink-0 items-center">
             <img
-              src={logo.url}
+              src="/logo-util-rent.svg"
               alt="UTIL Rent a Car"
               width={1048}
               height={730}
-              className="h-[64px] w-[104px] object-contain sm:h-[72px] sm:w-[118px] lg:h-[78px] lg:w-[128px]"
+              className="h-[64px] w-[118px] object-contain sm:h-[72px] sm:w-[132px] lg:h-[78px] lg:w-[142px]"
             />
           </Link>
 
