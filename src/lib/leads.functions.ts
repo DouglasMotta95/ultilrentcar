@@ -82,8 +82,8 @@ function leadInsertError(error: { code?: string; message?: string }) {
 }
 
 async function sendLeadNotification(data: z.infer<typeof leadSchema>): Promise<boolean> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL || "UTIL Rent a Car <comercial@utilrentcar.com.br>";
+  const apiKey = process.env["RESEND_API_KEY"];
+  const from = process.env["RESEND_FROM_EMAIL"] || "UTIL Rent a Car <comercial@utilrentcar.com.br>";
 
   if (!apiKey) {
     console.error("[UTIL cadastro] E-mail não enviado: falta configurar a variável segura RESEND_API_KEY.");
