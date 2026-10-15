@@ -37,8 +37,6 @@ export type Database = {
           number: string
           platform: Database["public"]["Enums"]["platform_type"]
           profession: string
-          privacy_consent_at?: string | null
-          privacy_policy_version?: string | null
           ref_phone_1: string
           ref_phone_2: string
           residence_proof_url: string | null
@@ -101,8 +99,6 @@ export type Database = {
           number?: string
           platform?: Database["public"]["Enums"]["platform_type"]
           profession?: string
-          privacy_consent_at?: string | null
-          privacy_policy_version?: string | null
           ref_phone_1?: string
           ref_phone_2?: string
           residence_proof_url?: string | null
@@ -173,127 +169,43 @@ export type Database = {
       }
       vehicles: {
         Row: {
-          app_category: string | null
-          body_type: string | null
           brand: string
           color: string | null
           created_at: string | null
-          description: string | null
           features: string[] | null
-          gallery_images: string[]
           id: string
           image_url: string | null
           is_active: boolean | null
           model: string
           plate: string | null
-          price_per_week: number | null
-          sort_order: number
-          transmission: string | null
-          updated_at: string | null
+          price_per_week: number
           year: number
         }
         Insert: {
-          app_category?: string | null
-          body_type?: string | null
           brand: string
           color?: string | null
           created_at?: string | null
-          description?: string | null
           features?: string[] | null
-          gallery_images?: string[]
           id?: string
           image_url?: string | null
           is_active?: boolean | null
           model: string
           plate?: string | null
-          price_per_week?: number | null
-          sort_order?: number
-          transmission?: string | null
-          updated_at?: string | null
+          price_per_week: number
           year: number
         }
         Update: {
-          app_category?: string | null
-          body_type?: string | null
           brand?: string
           color?: string | null
           created_at?: string | null
-          description?: string | null
           features?: string[] | null
-          gallery_images?: string[]
           id?: string
           image_url?: string | null
           is_active?: boolean | null
           model?: string
           plate?: string | null
-          price_per_week?: number | null
-          sort_order?: number
-          transmission?: string | null
-          updated_at?: string | null
+          price_per_week?: number
           year?: number
-        }
-        Relationships: []
-      }
-      company_settings: {
-        Row: {
-          address: string | null
-          city: string | null
-          email: string | null
-          facebook_url: string | null
-          hero_image_url: string | null
-          hero_subtitle: string | null
-          hero_title: string | null
-          hours: string | null
-          id: number
-          instagram_url: string | null
-          logo_url: string | null
-          map_embed_url: string | null
-          name: string
-          phone: string | null
-          state: string | null
-          updated_at: string | null
-          weekly_price_from: number | null
-          whatsapp: string | null
-        }
-        Insert: {
-          address?: string | null
-          city?: string | null
-          email?: string | null
-          facebook_url?: string | null
-          hero_image_url?: string | null
-          hero_subtitle?: string | null
-          hero_title?: string | null
-          hours?: string | null
-          id?: number
-          instagram_url?: string | null
-          logo_url?: string | null
-          map_embed_url?: string | null
-          name?: string
-          phone?: string | null
-          state?: string | null
-          updated_at?: string | null
-          weekly_price_from?: number | null
-          whatsapp?: string | null
-        }
-        Update: {
-          address?: string | null
-          city?: string | null
-          email?: string | null
-          facebook_url?: string | null
-          hero_image_url?: string | null
-          hero_subtitle?: string | null
-          hero_title?: string | null
-          hours?: string | null
-          id?: number
-          instagram_url?: string | null
-          logo_url?: string | null
-          map_embed_url?: string | null
-          name?: string
-          phone?: string | null
-          state?: string | null
-          updated_at?: string | null
-          weekly_price_from?: number | null
-          whatsapp?: string | null
         }
         Relationships: []
       }
@@ -334,12 +246,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -363,11 +275,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -388,11 +300,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -413,11 +325,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -430,11 +342,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
